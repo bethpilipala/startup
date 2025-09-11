@@ -50,7 +50,7 @@ sequenceDiagram
 
     %% Profile requires login
     User->>Website: Click Profile Page
-    Website-->>User: Show Profile Page (if success)
+    Website-->>User: Show Profile Page (if logged in)
     Website-->>User: Redirect to Login (if not logged in)
 
     User->>Website: Enter login credentials
