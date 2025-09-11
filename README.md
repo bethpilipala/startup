@@ -4,7 +4,7 @@
 
 Recipe Finder is an application that lets users browse recipes as well as add their own. But beyond being a simple recipe database, the user can enter what ingredients they currently have in their house and the Recipe Finder will spit out recipes that contain only those ingredients. Users can create an account, save recipes, create recipes, and record what ingredients they have. Some ingredients, like spices, cans or other dry goods, will be in a section that is more permanant so that the user doesn't have to input them every time, but will frequently ask for updates regarding ingredients such as fresh fruits and vegetables. After making the recipe the user can mark the recipe as made and the website will prompt the user to remove used ingredients.
 
-Other Possible Website Names
+#### Other Possible Website Names
  - The Partial Pantry
 
 
@@ -99,9 +99,12 @@ flowchart TD
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Secure login
+- Side panel pull out with links to pages
+- Recipe page that the user can browse or use a search by name
+- Ingredient search page that pulls recipes based on their ingredients
+- Users can save recipes
+- Users can create new recipes
 
 ### Technologies
 
