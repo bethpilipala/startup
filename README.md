@@ -28,6 +28,41 @@ Have you ever stared at your fridge full of food and still thought, 'What's for 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 ```mermaid
+sequenceDiagram
+    actor User as User
+    participant Website as Website
+    participant Database as Database
+
+    %% Browsing without login
+    User->>Website: Open Home Page
+    Website-->>User: Show navigation & dropdown
+
+    User->>Website: View About Page
+    Website-->>User: Display info text
+
+    User->>Website: View Recipes Page
+    Website->>Database: Fetch recipe list
+    Database-->>Website: Return recipes
+    Website-->>User: Show recipes + search bar
+
+    User->>Website: Use Ingredient Search
+    Website->>Database: Search recipes by ingredients
+    Database-->>Website: Return matching recipes
+    Website-->>User: Show filtered recipes
+
+    %% Profile requires login
+    User->>Website: Click Profile Page
+    Website-->>User: Show Profile Page (if success)
+    Website-->>User: Redirect to Login (if not logged in)
+
+    User->>Website: Enter login credentials
+    Website->>Database: Verify login
+    Database-->>Website: Success/Failure
+    Website-->>User: Show Profile Page (if success)
+
+```
+
+```mermaid
 flowchart TD
     %% Main pages
     A[Home Page]
