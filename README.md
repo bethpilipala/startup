@@ -108,12 +108,16 @@ flowchart TD
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - Uses correct HTML structure for application. Multiple HTML pages. Hyperlinks to choice artifact.
+- **CSS** - Application styling that looks good on different screen sizes, uses good whitespace, color choice and contrast.
+- **React** -  Provides login, recipe displays, and use of React for routing and components.
+- **Service** - Backend service with endpoints for:
+  - login
+  - retrieving recipes
+  - creating recipes
+  - adding ingredients to pantry
+- **DB/Login** - Store users, recipes, and user ingredients in database. Register and login users. Credentials securely stored in database.
+- **WebSocket** - Recipes are displayed on the website, including a recipe of the day on the home page.
 
 ## 🚀 AWS deliverable
 
