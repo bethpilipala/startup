@@ -28,10 +28,38 @@ Have you ever stared at your fridge full of food and still thought, 'What's for 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 ```mermaid
-sequenceDiagram
-    actor You
-    actor Website
-    You->>Website: Replace this with your design
+flowchart TD
+    %% Main pages
+    A[Home Page]
+    B[About Page]
+    C[Recipes Page]
+    D[Ingredient Search Page]
+    E[Profile Page]
+    F[Login Page]
+
+    %% Dropdown menu
+    M[Navigation Menu]
+
+    %% Navigation menu links
+    M --> A
+    M --> B
+    M --> C
+    M --> D
+    M --> E
+
+    %% Page connections
+    A --> M
+    B --> M
+    C --> M
+    D --> M
+    E --> M
+    F --> M
+
+    %% Profile login logic
+    E -->|If logged in| G[Profile Page Content]
+    E -->|If NOT logged in| F[Login Page]
+    F -->|Successful login| G
+    F -->|Back to Home| A
 ```
 
 ### Key features
