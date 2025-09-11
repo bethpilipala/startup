@@ -1,36 +1,29 @@
-# Your startup name here
+# Recipe Finder
 
 [My Notes](notes.md)
 
-A brief description of the application here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Recipe Finder is an application that lets users browse recipes as well as add their own. But beyond being a simple recipe database, the user can enter what ingredients they currently have in their house and the Recipe Finder will spit out recipes that contain only those ingredients. Users can create an account, save recipes, create recipes, and record what ingredients they have. Some ingredients, like spices, cans or other dry goods, will be in a section that is more permanant so that the user doesn't have to input them every time, but will frequently ask for updates regarding ingredients such as fresh fruits and vegetables. After making the recipe the user can mark the recipe as made and the website will prompt the user to remove used ingredients.
 
+Other Possible Website Names
+ - The Partial Pantry
 
-> [!NOTE]
->  This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
-
-> [!NOTE]
->  If you are not familiar with Markdown then you should review the [documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) before continuing.
 
 ## 🚀 Specification Deliverable
 
-> [!NOTE]
->  Fill in this sections as the submission artifact for this deliverable. You can refer to this [example](https://github.com/webprogramming260/startup-example/blob/main/README.md) for inspiration.
-
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
+- [x] Proper use of Markdown
+- [x] A concise and compelling elevator pitch
 - [ ] Description of key features
 - [ ] Description of how you will use each technology
 - [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Have you ever stared at your fridge full of food and still thought, 'What's for dinner?' You come up with an idea, only to realize you're missing a key ingredient. That's where Recipe Finder comes in. Simply enter the ingredients you already have, and we'll instantly suggest recipes you can make right now—no last-minute grocery runs and no dinner stress. Recipe Finder has got your back!
 
 ### Design
-
-![Design image](placeholder.png)
+<img src="initial_design.png" alt="initial design of the website" style="width:500px;"/>
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
