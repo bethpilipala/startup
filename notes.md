@@ -53,3 +53,7 @@ I just followed the directions [here](https://github.com/webprogramming260/.gith
 ## React Part 1: Routing
 
 ## React Part 2: Reactivity
+
+
+## General Notes
+
