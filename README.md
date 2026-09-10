@@ -60,40 +60,7 @@ sequenceDiagram
 
 ```
 
-```mermaid
-flowchart TD
-    %% Main pages
-    A[Home Page]
-    B[About Page]
-    C[Recipes Page]
-    D[Ingredient Search Page]
-    E[Profile Page]
-    F[Login Page]
-
-    %% Dropdown menu
-    M[Navigation Menu]
-
-    %% Navigation menu links
-    M --> A
-    M --> B
-    M --> C
-    M --> D
-    M --> E
-
-    %% Page connections
-    A --> M
-    B --> M
-    C --> M
-    D --> M
-    E --> M
-    F --> M
-
-    %% Profile login logic
-    E -->|If logged in| G[Profile Page Content]
-    E -->|If NOT logged in| F[Login Page]
-    F -->|Successful login| G
-    F -->|Back to Home| A
-```
+<img src="diagram.png" alt="flowchart diagram of the website" style="width:500px;"/>
 
 ### Key features
 
