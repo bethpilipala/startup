@@ -116,6 +116,7 @@ I am going to use the required technologies in the following ways.
   - retrieving recipes
   - creating recipes
   - adding ingredients to pantry
+- **Third-Party API** - The application will use the Spoonacular Food API to retrieve recipe information and search for recipes based on ingredients. When a user enters the ingredients they have available, the backend will send a request to Spoonacular and use the returned recipes to find recipes that can be made with those ingredients. Recipe information such as the recipe name, ingredients, instructions, and images can then be displayed in the application. This will allow Recipe Finder to use a real external recipe database rather than relying entirely on recipes stored in its own database.
 - **DB/Login** - Store users, recipes, and user ingredients in database. Register and login users. Credentials securely stored in database.
 - **WebSocket** - Recipes are displayed on the website, including a recipe of the day on the home page.
 
