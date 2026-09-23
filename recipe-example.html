@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Partial Pantry</title>
+</head>
+<body>
+    <header>
+      <h1>The Partial Pantry</h1>
+      <nav>
+        <menu>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="recipes.html">Recipes</a></li>
+          <li><a href="ingredients.html">Ingredients</a></li>
+          <li><a href="login.html">Login</a></li>
+        </menu>
+      </nav>
+      <hr />
+    </header>
+
+    <main>
+        <article>
+            <header>
+                <h1>Pasta Primavera</h1>
+
+                <p>
+                    A simple pasta dish packed with fresh vegetables.
+                    This recipe is a great way to use up ingredients you
+                    already have in your kitchen.
+                </p>
+
+                <p>
+                    <strong>Prep time:</strong> 15 minutes
+                    <br />
+                    <strong>Cook time:</strong> 20 minutes
+                    <br />
+                    <strong>Total time:</strong> 35 minutes
+                    <br />
+                    <strong>Servings:</strong> 4
+                </p>
+            </header>
+
+            <section>
+                <h2>Ingredients</h2>
+
+                <ul>
+                    <li>12 oz pasta</li>
+                    <li>1 tablespoon olive oil</li>
+                    <li>1 zucchini</li>
+                    <li>1 bell pepper</li>
+                    <li>1 cup broccoli</li>
+                    <li>1 cup cherry tomatoes</li>
+                    <li>2 cloves garlic</li>
+                    <li>1/2 cup Parmesan cheese</li>
+                    <li>Salt to taste</li>
+                    <li>Black pepper to taste</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Instructions</h2>
+
+                <ol>
+                    <li>
+                        Bring a large pot of salted water to a boil.
+                        Cook the pasta according to the package instructions.
+                    </li>
+                    <li>
+                        While the pasta is cooking, wash and chop the vegetables.
+                    </li>
+                    <li>
+                        Heat the olive oil in a large pan over medium heat.
+                    </li>
+                    <li>
+                        Add the garlic, zucchini, bell pepper, and broccoli.
+                        Cook until the vegetables are tender.
+                    </li>
+                    <li>
+                        Add the cherry tomatoes and cook for another
+                        2 to 3 minutes.
+                    </li>
+                    <li>
+                        Drain the pasta and add it to the pan with the vegetables.
+                    </li>
+                    <li>
+                        Season with salt and black pepper and toss everything together.
+                    </li>
+                    <li>
+                        Sprinkle Parmesan cheese over the pasta and serve.
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Recipe Tags</h2>
+
+                <ul>
+                    <li>Vegetarian</li>
+                    <li>Pasta</li>
+                    <li>Quick Meals</li>
+                    <li>Italian-Inspired</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Have the Ingredients?</h2>
+
+                <p>
+                    The Partial Pantry can help you find recipes based on
+                    the ingredients you already have at home.
+                </p>
+
+                <form action="ingredients.html">
+                    <button type="submit">Update Ingredients</button>
+                </form>
+            </section>
+
+            <section>
+                <h2>Recipe Rating</h2>
+
+                <p>
+                    If you enjoyed this recipe, vote for it!
+                </p>
+
+                <button type="button">Vote for this recipe</button>
+
+                <output id="recipe-vote-count" aria-live="polite">
+                    Current votes: 0
+                </output>
+            </section>
+
+            <section id="live-vote-updates" aria-live="polite">
+                <h2>Live Updates</h2>
+
+                <p>
+                    Live vote updates will appear here when the WebSocket
+                    connection is implemented.
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+      <hr />
+      <span class="text-reset">Beth Perkins</span>
+      <br />
+      <a href="https://github.com/bethpilipala/startup">GitHub</a>
+    </footer>
+    
+</body>
+</html>
