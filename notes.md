@@ -10,9 +10,7 @@
 
 ## SSHing in
 
-In the command prompt, type: **ssh -i prod-ec2-key.pem ubuntu@54.209.61.50**
-
-* Make sure it is in the folder where the .pem file exists
+In the command prompt, type: **ssh -i /home/beth/keys/startup-prod.pem ubuntu@thepartialpantry.click**
 
 ## AWS
 
@@ -47,6 +45,16 @@ Try this: CloudWatch Alarms (e.g., low CPU usage for N minutes) to trigger a sto
 I just followed the directions [here](https://github.com/webprogramming260/.github/blob/main/profile/webServers/https/https.md) and now my website is secure!
 
 ## HTML
+
+Some notes about the process to deploy to [startup.thepartialpantry.click](https://startup.thepartialpantry.click):
+
+To access the aws server via ssh: ssh -i /home/beth/keys/startup-prod.pem ubuntu@thepartialpantry.click
+
+To deploy: ./deployFiles.sh -k /home/beth/keys/startup-prod.pem -h thepartialpantry.click -s startup
+
+This is the part that I ran into the most issues with and took the most time on. I ran into quite a few issues deploying simon, and then my own startup.
+
+Other than that, the html process was pretty straightfoward. I am already quite familiar and comfortable with it. This step is mostly just a rough draft step anyways to get general elements down and thought through, as it will be changed quite extensively later on.
 
 ## CSS
 
