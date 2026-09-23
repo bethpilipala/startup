@@ -130,15 +130,15 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - Created the home, about, recipes, ingredients, login, and user home pages for the application.
+- [x] **Proper HTML element usage** - Each page includes valid document structure and uses elements like BODY, HEADER, NAV, MAIN, and FOOTER.
+- [x] **Links** - Added navigation links between pages so users can move through the app.
+- [x] **Text** - Added application text and content to each page.
+- [x] **3rd party API placeholder** - Added a Recipe of the Day section on the Home page identifying the future Spoonacular API integration.
+- [x] **Images** - Added placeholder image content to the site.
+- [x] **Login placeholder** - Added a login page and a user-home flow for the login placeholder experience.
+- [x] **DB data placeholder** - Added sample pantry records with food, quantity, and last-updated fields. These represent data that will eventually be loaded from the database.
+- [x] **WebSocket placeholder** - Added a live vote updates section on the recipe page that will eventually display real-time WebSocket updates.
 
 ## 🚀 CSS deliverable
 
