@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Partial Pantry</title>
+    <title>My Page | The Partial Pantry</title>
 </head>
 <body>
     <header>
       <h1>The Partial Pantry</h1>
-      <nav>
-        <menu>
+      <nav aria-label="Main navigation">
+        <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="recipes.html">Recipes</a></li>
           <li><a href="ingredients.html">Ingredients</a></li>
-          <li><a href="userhome.html">My Page</a></li>
-        </menu>
+          <li><a href="userhome.html" aria-current="page">My Page</a></li>
+        </ul>
       </nav>
       <hr />
     </header>
@@ -24,7 +24,7 @@
         <h1>My Page</h1>
         <p>Welcome to your personalized page!</p>
 
-        <div>
+        <section>
             <h2>Your Recipes</h2>
             <ul>
                 <li>Recipe 1</li>
@@ -38,17 +38,17 @@
                 <li>Ingredient 2</li>
                 <li>Ingredient 3</li>
             </ul>
-            <form action="ingredients.html">
-                <button type="submit">Update Ingredients</button>
-            </form>
-        </div>
+          </section>
+          <form action="ingredients.html">
+            <button type="submit">Update Ingredients</button>
+          </form>
     </main>
 
     <footer>
       <hr />
       <span class="text-reset">Beth Perkins</span>
       <br />
-      <a href="https://github.com/bethpilipala/startup">GitHub</a>
+      <a href="https://github.com/bethpilipala/startup" aria-label="The Partial Pantry on GitHub">GitHub</a>
     </footer>
     
 </body>

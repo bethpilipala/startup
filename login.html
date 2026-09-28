@@ -1,37 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Partial Pantry</title>
+    <title>Log in | The Partial Pantry</title>
 </head>
 <body>
     <header>
       <h1>The Partial Pantry</h1>
-      <nav>
-        <menu>
+      <nav aria-label="Main navigation">
+        <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="recipes.html">Recipes</a></li>
           <li><a href="ingredients.html">Ingredients</a></li>
-          <li><a href="login.html">Login</a></li>
-        </menu>
+          <li><a href="login.html" aria-current="page">Login</a></li>
+        </ul>
       </nav>
       <hr />
     </header>
 
     <main>
+        <h1>Log in</h1>
         <form method="get" action="userhome.html">
-            <div>
-                <span>@</span>
-                <input type="text" placeholder="your@email.com" />
-            </div>
-            <div>
-                <span>🔒</span>
-                <input type="password" placeholder="password" />
-            </div>
-            <button type="submit">Login</button>
-            <button type="submit">Create</button>
+          <div>
+            <label for="email" aria-label="Email address">@</label>
+            <input id="email" name="email" type="email" placeholder="your@email.com" autocomplete="username" />
+          </div>
+          <div>
+            <label for="password" aria-label="Password">🔒</label>
+            <input id="password" name="password" type="password" placeholder="••••••••" autocomplete="current-password"/>
+          </div>
+          <button type="submit">Log in</button>
+          <button type="submit">Create account</button>
         </form>
     </main>
 
@@ -39,7 +40,7 @@
       <hr />
       <span class="text-reset">Beth Perkins</span>
       <br />
-      <a href="https://github.com/bethpilipala/startup">GitHub</a>
+      <a href="https://github.com/bethpilipala/startup" aria-label="The Partial Pantry on GitHub">GitHub</a>
     </footer>
     
 </body>
