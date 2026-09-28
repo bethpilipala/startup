@@ -284,6 +284,26 @@ main > article section:first-of-type {
     border-top: 0;
 }
 
+.recipe-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.recipe-tags li {
+    margin: 0;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    background: var(--terracotta);
+    color: var(--white);
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
 main ul,
 main ol {
     padding-left: 1.5rem;
