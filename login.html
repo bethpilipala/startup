@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/site.css" />
-    <title>Log in | The Partial Pantry</title>
+    <title>Login | The Partial Pantry</title>
 </head>
 <body>
     <header>
@@ -27,7 +27,7 @@
     </header>
 
     <main>
-        <h1>Log in</h1>
+        <h1 class="login-heading">Login</h1>
         <form class="login-form" method="get" action="userhome.html">
           <div>
             <label for="email">Email</label>
@@ -37,8 +37,10 @@
             <label for="password">Password</label>
             <input class="form-control" id="password" name="password" type="password" placeholder="••••••••" autocomplete="current-password"/>
           </div>
-          <button class="btn" type="submit">Log in</button>
-          <button class="btn" type="submit">Create account</button>
+          <div class="login-actions">
+            <button class="btn" type="submit">Log in</button>
+            <button class="btn" type="submit">Create account</button>
+          </div>
         </form>
     </main>
 

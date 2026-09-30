@@ -60,6 +60,34 @@ main > form input {
     align-items: center;
 }
 
+.login-heading {
+    text-align: center;
+}
+
+.login-form {
+    margin-inline: auto;
+}
+
+.login-form > .btn {
+    justify-self: center;
+}
+
+.login-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.login-form > .login-actions {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+}
+
+.login-actions .btn {
+    width: 100%;
+    min-width: 0;
+}
+
 .login-form label {
     font-weight: 600;
 }
