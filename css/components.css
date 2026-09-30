@@ -15,6 +15,7 @@ button.btn {
 button.btn:hover {
     border-color: var(--sage-deep);
     background: var(--sage-deep);
+    color: var(--white);
 }
 
 button.btn:active {
