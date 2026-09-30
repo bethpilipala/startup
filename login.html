@@ -17,6 +17,11 @@
           <li><a href="ingredients.html">Ingredients</a></li>
           <li><a href="login.html" aria-current="page">Login</a></li>
         </ul>
+        <form class="site-recipe-search d-flex align-items-center gap-2 ms-auto" role="search" aria-label="Search recipes" action="/search" method="get">
+          <label class="visually-hidden" for="login-site-recipe-search">Search recipes</label>
+          <input class="form-control" id="login-site-recipe-search" name="q" type="search" placeholder="Find a recipe" />
+          <button class="btn" type="submit">Search</button>
+        </form>
       </nav>
       <hr />
     </header>

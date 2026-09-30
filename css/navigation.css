@@ -13,9 +13,17 @@ body > header h1 {
     line-height: 1.2;
 }
 
+nav[aria-label="Main navigation"] {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+}
+
 nav ul {
     display: flex;
     flex-wrap: wrap;
+    flex: 0 1 auto;
     gap: 0.35rem;
     margin: 0;
     padding: 0;
@@ -36,6 +44,20 @@ nav a:hover,
 nav a[aria-current] {
     background: var(--sage);
     color: #17271A;
+}
+
+.site-recipe-search {
+    flex: 0 1 20rem;
+    width: min(100%, 20rem);
+}
+
+.site-recipe-search .form-control {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.site-recipe-search .btn {
+    flex: 0 0 auto;
 }
 
 body > header hr {

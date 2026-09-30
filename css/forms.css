@@ -24,6 +24,18 @@ input.form-control:focus-visible {
     box-shadow: 0 0 0 3px rgba(122, 158, 126, 0.22);
 }
 
+.site-recipe-search .form-control,
+.recipe-search-form .form-control {
+    border-color: var(--sage);
+    border-radius: 999px;
+    background: var(--sage-lightest);
+}
+
+.site-recipe-search .btn,
+.recipe-search-form .btn {
+    border-radius: 999px;
+}
+
 main > form {
     display: grid;
     gap: 1rem;

@@ -11,6 +11,19 @@
         padding: 0.45rem 0.65rem;
     }
 
+    nav[aria-label="Main navigation"] {
+        align-items: stretch;
+    }
+
+    nav[aria-label="Main navigation"] ul {
+        flex: 1 1 100%;
+    }
+
+    .site-recipe-search {
+        flex: 0 1 20rem;
+        margin-left: auto;
+    }
+
     main {
         width: min(100% - 1.25rem, 960px);
         margin: 1rem auto;
