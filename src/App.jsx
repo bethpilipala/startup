@@ -8,7 +8,7 @@ import RecipeExample from "./pages/RecipeExample.jsx";
 import RecipeOfTheDay from "./pages/RecipeOfTheDay.jsx";
 import Recipes from "./pages/Recipes.jsx";
 import UserHome from "./pages/UserHome.jsx";
-import { HashRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 const activePages = {
   "/": "home",
@@ -44,8 +44,8 @@ function SiteLayout() {
 
 export default function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <SiteLayout />
-    </HashRouter>
+    </BrowserRouter>
   );
 }

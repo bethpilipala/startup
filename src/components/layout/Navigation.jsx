@@ -23,7 +23,7 @@ export default function Navigation({ activePage = "" }) {
           </li>
         ))}
       </ul>
-      <form className="site-recipe-search d-flex align-items-center gap-2 ms-auto" role="search" aria-label="Search recipes" action="/#/search" method="get">
+      <form className="site-recipe-search d-flex align-items-center gap-2 ms-auto" role="search" aria-label="Search recipes" action="/search" method="get">
         <label className="visually-hidden" htmlFor="site-recipe-search">Search recipes</label>
         <input className="form-control" id="site-recipe-search" name="q" type="search" placeholder="Find a recipe" />
         <button className="btn" type="submit">Search</button>
