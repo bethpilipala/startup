@@ -2,8 +2,11 @@
 
 [My startup - The Partial Pantry](https://thepartialpantry.click)
 
+I love web programming :)
+
 ## Helpful links
 
+- [MasteryLS](https://masteryls.com/course/1a8c01d0-5e9c-4a7c-8597-55bd5159967e/topic/84e8268d-0a0e-4c94-a9b1-34e31c78bb12)
 - [Course instruction](https://github.com/webprogramming260)
 - [Canvas](https://byu.instructure.com)
 - [MDN](https://developer.mozilla.org)
