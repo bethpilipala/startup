@@ -25,14 +25,32 @@
         <h1>Ingredients</h1>
         <p>This is only available if you have signed in.</p>
 
-        <section>
+        <section class="ingredients-section">
             <h2 id="shelf-stable-heading">Shelf Stable Ingredients</h2>
             <table aria-labelledby="shelf-stable-heading">
                 <thead>
                     <tr>
-                        <th scope="col">Name</th>
+                        <th scope="col" class="ingredient-sort-heading">
+                            <span>Name</span>
+                            <details class="ingredient-sort">
+                                <summary aria-label="Sort by name"><span class="ingredient-sort-icon" aria-hidden="true"></span></summary>
+                                <div class="ingredient-sort-menu" aria-label="Name sorting options">
+                                    <button type="button">A–Z</button>
+                                    <button type="button">Z–A</button>
+                                </div>
+                            </details>
+                        </th>
                         <th scope="col">Quantity</th>
-                        <th scope="col">Last Updated</th>
+                        <th scope="col" class="ingredient-sort-heading">
+                            <span>Last Updated</span>
+                            <details class="ingredient-sort">
+                                <summary aria-label="Sort by last updated"><span class="ingredient-sort-icon" aria-hidden="true"></span></summary>
+                                <div class="ingredient-sort-menu" aria-label="Last updated sorting options">
+                                    <button type="button">Newest first</button>
+                                    <button type="button">Oldest first</button>
+                                </div>
+                            </details>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,14 +82,32 @@
             </form>
         </section>
 
-        <section>
+        <section class="ingredients-section">
             <h2 id="refrigerated-heading">Refrigerated Ingredients</h2>
             <table aria-labelledby="refrigerated-heading">
                 <thead>
                     <tr>
-                        <th scope="col">Name</th>
+                        <th scope="col" class="ingredient-sort-heading">
+                            <span>Name</span>
+                            <details class="ingredient-sort">
+                                <summary aria-label="Sort by name"><span class="ingredient-sort-icon" aria-hidden="true"></span></summary>
+                                <div class="ingredient-sort-menu" aria-label="Name sorting options">
+                                    <button type="button">A–Z</button>
+                                    <button type="button">Z–A</button>
+                                </div>
+                            </details>
+                        </th>
                         <th scope="col">Quantity</th>
-                        <th scope="col">Last Updated</th>
+                        <th scope="col" class="ingredient-sort-heading">
+                            <span>Last Updated</span>
+                            <details class="ingredient-sort">
+                                <summary aria-label="Sort by last updated"><span class="ingredient-sort-icon" aria-hidden="true"></span></summary>
+                                <div class="ingredient-sort-menu" aria-label="Last updated sorting options">
+                                    <button type="button">Newest first</button>
+                                    <button type="button">Oldest first</button>
+                                </div>
+                            </details>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
