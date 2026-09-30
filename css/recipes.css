@@ -20,6 +20,33 @@
     font-weight: 700;
 }
 
+.home-quick-link {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.55rem 0.25rem;
+    border-top: 2px solid var(--sage);
+    color: var(--olive);
+    text-decoration: none;
+}
+
+.home-quick-link:hover {
+    border-color: var(--terracotta);
+    color: var(--olive);
+    text-decoration: none;
+}
+
+.home-quick-link strong {
+    font-weight: 700;
+}
+
+.home-quick-link span {
+    color: var(--olive-muted);
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
 .userhome-empty-state {
     display: flex;
     min-height: 12rem;
