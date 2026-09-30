@@ -97,6 +97,18 @@ main > form input {
     border-radius: 18px;
 }
 
+.login-forgot-password {
+    grid-column: 1 / -1;
+    justify-self: center;
+    color: var(--olive-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.login-forgot-password:hover {
+    color: var(--terracotta);
+}
+
 search {
     display: block;
     margin-bottom: 2rem;
