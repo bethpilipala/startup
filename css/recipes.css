@@ -52,13 +52,12 @@
 }
 
 .home-intro {
-    max-width: 48rem;
     margin: 1.75rem auto;
     padding: 1rem 0.5rem;
     border-top: 2px solid var(--terracotta);
     border-bottom: 1px solid var(--line);
     color: var(--olive-muted);
-    text-align: center;
+    text-align: left;
 }
 
 .userhome-empty-state {
