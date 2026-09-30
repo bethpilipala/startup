@@ -78,13 +78,16 @@ Also another thing that I think(?) I might be able to implement later on is the 
 
 ## Things I want to include
 
-I want to implement a reminder system for users to update their ingredients. If its been say a week for their fresh ingredients, a month for shelf stable, or something like that.
+I want to implement a reminder system for users to update their ingredients. If its been say a week for their fresh ingredients, a month for shelf stable, or something like that. Also inclide a button or something so when you make something, you can mark it as made and it will automatically update your pantry.
 
 Recently viewed recipes in a section on the main recipes page.
 
 On an individual recipe's page, have a toggle button to keep the screen awake (if working on a recipe at the time). Also options to multiply the recipe or cut it in half (like allrecipes does).
 
 More interactivity with the user. The ability to add comments, and add a profile picture that will appear with their comments. In the profile you can adjust your name, other personal info, etc.
+
+Include a feature to add your own recipes.
+
 
 ---
 
