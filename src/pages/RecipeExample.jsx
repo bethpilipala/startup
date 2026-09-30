@@ -4,6 +4,7 @@ import IngredientsList from "../components/recipes/IngredientsList.jsx";
 import InstructionsList from "../components/recipes/InstructionsList.jsx";
 import RecipeHeader from "../components/recipes/RecipeHeader.jsx";
 import RecipeTags from "../components/recipes/RecipeTags.jsx";
+import strings from "../strings/en.js";
 
 const ingredients = [
   "12 oz pasta",
@@ -48,19 +49,18 @@ export default function RecipeExample() {
         <InstructionsList instructions={instructions} />
         <RecipeTags tags={["Vegetarian", "Pasta", "Quick Meals", "Italian-Inspired"]} />
         <section>
-          <h2>Have the Ingredients?</h2>
+          <h2>{strings.recipes.haveIngredientsHeading}</h2>
           <p>
-            The Partial Pantry can help you find recipes based on
-            the ingredients you already have at home.
+            {strings.recipes.haveIngredientsText}
           </p>
-          <Link className="btn" to="/ingredients">Update Ingredients</Link>
+          <Link className="btn" to="/ingredients">{strings.common.updateIngredientsButton}</Link>
         </section>
         <section aria-labelledby="recipe-save-heading">
-          <h2 id="recipe-save-heading">Enjoy this recipe?</h2>
-          <p className="recipe-save-description">Save this recipe to your My Pantry page.</p>
+          <h2 id="recipe-save-heading">{strings.recipes.enjoyRecipeHeading}</h2>
+          <p className="recipe-save-description">{strings.recipes.saveRecipeText}</p>
           <div className="recipe-save-actions">
-            <button className="btn recipe-save-button" type="button"><span aria-hidden="true">♡</span> Save Recipe</button>
-            <output id="recipe-save-count" aria-live="polite">0 saves</output>
+            <button className="btn recipe-save-button" type="button"><span aria-hidden="true">♡</span> {strings.recipes.saveRecipeButton}</button>
+            <output id="recipe-save-count" aria-live="polite">{strings.recipes.saveCountInitial}</output>
           </div>
         </section>
       </article>

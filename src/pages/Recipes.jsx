@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import CategoryList from "../components/categories/CategoryList.jsx";
+import strings from "../strings/en.js";
 import appetizersImage from "../../images/appetizers.jpg";
 import breakfastImage from "../../images/breakfast.jpg";
 import dessertImage from "../../images/dessert.jpg";
@@ -23,15 +24,15 @@ const categories = [
 export default function Recipes() {
   return (
     <main>
-      <h1>Recipes</h1>
+      <h1>{strings.recipes.pageTitle}</h1>
       <search>
         <form className="recipe-search-form" action="/search" method="get">
-          <input className="form-control" type="search" name="q" placeholder="Search..." aria-label="Search recipes" />
-          <button className="btn" type="submit">Search</button>
+          <input className="form-control" type="search" name="q" placeholder={strings.recipes.searchPlaceholder} aria-label={strings.common.searchRecipesLabel} />
+          <button className="btn" type="submit">{strings.common.searchButton}</button>
         </form>
       </search>
       <CategoryList categories={categories} />
-      <Link to="/recipe-example">Get a Random Recipe</Link>
+      <Link to="/recipe-example">{strings.recipes.randomRecipeLink}</Link>
     </main>
   );
 }

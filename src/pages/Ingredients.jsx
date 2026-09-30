@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import strings from "../strings/en.js";
 
 function IngredientTable({ headingId, title, records, sortLabels }) {
   return (
@@ -8,23 +9,23 @@ function IngredientTable({ headingId, title, records, sortLabels }) {
         <thead>
           <tr>
             <th scope="col" className="ingredient-sort-heading">
-              <span>Name</span>
+              <span>{strings.ingredients.nameHeader}</span>
               <details className="ingredient-sort">
-                <summary aria-label="Sort by name"><span className="ingredient-sort-icon" aria-hidden="true"></span></summary>
-                <div className="ingredient-sort-menu" aria-label="Name sorting options">
+                <summary aria-label={strings.ingredients.sortByNameLabel}><span className="ingredient-sort-icon" aria-hidden="true"></span></summary>
+                <div className="ingredient-sort-menu" aria-label={strings.ingredients.nameSortMenuLabel}>
                   <button type="button">{sortLabels[0]}</button>
                   <button type="button">{sortLabels[1]}</button>
                 </div>
               </details>
             </th>
-            <th scope="col">Quantity</th>
+            <th scope="col">{strings.ingredients.quantityHeader}</th>
             <th scope="col" className="ingredient-sort-heading">
-              <span>Last Updated</span>
+              <span>{strings.ingredients.lastUpdatedHeader}</span>
               <details className="ingredient-sort">
-                <summary aria-label="Sort by last updated"><span className="ingredient-sort-icon" aria-hidden="true"></span></summary>
-                <div className="ingredient-sort-menu" aria-label="Last updated sorting options">
-                  <button type="button">Newest first</button>
-                  <button type="button">Oldest first</button>
+                <summary aria-label={strings.ingredients.sortByLastUpdatedLabel}><span className="ingredient-sort-icon" aria-hidden="true"></span></summary>
+                <div className="ingredient-sort-menu" aria-label={strings.ingredients.lastUpdatedSortMenuLabel}>
+                  <button type="button">{strings.ingredients.newestFirstLabel}</button>
+                  <button type="button">{strings.ingredients.oldestFirstLabel}</button>
                 </div>
               </details>
             </th>
@@ -41,7 +42,7 @@ function IngredientTable({ headingId, title, records, sortLabels }) {
         </tbody>
       </table>
       <br />
-      <Link className="btn" to="/ingredients">Update Ingredients</Link>
+      <Link className="btn" to="/ingredients">{strings.common.updateIngredientsButton}</Link>
     </section>
   );
 }
@@ -63,19 +64,19 @@ const refrigeratedIngredients = [
 export default function Ingredients() {
   return (
     <main>
-      <h1>Ingredients</h1>
-      <p>This is only available if you have signed in.</p>
+      <h1>{strings.ingredients.pageTitle}</h1>
+      <p>{strings.ingredients.signInNotice}</p>
       <IngredientTable
         headingId="shelf-stable-heading"
-        title="Shelf Stable Ingredients"
+        title={strings.ingredients.shelfStableHeading}
         records={shelfStableIngredients}
-        sortLabels={["Sort A–Z", "Sort Z–A"]}
+        sortLabels={[strings.ingredients.sortNameAscLabel, strings.ingredients.sortNameDescLabel]}
       />
       <IngredientTable
         headingId="refrigerated-heading"
-        title="Refrigerated Ingredients"
+        title={strings.ingredients.refrigeratedHeading}
         records={refrigeratedIngredients}
-        sortLabels={["A–Z", "Z–A"]}
+        sortLabels={[strings.ingredients.sortNameAscShortLabel, strings.ingredients.sortNameDescShortLabel]}
       />
     </main>
   );

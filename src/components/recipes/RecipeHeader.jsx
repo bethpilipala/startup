@@ -1,3 +1,5 @@
+import strings from "../../strings/en.js";
+
 export default function RecipeHeader({
   title = "Recipe title",
   description = "Recipe description",
@@ -11,13 +13,13 @@ export default function RecipeHeader({
       <h1>{title}</h1>
       <p>{description}</p>
       <p>
-        <strong>Prep time:</strong> {prepTime}
+        <strong>{strings.recipes.prepTimeLabel}</strong> {prepTime}
         <br />
-        <strong>Cook time:</strong> {cookTime}
+        <strong>{strings.recipes.cookTimeLabel}</strong> {cookTime}
         <br />
-        <strong>Total time:</strong> {totalTime}
+        <strong>{strings.recipes.totalTimeLabel}</strong> {totalTime}
         <br />
-        <strong>Servings:</strong> {servings}
+        <strong>{strings.recipes.servingsLabel}</strong> {servings}
       </p>
     </header>
   );

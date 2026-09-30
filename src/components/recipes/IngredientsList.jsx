@@ -1,7 +1,9 @@
+import strings from "../../strings/en.js";
+
 export default function IngredientsList({ ingredients = [], groups = [] }) {
   return (
     <section>
-      <h2>Ingredients</h2>
+      <h2>{strings.recipes.ingredientsHeading}</h2>
       {groups.length > 0
         ? groups.map((group) => (
             <div key={group.name}>
