@@ -26,6 +26,44 @@ main > section[aria-label="Recipe categories"] p {
     font-weight: 700;
 }
 
+.recipe-of-the-day {
+    width: min(100%, 36rem);
+    margin: 1.5rem auto;
+    overflow: hidden;
+    padding: 0;
+    background: var(--terracotta-soft);
+    text-align: center;
+}
+
+.recipe-of-the-day h2 {
+    margin: 0;
+    padding: 0.6rem 1rem;
+    background: var(--terracotta);
+    color: var(--white);
+    font-size: 1.45rem;
+}
+
+.recipe-of-the-day figure {
+    margin: 0;
+    padding: clamp(1rem, 3vw, 1.5rem);
+}
+
+.recipe-of-the-day img {
+    display: block;
+    width: min(100%, 40rem);
+    max-height: 26rem;
+    margin: 0 auto 0.85rem;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+.recipe-of-the-day figcaption h3 {
+    display: inline-block;
+    margin: 0;
+    color: var(--olive);
+    font-size: 1.3rem;
+}
+
 main > article > header {
     margin: -0.5rem 0 1.5rem;
     padding: 1.25rem 1.5rem;
