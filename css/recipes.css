@@ -161,6 +161,35 @@ main > article section:first-of-type {
     line-height: 1.45;
 }
 
+.recipe-save-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+button.btn.recipe-save-button {
+    border-color: var(--terracotta);
+    background: var(--terracotta);
+}
+
+button.btn.recipe-save-button:hover {
+    border-color: #873B25;
+    background: #873B25;
+}
+
+.recipe-save-actions output {
+    margin: 0;
+    color: var(--olive-muted);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.recipe-save-description {
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
 main ul,
 main ol {
     padding-left: 1.5rem;
