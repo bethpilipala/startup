@@ -1,10 +1,4 @@
-main > section[aria-label="Recipe categories"] {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-main > section[aria-label="Recipe categories"] > div {
+.recipe-category-card {
     overflow: hidden;
     border: 1px solid var(--line);
     border-radius: 8px;
@@ -12,7 +6,7 @@ main > section[aria-label="Recipe categories"] > div {
     text-align: center;
 }
 
-main > section[aria-label="Recipe categories"] img {
+.recipe-category-card img {
     display: block;
     width: 100%;
     aspect-ratio: 4 / 3;
@@ -20,7 +14,7 @@ main > section[aria-label="Recipe categories"] img {
     background: var(--terracotta-soft);
 }
 
-main > section[aria-label="Recipe categories"] p {
+.recipe-category-card p {
     margin: 0;
     padding: 0.7rem 0.4rem;
     font-weight: 700;
@@ -133,7 +127,7 @@ main > article section:first-of-type {
     list-style: none;
 }
 
-.recipe-tags li {
+.recipe-tags li.badge {
     margin: 0;
     padding: 0.3rem 0.8rem;
     border-radius: 999px;

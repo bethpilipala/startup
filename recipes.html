@@ -25,42 +25,60 @@
         <h1>Recipes</h1>
         <search>
             <form action="/search" method="get">
-                <input type="search" name="q" placeholder="Search..." aria-label="Search recipes">
-                <button type="submit">Search</button>
+                <input class="form-control" type="search" name="q" placeholder="Search..." aria-label="Search recipes">
+                <button class="btn" type="submit">Search</button>
             </form>
         </search>
         <section aria-label="Recipe categories">
-            <div>
-                <img src="images/breakfast.jpg" alt="" />
-                <p>Breakfast</p>
-            </div>
-            <div>
-                <img src="images/lunch.jpg" alt="" />
-                <p>Lunch</p>
-            </div>
-            <div>
-                <img src="images/dinner.jpg" alt="" />
-                <p>Dinner</p>
-            </div>
-            <div>
-                <img src="images/appetizers.jpg" alt="" />
-                <p>Appetizers</p>
-            </div>
-            <div>
-                <img src="images/sides.jpg" alt="" />
-                <p>Sides</p>
-            </div>
-            <div>
-                <img src="images/soups_and_salad.jpg" alt="" />
-                <p>Soups &amp; Salads</p>
-            </div>
-            <div>
-                <img src="images/dessert.jpg" alt="" />
-                <p>Desserts</p>
-            </div>
-            <div>
-                <img src="images/snacks_and_drinks.jpg" alt="" />
-                <p>Snacks &amp; Drinks</p>
+            <div class="row row-cols-2 row-cols-md-4 g-3 recipe-category-grid">
+                <div class="col">
+                    <div class="recipe-category-card">
+                        <img src="images/breakfast.jpg" alt="" />
+                        <p>Breakfast</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="recipe-category-card">
+                        <img src="images/lunch.jpg" alt="" />
+                        <p>Lunch</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="recipe-category-card">
+                        <img src="images/dinner.jpg" alt="" />
+                        <p>Dinner</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="recipe-category-card">
+                        <img src="images/appetizers.jpg" alt="" />
+                        <p>Appetizers</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="recipe-category-card">
+                        <img src="images/sides.jpg" alt="" />
+                        <p>Sides</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="recipe-category-card">
+                        <img src="images/soups_and_salad.jpg" alt="" />
+                        <p>Soups &amp; Salads</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="recipe-category-card">
+                        <img src="images/dessert.jpg" alt="" />
+                        <p>Desserts</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="recipe-category-card">
+                        <img src="images/snacks_and_drinks.jpg" alt="" />
+                        <p>Snacks &amp; Drinks</p>
+                    </div>
+                </div>
             </div>
         </section>
         <a href="recipe-example.html">Get a Random Recipe</a>

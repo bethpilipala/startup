@@ -1,4 +1,5 @@
-input {
+input.form-control {
+    width: auto;
     min-height: 2.75rem;
     padding: 0.65rem 0.8rem;
     border: 1px solid #AAB5A7;
@@ -8,12 +9,17 @@ input {
     font: inherit;
 }
 
-input::placeholder {
+input.form-control::placeholder {
     color: var(--olive-muted);
     opacity: 1;
 }
 
-input:focus-visible {
+input.form-control:focus {
+    border-color: #AAB5A7;
+    box-shadow: none;
+}
+
+input.form-control:focus-visible {
     border-color: var(--sage-dark);
     box-shadow: 0 0 0 3px rgba(122, 158, 126, 0.22);
 }

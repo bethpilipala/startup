@@ -95,6 +95,7 @@
 }
 
 .ingredient-sort-menu button {
+    min-height: 2.75rem;
     padding: 0.55rem 0.7rem;
     border: 0;
     border-radius: 4px;

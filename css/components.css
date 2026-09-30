@@ -1,4 +1,4 @@
-button {
+button.btn {
     min-height: 2.75rem;
     padding: 0.65rem 1.1rem;
     border: 1px solid var(--sage-dark);
@@ -12,21 +12,30 @@ button {
     transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease;
 }
 
-button:hover {
+button.btn:hover {
     border-color: var(--sage-deep);
     background: var(--sage-deep);
 }
 
-button:active {
+button.btn:active {
     transform: translateY(1px);
 }
 
-button + button {
+button.btn:focus {
+    box-shadow: none;
+}
+
+button.btn:focus-visible {
+    outline: 3px solid var(--terracotta);
+    outline-offset: 3px;
+}
+
+button.btn + button.btn {
     border-color: var(--terracotta);
     background: var(--terracotta);
 }
 
-button + button:hover {
+button.btn + button.btn:hover {
     border-color: #873B25;
     background: #873B25;
 }

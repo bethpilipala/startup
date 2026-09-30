@@ -18,10 +18,6 @@
         border-radius: 10px;
     }
 
-    main > section[aria-label="Recipe categories"] {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
     main > section {
         overflow-x: auto;
     }
@@ -60,6 +56,13 @@
 
     .ingredient-sort-menu {
         max-width: calc(100vw - 2rem);
+    }
+}
+
+@media (min-width: 701px) and (max-width: 767.98px) {
+    .recipe-category-grid.row-cols-2 > .col {
+        flex: 0 0 auto;
+        width: 25%;
     }
 }
 
