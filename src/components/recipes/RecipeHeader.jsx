@@ -10,16 +10,15 @@ export default function RecipeHeader({
     <header>
       <h1>{title}</h1>
       <p>{description}</p>
-      <dl>
-        <dt>Prep time</dt>
-        <dd>{prepTime}</dd>
-        <dt>Cook time</dt>
-        <dd>{cookTime}</dd>
-        <dt>Total time</dt>
-        <dd>{totalTime}</dd>
-        <dt>Servings</dt>
-        <dd>{servings}</dd>
-      </dl>
+      <p>
+        <strong>Prep time:</strong> {prepTime}
+        <br />
+        <strong>Cook time:</strong> {cookTime}
+        <br />
+        <strong>Total time:</strong> {totalTime}
+        <br />
+        <strong>Servings:</strong> {servings}
+      </p>
     </header>
   );
 }

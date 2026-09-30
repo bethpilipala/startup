@@ -1,10 +1,10 @@
 export default function RecipeTags({ tags = [] }) {
   return (
     <section>
-      <h2>Recipe tags</h2>
-      <ul>
+      <h2>Recipe Tags</h2>
+      <ul className="recipe-tags">
         {tags.map((tag) => (
-          <li key={tag}>{tag}</li>
+          <li className="badge" key={tag}>{tag}</li>
         ))}
       </ul>
     </section>

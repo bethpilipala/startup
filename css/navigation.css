@@ -1,10 +1,10 @@
-body > header {
+:is(body, #root) > header {
     padding: 1.25rem max(1.25rem, calc((100% - 1120px) / 2));
     background: var(--olive);
     color: var(--white);
 }
 
-body > header h1 {
+:is(body, #root) > header h1 {
     margin: 0 0 0.6rem;
     color: var(--white);
     font-family: var(--font-heading);
@@ -62,7 +62,7 @@ nav a[aria-current] {
     flex: 0 0 auto;
 }
 
-body > header hr {
+:is(body, #root) > header hr {
     max-width: 1120px;
     margin: 1rem auto 0;
     border: 0;

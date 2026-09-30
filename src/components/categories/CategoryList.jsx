@@ -3,13 +3,13 @@ import CategoryCard from "./CategoryCard.jsx";
 export default function CategoryList({ categories = [] }) {
   return (
     <section aria-label="Recipe categories">
-      <ul>
+      <div className="row row-cols-2 row-cols-md-4 g-3 recipe-category-grid">
         {categories.map((category) => (
-          <li key={category.href || category.name}>
+          <div className="col" key={category.name}>
             <CategoryCard {...category} />
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </section>
   );
 }
