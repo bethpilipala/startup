@@ -58,6 +58,10 @@ Other than that, the html process was pretty straightfoward. I am already quite 
 
 ## CSS
 
+I am also alrady familiar with css, so this was fun to implement. I created a color scheme of greens and terrecotta that I can use in all of my elements.
+
+One note is that I added a sort menu to my ingredient tables, but it is not functional. I think I might be able to add the functionality in a later phase? If not, I need to go back and implement this.
+
 ## React Part 1: Routing
 
 ## React Part 2: Reactivity
