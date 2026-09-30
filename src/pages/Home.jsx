@@ -12,7 +12,7 @@ export default function Home() {
         <h2 id="recipe-of-the-day-heading">Recipe of the Day</h2>
         <RecipeCard
           className="recipe-of-the-day-link"
-          href="recipe-of-the-day.html"
+          href="/recipe-of-the-day"
           title="Eggs Benedict"
           image={eggsBenedictImage}
           imageAlt=""

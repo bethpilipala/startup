@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
+
 export default function Login() {
   return (
     <main>
-      <form className="login-form" method="get" action="userhome.html">
+      <div className="login-form">
         <div>
           <label htmlFor="email">Email</label>
           <input className="form-control" id="email" name="email" type="email" placeholder="your@email.com" autoComplete="username" />
@@ -12,10 +14,10 @@ export default function Login() {
           <a className="login-forgot-password" href="#">Forgot your password?</a>
         </div>
         <div className="login-actions">
-          <button className="btn" type="submit">Log in</button>
-          <button className="btn" type="submit">Create account</button>
+          <Link className="btn" to="/userhome">Log in</Link>
+          <Link className="btn" to="/userhome">Create account</Link>
         </div>
-      </form>
+      </div>
     </main>
   );
 }

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CategoryList from "../components/categories/CategoryList.jsx";
 import appetizersImage from "../../images/appetizers.jpg";
 import breakfastImage from "../../images/breakfast.jpg";
@@ -30,7 +31,7 @@ export default function Recipes() {
         </form>
       </search>
       <CategoryList categories={categories} />
-      <a href="recipe-example.html">Get a Random Recipe</a>
+      <Link to="/recipe-example">Get a Random Recipe</Link>
     </main>
   );
 }

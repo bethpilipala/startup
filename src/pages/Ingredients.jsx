@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function IngredientTable({ headingId, title, records, sortLabels }) {
   return (
     <section className="ingredients-section">
@@ -39,9 +41,7 @@ function IngredientTable({ headingId, title, records, sortLabels }) {
         </tbody>
       </table>
       <br />
-      <form action="ingredients.html">
-        <button className="btn" type="submit">Update Ingredients</button>
-      </form>
+      <Link className="btn" to="/ingredients">Update Ingredients</Link>
     </section>
   );
 }

@@ -8,28 +8,44 @@ import RecipeExample from "./pages/RecipeExample.jsx";
 import RecipeOfTheDay from "./pages/RecipeOfTheDay.jsx";
 import Recipes from "./pages/Recipes.jsx";
 import UserHome from "./pages/UserHome.jsx";
+import { HashRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 
-const pages = {
-  "/": { name: "home", component: Home },
-  "/index.html": { name: "home", component: Home },
-  "/about.html": { name: "about", component: About },
-  "/ingredients.html": { name: "ingredients", component: Ingredients },
-  "/login.html": { name: "login", component: Login },
-  "/recipe-example.html": { name: "recipes", component: RecipeExample },
-  "/recipe-of-the-day.html": { name: "recipes", component: RecipeOfTheDay },
-  "/recipes.html": { name: "recipes", component: Recipes },
-  "/userhome.html": { name: "userhome", component: UserHome },
+const activePages = {
+  "/": "home",
+  "/about": "about",
+  "/ingredients": "ingredients",
+  "/login": "login",
+  "/recipe-example": "recipes",
+  "/recipe-of-the-day": "recipes",
+  "/recipes": "recipes",
+  "/userhome": "userhome",
 };
 
-export default function App() {
-  const page = pages[window.location.pathname] || pages["/"];
-  const Page = page.component;
-
+function SiteLayout() {
+  const { pathname } = useLocation();
   return (
     <>
-      <Header activePage={page.name} />
-      <Page />
+      <Header activePage={activePages[pathname] || ""} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/ingredients" element={<Ingredients />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/recipe-example" element={<RecipeExample />} />
+        <Route path="/recipe-of-the-day" element={<RecipeOfTheDay />} />
+        <Route path="/recipes" element={<Recipes />} />
+        <Route path="/userhome" element={<UserHome />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
       <Footer />
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <HashRouter>
+      <SiteLayout />
+    </HashRouter>
   );
 }

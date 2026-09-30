@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import eggsBenedictImage from "../../images/eggs_benedict.jpg";
 import IngredientsList from "../components/recipes/IngredientsList.jsx";
 import InstructionsList from "../components/recipes/InstructionsList.jsx";
@@ -67,9 +68,7 @@ export default function RecipeOfTheDay() {
             The Partial Pantry can help you find recipes based on
             the ingredients you already have at home.
           </p>
-          <form action="ingredients.html">
-            <button className="btn" type="submit">Update Ingredients</button>
-          </form>
+          <Link className="btn" to="/ingredients">Update Ingredients</Link>
         </section>
         <section aria-labelledby="recipe-save-heading">
           <h2 id="recipe-save-heading">Enjoy this recipe?</h2>

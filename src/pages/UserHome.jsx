@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const pantryIngredients = [
   ["Flour", "10 lbs"],
   ["Sugar", "5 lbs"],
@@ -22,7 +24,7 @@ export default function UserHome() {
                 <div className="userhome-empty-state" role="status">
                   <p>No recipes saved yet.</p>
                   <p>Recipes you save will appear here.</p>
-                  <a href="recipes.html">Explore recipes</a>
+                  <Link to="/recipes">Explore recipes</Link>
                 </div>
               </div>
             </div>
@@ -32,7 +34,7 @@ export default function UserHome() {
           <section className="userhome-ingredients" aria-labelledby="your-ingredients-heading">
             <div className="userhome-section-heading">
               <h2 id="your-ingredients-heading">My Ingredients</h2>
-              <a href="ingredients.html">View all</a>
+              <Link to="/ingredients">View all</Link>
             </div>
             <ul className="list-group list-group-flush userhome-ingredient-list">
               {pantryIngredients.map(([name, quantity]) => (
@@ -41,9 +43,7 @@ export default function UserHome() {
                 </li>
               ))}
             </ul>
-            <form action="ingredients.html">
-              <button className="btn" type="submit">Update Ingredients</button>
-            </form>
+            <Link className="btn" to="/ingredients">Update Ingredients</Link>
           </section>
         </div>
       </div>
