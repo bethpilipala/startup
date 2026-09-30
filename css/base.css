@@ -20,7 +20,7 @@ h1,
 h2,
 h3 {
     color: var(--olive);
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: var(--font-heading);
     line-height: 1.25;
 }
 
