@@ -146,12 +146,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [x] **Header, footer, and main content body** - Styled the page header and footer and added a centered, constrained main content layout with consistent section spacing.
+- [x] **Navigation elements** - Styled navigation links, hover and current-page states, and responsive spacing.
+- [x] **Responsive to window resizing** - Added 700px and 420px breakpoints plus reduced-motion adjustments for page layout, navigation, forms, tables, and recipe categories.
+- [x] **Application elements** - Styled buttons, forms, search, recipe category tiles and tags, ingredient tables, and sorting menus.
+- [x] **Application text content** - Added typography hierarchy, text spacing, list styling, link states, and visible keyboard focus indicators.
+- [x] **Application images** - Placeholder images have been replaced with real images and they have all been formatted to fit within their respective elements.
 
 ## 🚀 React part 1: Routing deliverable
 
