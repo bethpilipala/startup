@@ -1,0 +1,60 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background: var(--cream);
+    scroll-behavior: smooth;
+}
+
+body {
+    min-width: 320px;
+    margin: 0;
+    background: var(--cream);
+    color: var(--olive);
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+h1,
+h2,
+h3 {
+    color: var(--olive);
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.25;
+}
+
+main > h1 {
+    margin: 0 0 1.25rem;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+}
+
+h2 {
+    margin: 0 0 1rem;
+    font-size: 1.55rem;
+}
+
+p {
+    margin: 0 0 1.15rem;
+}
+
+main a,
+footer a {
+    color: var(--sage-dark);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+}
+
+main a:hover,
+footer a:hover {
+    color: var(--terracotta);
+    text-decoration-thickness: 2px;
+}
+
+:where(a, button, input):focus-visible {
+    outline: 3px solid var(--terracotta);
+    outline-offset: 3px;
+}

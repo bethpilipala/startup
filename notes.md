@@ -85,10 +85,10 @@ It links external resources to an HTML document — most often an external CSS s
 Example:
 
 ```html
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="css/base.css">
 ```
 
-This tells the browser to load and apply the styles from `styles.css`.
+This tells the browser to load and apply the styles from `css/base.css`.
 
 ---
 

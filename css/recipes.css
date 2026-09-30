@@ -1,0 +1,82 @@
+main > section[aria-label="Recipe categories"] {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+main > section[aria-label="Recipe categories"] > div {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--white);
+    text-align: center;
+}
+
+main > section[aria-label="Recipe categories"] img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    background: var(--terracotta-soft);
+}
+
+main > section[aria-label="Recipe categories"] p {
+    margin: 0;
+    padding: 0.7rem 0.4rem;
+    font-weight: 700;
+}
+
+main > article > header {
+    margin: -0.5rem 0 1.5rem;
+    padding: 1.25rem 1.5rem;
+    border-left: 4px solid var(--terracotta);
+    border-radius: 0 8px 8px 0;
+    background: var(--cream);
+}
+
+main > article > header h1 {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+}
+
+main > article > header p:last-child {
+    margin-bottom: 0;
+}
+
+main > article section {
+    padding: 1.35rem 0;
+    border-top: 1px solid var(--line);
+}
+
+main > article section:first-of-type {
+    border-top: 0;
+}
+
+.recipe-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.recipe-tags li {
+    margin: 0;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    background: var(--terracotta);
+    color: var(--white);
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+main ul,
+main ol {
+    padding-left: 1.5rem;
+}
+
+main li {
+    margin-block: 0.35rem;
+}

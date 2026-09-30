@@ -1,0 +1,14 @@
+:root {
+    color-scheme: light;
+    --cream: #FAF7F0;
+    --white: #FFFFFF;
+    --sage: #7A9E7E;
+    --sage-dark: #4E6A52;
+    --sage-deep: #405845;
+    --terracotta: #A84F32;
+    --terracotta-soft: #F4E3D9;
+    --olive: #344536;
+    --olive-muted: #5C6C5D;
+    --line: #E5E5D9;
+    --shadow: 0 10px 28px rgba(52, 69, 54, 0.08);
+}

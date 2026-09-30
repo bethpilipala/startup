@@ -1,0 +1,25 @@
+main > section table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+main > section th,
+main > section td {
+    padding: 0.7rem 0.8rem;
+    border-bottom: 1px solid var(--line);
+}
+
+main > section th {
+    background: #EEF2EB;
+    color: var(--olive);
+    font-weight: 700;
+}
+
+main > section tbody tr:nth-child(even) {
+    background: #FAF9F5;
+}
+
+main > section tbody tr:last-child td {
+    border-bottom: 0;
+}

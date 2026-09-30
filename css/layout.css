@@ -1,0 +1,22 @@
+main {
+    width: min(100% - 2rem, 960px);
+    min-height: 16rem;
+    margin: 2.5rem auto;
+    padding: clamp(1.4rem, 4vw, 3rem);
+    border: 1px solid rgba(122, 158, 126, 0.18);
+    border-radius: 14px;
+    background: var(--white);
+    box-shadow: var(--shadow);
+}
+
+main > section {
+    margin: 1.5rem 0;
+    padding: clamp(1rem, 3vw, 1.5rem);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #FFFEFB;
+}
+
+main > section h2 {
+    margin-bottom: 0.85rem;
+}

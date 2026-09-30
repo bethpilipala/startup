@@ -1,0 +1,62 @@
+input {
+    min-height: 2.75rem;
+    padding: 0.65rem 0.8rem;
+    border: 1px solid #AAB5A7;
+    border-radius: 6px;
+    background: var(--white);
+    color: var(--olive);
+    font: inherit;
+}
+
+input::placeholder {
+    color: var(--olive-muted);
+    opacity: 1;
+}
+
+input:focus-visible {
+    border-color: var(--sage-dark);
+    box-shadow: 0 0 0 3px rgba(122, 158, 126, 0.22);
+}
+
+main > form {
+    display: grid;
+    gap: 1rem;
+    max-width: 30rem;
+}
+
+main > form > div {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+main > form input {
+    flex: 1;
+    min-width: 0;
+}
+
+search {
+    display: block;
+    margin-bottom: 2rem;
+}
+
+search form {
+    display: flex;
+    gap: 0.65rem;
+    max-width: 38rem;
+}
+
+search input {
+    flex: 1;
+    min-width: 0;
+}
+
+main > section form {
+    margin-top: 0.75rem;
+}
+
+main > section output {
+    display: inline-block;
+    margin-left: 0.75rem;
+    font-weight: 700;
+}

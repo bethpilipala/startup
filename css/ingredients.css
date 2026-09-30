@@ -1,0 +1,112 @@
+.ingredients-section th.ingredient-sort-heading {
+    position: relative;
+    white-space: nowrap;
+}
+
+.ingredient-sort-heading > span {
+    vertical-align: middle;
+}
+
+.ingredient-sort {
+    position: relative;
+    display: inline-block;
+    margin-left: 0.2rem;
+    vertical-align: middle;
+}
+
+.ingredient-sort summary {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    color: var(--olive);
+    cursor: pointer;
+    list-style: none;
+}
+
+.ingredient-sort summary::-webkit-details-marker {
+    display: none;
+}
+
+.ingredient-sort summary:hover,
+.ingredient-sort[open] summary {
+    border-color: var(--line);
+    background: var(--white);
+}
+
+.ingredient-sort summary:focus-visible,
+.ingredient-sort-menu button:focus-visible {
+    outline: 3px solid var(--sage-dark);
+    outline-offset: 2px;
+}
+
+.ingredient-sort-icon,
+.ingredient-sort-icon::before,
+.ingredient-sort-icon::after {
+    display: block;
+    width: 0.85rem;
+    height: 2px;
+    border-radius: 1px;
+    background: currentColor;
+}
+
+.ingredient-sort-icon {
+    position: relative;
+    width: 0.55rem;
+}
+
+.ingredient-sort-icon::before,
+.ingredient-sort-icon::after {
+    position: absolute;
+    left: 0;
+    content: "";
+}
+
+.ingredient-sort-icon::before {
+    top: -0.28rem;
+    width: 0.85rem;
+}
+
+.ingredient-sort-icon::after {
+    top: 0.28rem;
+    width: 0.3rem;
+}
+
+.ingredient-sort-menu {
+    position: absolute;
+    z-index: 2;
+    top: calc(100% + 0.45rem);
+    left: 0;
+    display: grid;
+    width: max-content;
+    min-width: 9rem;
+    padding: 0.3rem;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    background: var(--white);
+    box-shadow: var(--shadow);
+}
+
+.ingredients-section th:last-child .ingredient-sort-menu {
+    right: 0;
+    left: auto;
+}
+
+.ingredient-sort-menu button {
+    padding: 0.55rem 0.7rem;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--olive);
+    cursor: pointer;
+    font: inherit;
+    line-height: 1.35;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.ingredient-sort-menu button:hover {
+    background: #EEF2EB;
+}

@@ -1,0 +1,16 @@
+body > footer {
+    padding: 1rem max(1.25rem, calc((100% - 1120px) / 2)) 1.75rem;
+    color: var(--olive-muted);
+    text-align: center;
+}
+
+body > footer hr {
+    margin-bottom: 1.25rem;
+    border: 0;
+    border-top: 1px solid rgba(52, 69, 54, 0.18);
+}
+
+body > footer span {
+    display: inline-block;
+    margin-bottom: 0.35rem;
+}
