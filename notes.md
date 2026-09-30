@@ -62,6 +62,8 @@ I am also alrady familiar with css, so this was fun to implement. I created a co
 
 One note is that I added a sort menu to my ingredient tables, but it is not functional. I think I might be able to add the functionality in a later phase? If not, I need to go back and implement this.
 
+Also another thing that I think(?) I might be able to implement later on is the fact that the sort menus don't close upon an outside click and that needs to happen. So that's another thing I need to be aware of in later phases.
+
 ## React Part 1: Routing
 
 ## React Part 2: Reactivity
