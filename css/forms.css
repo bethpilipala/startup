@@ -29,6 +29,7 @@ input.form-control:focus-visible {
     border-color: var(--sage);
     border-radius: 999px;
     background: var(--sage-lightest);
+    line-height: 1.2;
 }
 
 .site-recipe-search .btn,
