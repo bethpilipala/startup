@@ -1,4 +1,7 @@
-button.btn {
+:is(button, a).btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     min-height: 2.75rem;
     padding: 0.65rem 1.1rem;
     border: 1px solid var(--sage-dark);
@@ -9,34 +12,35 @@ button.btn {
     font: inherit;
     font-weight: 700;
     line-height: 1.2;
+    text-decoration: none;
     transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease;
 }
 
-button.btn:hover {
+:is(button, a).btn:hover {
     border-color: var(--sage-deep);
     background: var(--sage-deep);
     color: var(--white);
 }
 
-button.btn:active {
+:is(button, a).btn:active {
     transform: translateY(1px);
 }
 
-button.btn:focus {
+:is(button, a).btn:focus {
     box-shadow: none;
 }
 
-button.btn:focus-visible {
+:is(button, a).btn:focus-visible {
     outline: 3px solid var(--terracotta);
     outline-offset: 3px;
 }
 
-button.btn + button.btn {
+:is(button, a).btn + :is(button, a).btn {
     border-color: var(--terracotta);
     background: var(--terracotta);
 }
 
-button.btn + button.btn:hover {
+:is(button, a).btn + :is(button, a).btn:hover {
     border-color: #873B25;
     background: #873B25;
 }
