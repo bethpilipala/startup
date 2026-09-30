@@ -108,5 +108,5 @@
 }
 
 .ingredient-sort-menu button:hover {
-    background: #EEF2EB;
+    background: var(--sage-lightest);
 }

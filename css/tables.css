@@ -11,13 +11,13 @@ main > section td {
 }
 
 main > section th {
-    background: #EEF2EB;
+    background: var(--sage-lightest);
     color: var(--olive);
     font-weight: 700;
 }
 
 main > section tbody tr:nth-child(even) {
-    background: #FAF9F5;
+    background: var(--cream-light);
 }
 
 main > section tbody tr:last-child td {
