@@ -9,7 +9,7 @@ body > header h1 {
     color: var(--white);
     font-family: var(--font-heading);
     font-size: clamp(1.7rem, 3vw, 2.15rem);
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.2;
 }
 

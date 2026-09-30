@@ -13,5 +13,6 @@
     --line: #E5E5D9;
     --cream-light: #FAF9F5;
     --shadow: 0 10px 28px rgba(52, 69, 54, 0.08);
+    --font-body: "Nunito Sans", "Trebuchet MS", "Segoe UI", sans-serif;
     --font-heading: "Lora", Georgia, "Times New Roman", serif;
 }
