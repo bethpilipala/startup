@@ -20,6 +20,29 @@
     font-weight: 700;
 }
 
+.userhome-empty-state {
+    display: flex;
+    min-height: 12rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 1.5rem;
+    border: 1px dashed var(--sage);
+    border-radius: 8px;
+    background: var(--white);
+    text-align: center;
+}
+
+.userhome-empty-state p {
+    margin: 0;
+}
+
+.userhome-empty-state p:first-child {
+    color: var(--terracotta);
+    font-weight: 700;
+}
+
 .recipe-of-the-day {
     width: min(100%, 36rem);
     margin: 1.5rem auto;
