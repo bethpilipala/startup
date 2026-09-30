@@ -27,14 +27,14 @@ input.form-control:focus-visible {
 .site-recipe-search .form-control,
 .recipe-search-form .form-control {
     border-color: var(--sage);
-    border-radius: 999px;
+    border-radius: 18px;
     background: var(--sage-lightest);
     line-height: 1.2;
 }
 
 .site-recipe-search .btn,
 .recipe-search-form .btn {
-    border-radius: 999px;
+    border-radius: 18px;
 }
 
 main > form {
@@ -52,6 +52,21 @@ main > form > div {
 main > form input {
     flex: 1;
     min-width: 0;
+}
+
+.login-form > div {
+    display: grid;
+    grid-template-columns: 5rem minmax(0, 1fr);
+    align-items: center;
+}
+
+.login-form label {
+    font-weight: 600;
+}
+
+.login-form input.form-control {
+    width: 100%;
+    border-radius: 18px;
 }
 
 search {

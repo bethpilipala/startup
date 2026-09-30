@@ -35,7 +35,7 @@ nav a {
     align-items: center;
     min-height: 2.75rem;
     padding: 0.45rem 0.8rem;
-    border-radius: 999px;
+    border-radius: 18px;
     color: var(--white);
     font-weight: 600;
     text-decoration: none;
