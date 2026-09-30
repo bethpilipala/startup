@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/site.css" />
+    <title>Eggs Benedict | The Partial Pantry</title>
+</head>
+<body>
+    <header>
+        <h1>The Partial Pantry</h1>
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="recipes.html" aria-current="location">Recipes</a></li>
+                <li><a href="ingredients.html">Ingredients</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+        <hr />
+    </header>
+
+    <main>
+        <article>
+            <header>
+                <h1>Eggs Benedict</h1>
+
+                <p>
+                    A classic breakfast made with toasted English muffins,
+                    Canadian bacon, poached eggs, and creamy hollandaise sauce.
+                    It's a delicious way to turn a few simple ingredients
+                    into a satisfying meal.
+                </p>
+
+                <p>
+                    <strong>Prep time:</strong> 10 minutes
+                    <br />
+                    <strong>Cook time:</strong> 20 minutes
+                    <br />
+                    <strong>Total time:</strong> 30 minutes
+                    <br />
+                    <strong>Servings:</strong> 2
+                </p>
+            </header>
+
+            <section>
+                <h2>Ingredients</h2>
+
+                <h3>Eggs Benedict</h3>
+                <ul>
+                    <li>2 English muffins, split</li>
+                    <li>4 slices Canadian bacon</li>
+                    <li>4 large eggs</li>
+                    <li>1 tablespoon white vinegar</li>
+                    <li>Salt to taste</li>
+                    <li>Black pepper to taste</li>
+                    <li>Fresh chives for garnish (optional)</li>
+                </ul>
+
+                <h3>Hollandaise Sauce</h3>
+                <ul>
+                    <li>2 egg yolks</li>
+                    <li>1 tablespoon lemon juice</li>
+                    <li>1/2 cup unsalted butter, melted</li>
+                    <li>Salt to taste</li>
+                    <li>Cayenne pepper to taste (optional)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Instructions</h2>
+
+                <ol>
+                    <li>
+                        Toast the English muffin halves until lightly golden.
+                    </li>
+                    <li>
+                        Heat a skillet over medium heat and warm the Canadian
+                        bacon for 1 to 2 minutes per side. Set aside.
+                    </li>
+                    <li>
+                        To make the hollandaise sauce, whisk the egg yolks and
+                        lemon juice together in a heatproof bowl until slightly
+                        thickened.
+                    </li>
+                    <li>
+                        Place the bowl over a pot of gently simmering water,
+                        making sure the bottom of the bowl does not touch the
+                        water. Slowly whisk in the melted butter until the
+                        sauce is smooth and thickened.
+                    </li>
+                    <li>
+                        Season the hollandaise with salt and, if desired,
+                        a small pinch of cayenne pepper. Keep warm.
+                    </li>
+                    <li>
+                        Fill a saucepan with several inches of water and bring
+                        it to a gentle simmer. Add the vinegar.
+                    </li>
+                    <li>
+                        Crack each egg into a small bowl. Gently slide the eggs
+                        into the simmering water and poach for about 3 to 4
+                        minutes, until the whites are set but the yolks remain
+                        soft.
+                    </li>
+                    <li>
+                        Remove the eggs with a slotted spoon and let them drain
+                        briefly.
+                    </li>
+                    <li>
+                        Assemble each serving by placing two toasted English
+                        muffin halves on a plate. Top each half with Canadian
+                        bacon and a poached egg.
+                    </li>
+                    <li>
+                        Spoon hollandaise sauce over the poached eggs.
+                    </li>
+                    <li>
+                        Season with black pepper and garnish with fresh chives
+                        if desired. Serve immediately.
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Recipe Tags</h2>
+
+                <ul class="recipe-tags">
+                    <li>Breakfast</li>
+                    <li>Eggs</li>
+                    <li>Classic</li>
+                    <li>Brunch</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Have the Ingredients?</h2>
+
+                <p>
+                    The Partial Pantry can help you find recipes based on
+                    the ingredients you already have at home.
+                </p>
+
+                <form action="ingredients.html">
+                    <button type="submit">Update Ingredients</button>
+                </form>
+            </section>
+
+            <section>
+                <h2>Recipe Rating</h2>
+
+                <p>
+                    If you enjoyed this recipe, vote for it!
+                </p>
+
+                <button type="button">Vote for this recipe</button>
+
+                <output id="recipe-vote-count" aria-live="polite">
+                    Current votes: 0
+                </output>
+            </section>
+
+            <section id="live-vote-updates">
+                <h2>Live Updates</h2>
+
+                <p>
+                    Live vote updates will appear here when the WebSocket
+                    connection is implemented.
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        <hr />
+        <span class="text-reset">Beth Perkins</span>
+        <br />
+        <a href="https://github.com/bethpilipala/startup"
+           aria-label="The Partial Pantry on GitHub">GitHub</a>
+    </footer>
+
+</body>
+</html>
