@@ -4,7 +4,7 @@ import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
 import Ingredients from "./pages/Ingredients.jsx";
 import Login from "./pages/Login.jsx";
-import RecipeExample from "./pages/RecipeExample.jsx";
+import RandomRecipe from "./pages/RandomRecipe.jsx";
 import RecipeOfTheDay from "./pages/RecipeOfTheDay.jsx";
 import Recipes from "./pages/Recipes.jsx";
 import UserHome from "./pages/UserHome.jsx";
@@ -15,7 +15,7 @@ const activePages = {
   "/about": "about",
   "/ingredients": "ingredients",
   "/login": "login",
-  "/recipe-example": "recipes",
+  "/random-recipe": "recipes",
   "/recipe-of-the-day": "recipes",
   "/recipes": "recipes",
   "/userhome": "userhome",
@@ -31,7 +31,7 @@ function SiteLayout() {
         <Route path="/about" element={<About />} />
         <Route path="/ingredients" element={<Ingredients />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/recipe-example" element={<RecipeExample />} />
+        <Route path="/random-recipe" element={<RandomRecipe />} />
         <Route path="/recipe-of-the-day" element={<RecipeOfTheDay />} />
         <Route path="/recipes" element={<Recipes />} />
         <Route path="/userhome" element={<UserHome />} />

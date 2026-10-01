@@ -54,7 +54,7 @@ export const eggsBenedictRecipe = {
 
 export const pastaPrimaveraRecipe = {
   id: "pasta-primavera",
-  path: "/recipe-example",
+  path: "/random-recipe",
   title: "Pasta Primavera",
   description: "A simple pasta dish packed with fresh vegetables. This recipe is a great way to use up ingredients you already have in your kitchen.",
   image: pastaPrimaveraImage,

@@ -32,7 +32,7 @@ export default function Recipes() {
         </form>
       </search>
       <CategoryList categories={categories} />
-      <Link to="/recipe-example">{strings.recipes.randomRecipeLink}</Link>
+      <Link to="/random-recipe">{strings.recipes.randomRecipeLink}</Link>
     </main>
   );
 }
