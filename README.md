@@ -154,9 +154,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [x] **Bundled using Vite** - The application is built and served using Vite, with React components compiled from `src/` into the production bundle.
+- [x] **Components** - The UI is broken into reusable components (`Header`, `Footer`, `Navigation`, `RecipeCard`, `RecipeList`, `CategoryCard`, `IngredientsList`, etc.) organized under `src/components/`, with each page composed from these pieces.
+- [x] **Router** - Added client-side routing with React Router (`BrowserRouter`, `Routes`, `Route`) in `App.jsx`, covering Home, About, Recipes, Ingredients, Login, UserHome, Random Recipe, and Recipe of the Day pages, with unmatched routes redirecting to Home.
 
 ## 🚀 React part 2: Reactivity deliverable
 
