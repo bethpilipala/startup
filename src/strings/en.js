@@ -6,7 +6,7 @@ const strings = {
     findRecipePlaceholder: "Find a recipe",
     updateIngredientsButton: "Update Ingredients",
     githubLinkLabel: "The Partial Pantry on GitHub",
-    githubLinkText: "GitHub",
+    githubLinkText: "The Partial Pantry on GitHub",
     authorName: "Beth Perkins",
   },
 

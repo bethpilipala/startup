@@ -26,7 +26,7 @@ export default function RecipeDetails({ recipe }) {
           <p className="recipe-save-description">{strings.recipes.saveRecipeText}</p>
           <div className="recipe-save-actions">
             <button className="btn recipe-save-button" type="button">
-              <span aria-hidden="true">♡</span> {strings.recipes.saveRecipeButton}
+              <span aria-hidden="true">♡</span>&ensp;{strings.recipes.saveRecipeButton}
             </button>
             <output id="recipe-save-count" aria-live="polite">{strings.recipes.saveCountInitial}</output>
           </div>
