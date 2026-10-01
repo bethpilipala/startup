@@ -1,51 +1,12 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/site.css" />
     <title>The Partial Pantry</title>
-</head>
-<body>
-    <header>
-      <h1>The Partial Pantry</h1>
-      <nav aria-label="Main navigation">
-        <ul>
-          <li><a href="index.html" aria-current="page">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="recipes.html">Recipes</a></li>
-          <li><a href="ingredients.html">Ingredients</a></li>
-          <li><a href="login.html">Login</a></li>
-        </ul>
-        <form class="site-recipe-search d-flex align-items-center gap-2 ms-auto" role="search" aria-label="Search recipes" action="/search" method="get">
-          <label class="visually-hidden" for="home-site-recipe-search">Search recipes</label>
-          <input class="form-control" id="home-site-recipe-search" name="q" type="search" placeholder="Find a recipe" />
-          <button class="btn" type="submit">Search</button>
-        </form>
-      </nav>
-      <hr />
-    </header>
-
-    <main>
-      <h1 class="home-page-title">The Partial Pantry</h1>
-      <p class="home-intro">Don't let a few missing ingredients stop you from cooking! Browse by meal, add ingredients to your pantry, or try today's featured recipe.</p>
-        <section class="recipe-of-the-day" aria-labelledby="recipe-of-the-day-heading">
-          <h2 id="recipe-of-the-day-heading">Recipe of the Day</h2>
-          <a class="recipe-of-the-day-link" href="recipe-of-the-day.html">
-            <figure>
-              <img src="images/eggs_benedict.jpg" alt="" />
-              <figcaption><h3>Eggs Benedict</h3></figcaption>
-            </figure>
-          </a>
-        </section>
-    </main>
-
-    <footer>
-      <hr />
-      <span class="text-reset">Beth Perkins</span>
-      <br />
-      <a href="https://github.com/bethpilipala/startup" aria-label="The Partial Pantry on GitHub">GitHub</a>
-    </footer>
-    
-</body>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

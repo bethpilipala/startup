@@ -10,7 +10,7 @@
 }
 
 @media (max-width: 700px) {
-    body > header {
+    :is(body, #root) > header {
         padding: 1rem;
     }
 

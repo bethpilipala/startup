@@ -65,6 +65,9 @@ main > form input {
 }
 
 .login-form {
+    display: grid;
+    gap: 1rem;
+    max-width: 30rem;
     margin-inline: auto;
 }
 
