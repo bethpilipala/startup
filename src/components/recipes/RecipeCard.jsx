@@ -1,17 +1,15 @@
 import { Link } from "react-router-dom";
 
 export default function RecipeCard({
-  title = "Recipe title",
-  href = "#",
-  image,
-  imageAlt = "",
+  recipe,
   className = "",
+  imageAlt = recipe.imageAlt || "",
 }) {
   return (
-    <Link className={className || undefined} to={href}>
+    <Link className={className || undefined} to={recipe.path}>
       <figure>
-        {image && <img src={image} alt={imageAlt} />}
-        <figcaption><h3>{title}</h3></figcaption>
+        {recipe.image && <img src={recipe.image} alt={imageAlt} />}
+        <figcaption><h3>{recipe.title}</h3></figcaption>
       </figure>
     </Link>
   );

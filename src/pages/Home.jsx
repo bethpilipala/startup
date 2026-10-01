@@ -1,6 +1,6 @@
-import eggsBenedictImage from "../../images/eggs_benedict.jpg";
 import RecipeCard from "../components/recipes/RecipeCard.jsx";
 import strings from "../strings/en.js";
+import { eggsBenedictRecipe } from "../data/recipes.js";
 
 export default function Home() {
   return (
@@ -13,9 +13,7 @@ export default function Home() {
         <h2 id="recipe-of-the-day-heading">{strings.home.recipeOfTheDayHeading}</h2>
         <RecipeCard
           className="recipe-of-the-day-link"
-          href="/recipe-of-the-day"
-          title="Eggs Benedict"
-          image={eggsBenedictImage}
+          recipe={eggsBenedictRecipe}
           imageAlt=""
         />
       </section>

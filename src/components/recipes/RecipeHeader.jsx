@@ -1,13 +1,6 @@
 import strings from "../../strings/en.js";
 
-export default function RecipeHeader({
-  title = "Recipe title",
-  description = "Recipe description",
-  prepTime = "Not specified",
-  cookTime = "Not specified",
-  totalTime = "Not specified",
-  servings = "Not specified",
-}) {
+export default function RecipeHeader({ title, description, prepTime, cookTime, totalTime, servings }) {
   return (
     <header>
       <h1>{title}</h1>

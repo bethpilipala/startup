@@ -6,8 +6,8 @@ export default function RecipeList({ recipes = [] }) {
     <section aria-label={strings.recipes.recipesListLabel}>
       <ul>
         {recipes.map((recipe) => (
-          <li key={recipe.href || recipe.title}>
-            <RecipeCard {...recipe} />
+          <li key={recipe.id}>
+            <RecipeCard recipe={recipe} />
           </li>
         ))}
       </ul>
