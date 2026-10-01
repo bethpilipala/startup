@@ -8,24 +8,12 @@ import RandomRecipe from "./pages/RandomRecipe.jsx";
 import RecipeOfTheDay from "./pages/RecipeOfTheDay.jsx";
 import Recipes from "./pages/Recipes.jsx";
 import UserHome from "./pages/UserHome.jsx";
-import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
-
-const activePages = {
-  "/": "home",
-  "/about": "about",
-  "/ingredients": "ingredients",
-  "/login": "login",
-  "/random-recipe": "recipes",
-  "/recipe-of-the-day": "recipes",
-  "/recipes": "recipes",
-  "/userhome": "userhome",
-};
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 function SiteLayout() {
-  const { pathname } = useLocation();
   return (
     <>
-      <Header activePage={activePages[pathname] || ""} />
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

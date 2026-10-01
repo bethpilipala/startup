@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import strings from "../../strings/en.js";
 
 const navigationLinks = [
@@ -8,10 +8,18 @@ const navigationLinks = [
   { label: strings.navigation.ingredients, to: "/ingredients", page: "ingredients" },
 ];
 
-export default function Navigation({ activePage = "" }) {
-  const accountLink = activePage === "userhome"
+export default function Navigation() {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const accountLink = pathname === "/userhome"
     ? { label: strings.navigation.myPantry, to: "/userhome", page: "userhome" }
     : { label: strings.navigation.login, to: "/login", page: "login" };
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    const query = new FormData(event.currentTarget).get("q");
+    navigate(`/recipes${query ? `?q=${encodeURIComponent(query)}` : ""}`);
+  };
 
   return (
     <nav aria-label={strings.navigation.mainNavigationLabel}>
@@ -24,7 +32,7 @@ export default function Navigation({ activePage = "" }) {
           </li>
         ))}
       </ul>
-      <form className="site-recipe-search d-flex align-items-center gap-2 ms-auto" role="search" aria-label={strings.common.searchRecipesLabel} action="/search" method="get">
+      <form className="site-recipe-search d-flex align-items-center gap-2 ms-auto" role="search" aria-label={strings.common.searchRecipesLabel} onSubmit={handleSearchSubmit}>
         <label className="visually-hidden" htmlFor="site-recipe-search">{strings.common.searchRecipesLabel}</label>
         <input className="form-control" id="site-recipe-search" name="q" type="search" placeholder={strings.common.findRecipePlaceholder} />
         <button className="btn" type="submit">{strings.common.searchButton}</button>
