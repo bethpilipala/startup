@@ -69,6 +69,8 @@ Also another thing that I think(?) I might be able to implement later on is the 
 
 ## React Part 1: Routing
 
+I worked on a large codebase during an internship, and they never hardcoded their strings, but used variables for them in each of the .jsx files. This way too, if I ever want to add translation ability, it would be easy to move from en.js to es.js to deu.js, etc. Of course for now I only want it in english. I would need to figure out how translation works if I'm pulling information in english from an api endpoint, but that is of little concern at the present moment.
+
 ## React Part 2: Reactivity
 
 
