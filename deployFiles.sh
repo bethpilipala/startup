@@ -15,15 +15,21 @@ if [[ -z "$key" || -z "$hostname" || -z "$service" ]]; then
     exit 1
 fi
 
+printf "\n----> Building the React application.\n"
+npm run build
+
+if [[ $? -ne 0 ]]; then
+    printf "\n----> Build failed. Deployment cancelled.\n"
+    exit 1
+fi
+
 printf "\n----> Deploying files for $service to $hostname with $key\n"
 
-# Step 1
 printf "\n----> Clear out the previous distribution on the target.\n"
 ssh -i "$key" ubuntu@$hostname << ENDSSH
 rm -rf services/${service}/public
 mkdir -p services/${service}/public
 ENDSSH
 
-# Step 2
-printf "\n----> Copy the distribution package to the target.\n"
-scp -r -i "$key" * ubuntu@$hostname:services/$service/public
+printf "\n----> Copy the production build to the target.\n"
+scp -r -i "$key" dist/* ubuntu@$hostname:services/$service/public
