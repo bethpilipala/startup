@@ -1,5 +1,5 @@
 main {
-    width: min(100% - 2rem, 960px);
+    width: min(100% - 2rem, 1150px);
     min-height: 16rem;
     margin: 2.5rem auto;
     padding: clamp(1.4rem, 4vw, 3rem);
