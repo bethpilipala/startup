@@ -1,4 +1,3 @@
-import foodBanner from "../../images/food_banner.jpg";
 import strings from "../strings/en.js";
 
 export default function About() {
@@ -8,7 +7,7 @@ export default function About() {
       {strings.about.paragraphs.map((paragraph) => (
         <p key={paragraph}>{paragraph}</p>
       ))}
-      <img className="about-banner" src={foodBanner} alt="" />
+      <img className="about-banner" src="/images/food_banner.jpg" alt="" />
     </main>
   );
 }

@@ -4,13 +4,31 @@
     color: var(--white);
 }
 
-:is(body, #root) > header h1 {
-    margin: 0 0 0.6rem;
+:is(body, #root) > header .site-brand {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+}
+
+:is(body, #root) > header .site-brand h1 {
+    margin: 0;
     color: var(--white);
     font-family: var(--font-heading);
     font-size: clamp(1.7rem, 3vw, 2.15rem);
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.1;
+    white-space: nowrap;
+}
+
+.site-logo {
+    display: block;
+    width: 3rem;
+    height: 3rem;
+    object-fit: contain;
+    flex: 0 0 auto;
 }
 
 nav[aria-label="Main navigation"] {

@@ -1,24 +1,16 @@
 import { Link } from "react-router-dom";
 import CategoryList from "../components/categories/CategoryList.jsx";
 import strings from "../strings/en.js";
-import appetizersImage from "../../images/appetizers.jpg";
-import breakfastImage from "../../images/breakfast.jpg";
-import dessertImage from "../../images/dessert.jpg";
-import dinnerImage from "../../images/dinner.jpg";
-import lunchImage from "../../images/lunch.jpg";
-import sidesImage from "../../images/sides.jpg";
-import snacksAndDrinksImage from "../../images/snacks_and_drinks.jpg";
-import soupsAndSaladImage from "../../images/soups_and_salad.jpg";
 
 const categories = [
-  { name: "Breakfast", image: breakfastImage, imageAlt: "" },
-  { name: "Lunch", image: lunchImage, imageAlt: "" },
-  { name: "Dinner", image: dinnerImage, imageAlt: "" },
-  { name: "Appetizers", image: appetizersImage, imageAlt: "" },
-  { name: "Sides", image: sidesImage, imageAlt: "" },
-  { name: "Soups & Salads", image: soupsAndSaladImage, imageAlt: "" },
-  { name: "Desserts", image: dessertImage, imageAlt: "" },
-  { name: "Snacks & Drinks", image: snacksAndDrinksImage, imageAlt: "" },
+  { name: "Breakfast", image: "/images/breakfast.jpg", imageAlt: "" },
+  { name: "Lunch", image: "/images/lunch.jpg", imageAlt: "" },
+  { name: "Dinner", image: "/images/dinner.jpg", imageAlt: "" },
+  { name: "Appetizers", image: "/images/appetizers.jpg", imageAlt: "" },
+  { name: "Sides", image: "/images/sides.jpg", imageAlt: "" },
+  { name: "Soups & Salads", image: "/images/soups_and_salad.jpg", imageAlt: "" },
+  { name: "Desserts", image: "/images/dessert.jpg", imageAlt: "" },
+  { name: "Snacks & Drinks", image: "/images/snacks_and_drinks.jpg", imageAlt: "" },
 ];
 
 export default function Recipes() {

@@ -22,7 +22,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 Have you ever stared at your fridge full of food and still thought, 'What's for dinner?' You come up with an idea, only to realize you're missing a key ingredient. That's where Recipe Finder comes in. Simply enter the ingredients you already have, and we'll instantly suggest recipes you can make right now—no last-minute grocery runs and no dinner stress. Recipe Finder has got your back!
 
 ### Design
-<img src="images/initial_design.png" alt="initial design of the website" style="width:500px;"/>
+<img src="public/images/initial_design.png" alt="initial design of the website" style="width:500px;"/>
 
 ```mermaid
 sequenceDiagram

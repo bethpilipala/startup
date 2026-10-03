@@ -1,12 +1,9 @@
-import eggsBenedictImage from "../../images/eggs_benedict.jpg";
-import pastaPrimaveraImage from "../../images/pasta-primavera.jpg";
-
 export const eggsBenedictRecipe = {
   id: "eggs-benedict",
   path: "/recipe-of-the-day",
   title: "Eggs Benedict",
   description: "A classic breakfast made with toasted English muffins, Canadian bacon, poached eggs, and creamy hollandaise sauce. It's a delicious way to turn a few simple ingredients into a satisfying meal.",
-  image: eggsBenedictImage,
+  image: "/images/eggs_benedict.jpg",
   imageAlt: "Eggs Benedict with hollandaise sauce",
   prepTime: "10 minutes",
   cookTime: "20 minutes",
@@ -57,7 +54,7 @@ export const pastaPrimaveraRecipe = {
   path: "/random-recipe",
   title: "Pasta Primavera",
   description: "A simple pasta dish packed with fresh vegetables. This recipe is a great way to use up ingredients you already have in your kitchen.",
-  image: pastaPrimaveraImage,
+  image: "/images/pasta-primavera.jpg",
   imageAlt: "Pasta Primavera with vegetables and Parmesan",
   prepTime: "15 minutes",
   cookTime: "20 minutes",
