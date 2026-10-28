@@ -3,6 +3,7 @@ import { eggsBenedictRecipe, pastaPrimaveraRecipe } from "../data/recipes.js";
 export const APP_STORAGE_KEYS = {
   ingredients: "partialPantry.ingredients",
   recipes: "partialPantry.recipes",
+  user: "partialPantry.user",
 };
 
 const initialIngredients = [

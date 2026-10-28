@@ -18,6 +18,7 @@ const strings = {
     ingredients: "Ingredients",
     login: "Login",
     myPantry: "My Pantry",
+    logout: "Log out",
   },
 
   home: {
@@ -64,8 +65,11 @@ const strings = {
     passwordLabel: "Password",
     passwordPlaceholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
     forgotPasswordLink: "Forgot your password?",
+    forgotPasswordNotice: "Password recovery is not available in this demo.",
     submitButton: "Log in",
     createAccountButton: "Create account",
+    requiredFieldsError: "Enter a valid email address and a password to continue.",
+    mockAuthNotice: "Demo account access is stored in this browser only. Do not use a real password.",
   },
 
   recipes: {

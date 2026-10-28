@@ -1,4 +1,4 @@
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import strings from "../../strings/en.js";
 
 const navigationLinks = [
@@ -8,12 +8,11 @@ const navigationLinks = [
   { label: strings.navigation.ingredients, to: "/ingredients", page: "ingredients" },
 ];
 
-export default function Navigation() {
-  const { pathname } = useLocation();
+export default function Navigation({ user, onLogout }) {
   const navigate = useNavigate();
-  const accountLink = pathname === "/userhome"
-    ? { label: strings.navigation.myPantry, to: "/userhome", page: "userhome" }
-    : { label: strings.navigation.login, to: "/login", page: "login" };
+  const accountLink = user
+    ? { label: strings.navigation.myPantry, to: "/userhome" }
+    : { label: strings.navigation.login, to: "/login" };
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
@@ -31,6 +30,13 @@ export default function Navigation() {
             </NavLink>
           </li>
         ))}
+        {user && (
+          <li>
+            <button className="btn" type="button" onClick={onLogout}>
+              {strings.navigation.logout}
+            </button>
+          </li>
+        )}
       </ul>
       <form className="site-recipe-search d-flex align-items-center gap-2 ms-auto" role="search" aria-label={strings.common.searchRecipesLabel} onSubmit={handleSearchSubmit}>
         <label className="visually-hidden" htmlFor="site-recipe-search">{strings.common.searchRecipesLabel}</label>

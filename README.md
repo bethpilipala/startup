@@ -162,8 +162,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - This deliverable is in progress. Added a localStorage service with first-run pantry and recipe data; the pages are not yet wired to this data.
-- [ ] **Hooks** - This deliverable is in progress. Reactive page behavior and hooks are still to be implemented.
+- [ ] **All functionality implemented or mocked out** - This deliverable is in progress. Added localStorage seed data and a mock sign-in/create-account/logout flow with protected pantry routes. Ingredient and recipe pages are not yet wired to stored data.
+- [ ] **Hooks** - This deliverable is in progress. Login uses controlled React state, and app-level auth state is initialized from localStorage. Remaining reactive page behavior is still to be implemented.
 
 ## 🚀 Service deliverable
 

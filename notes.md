@@ -75,6 +75,8 @@ I worked on a large codebase during an internship, and they never hardcoded thei
 
 The app now has a small localStorage service in `src/services/storage.js`. It provides JSON-based get, set, and remove helpers, and seeds pantry ingredients and the existing sample recipes the first time the app starts. The seed checks for missing keys, so returning users' saved data is not overwritten. The UI still uses its existing static data for now; the next step is to connect page state to this storage service.
 
+The login page is now a mock client-side flow: users enter an email and password, but the password is never persisted or checked against a server. Only a display name/email is stored in localStorage. The `/ingredients` and `/userhome` routes redirect to login when signed out, then return to the requested route after successful mock sign-in. Logout clears the local user record. This is demo-only authentication, not security.
+
 ## General Notes
 
 ---
