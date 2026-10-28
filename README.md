@@ -162,8 +162,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [ ] **All functionality implemented or mocked out** - This deliverable is in progress. Added a localStorage service with first-run pantry and recipe data; the pages are not yet wired to this data.
+- [ ] **Hooks** - This deliverable is in progress. Reactive page behavior and hooks are still to be implemented.
 
 ## 🚀 Service deliverable
 

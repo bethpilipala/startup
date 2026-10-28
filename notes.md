@@ -73,6 +73,7 @@ I worked on a large codebase during an internship, and they never hardcoded thei
 
 ## React Part 2: Reactivity
 
+The app now has a small localStorage service in `src/services/storage.js`. It provides JSON-based get, set, and remove helpers, and seeds pantry ingredients and the existing sample recipes the first time the app starts. The seed checks for missing keys, so returning users' saved data is not overwritten. The UI still uses its existing static data for now; the next step is to connect page state to this storage service.
 
 ## General Notes
 
