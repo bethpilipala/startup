@@ -1,18 +1,13 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { APP_STORAGE_KEYS, getStorageItem } from "../services/storage.js";
 import strings from "../strings/en.js";
 
-const pantryIngredients = [
-  ["Flour", "10 lbs"],
-  ["Sugar", "5 lbs"],
-  ["Rice", "2 lbs"],
-  ["Pasta, Fettuccine", "1 box"],
-  ["Eggs", "1 dozen"],
-  ["Milk", "1 gallon"],
-  ["Cheese, Pepper Jack", "1 lb"],
-  ["Butter, salted", "4 sticks"],
-];
-
 export default function UserHome() {
+  const [pantryIngredients] = useState(
+    () => getStorageItem(APP_STORAGE_KEYS.ingredients) ?? [],
+  );
+
   return (
     <main className="userhome">
       <h1>{strings.userhome.title}</h1>
@@ -38,9 +33,9 @@ export default function UserHome() {
               <Link to="/ingredients">{strings.userhome.viewAllLink}</Link>
             </div>
             <ul className="list-group list-group-flush userhome-ingredient-list">
-              {pantryIngredients.map(([name, quantity]) => (
-                <li className="list-group-item d-flex justify-content-between" key={name}>
-                  <span>{name}</span><span>{quantity}</span>
+              {pantryIngredients.map((ingredient) => (
+                <li className="list-group-item d-flex justify-content-between" key={ingredient.name}>
+                  <span>{ingredient.name}</span><span>{ingredient.quantity}</span>
                 </li>
               ))}
             </ul>

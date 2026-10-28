@@ -1,3 +1,66 @@
+.ingredient-form {
+    display: grid;
+    gap: 1rem;
+    max-width: none;
+    margin: 1.5rem 0 2rem;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--white);
+}
+
+.ingredient-form h2 {
+    margin: 0;
+}
+
+.ingredient-form-fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 1rem;
+}
+
+.ingredient-form-fields > div {
+    display: grid;
+    gap: 0.4rem;
+}
+
+.ingredient-form-fields label {
+    font-weight: 600;
+}
+
+.ingredient-form-fields .form-control {
+    width: 100%;
+    min-height: 2.75rem;
+    padding: 0.65rem 0.8rem;
+    border: 1px solid #AAB5A7;
+    border-radius: 6px;
+    background: var(--white);
+    color: var(--olive);
+    font: inherit;
+}
+
+.ingredient-form-fields .form-control:focus-visible {
+    border-color: var(--sage-dark);
+    outline: 3px solid rgba(122, 158, 126, 0.22);
+}
+
+.ingredient-form-actions,
+.ingredient-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.ingredient-form-error {
+    margin: 0;
+    color: var(--terracotta);
+    font-weight: 600;
+}
+
+.ingredient-actions .btn {
+    padding: 0.35rem 0.6rem;
+}
+
 .ingredients-section th.ingredient-sort-heading {
     position: relative;
     white-space: nowrap;

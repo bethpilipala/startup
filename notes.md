@@ -77,6 +77,8 @@ The app now has a small localStorage service in `src/services/storage.js`. It pr
 
 The login page is now a mock client-side flow: users enter an email and password, but the password is never persisted or checked against a server. Only a display name/email is stored in localStorage. The `/ingredients` and `/userhome` routes redirect to login when signed out, then return to the requested route after successful mock sign-in. Logout clears the local user record. This is demo-only authentication, not security.
 
+The Ingredients page now loads its pantry list from localStorage, saves changes with an effect, and supports adding, editing, and deleting ingredients. Each ingredient has a category and last-updated date. The existing sort menus now sort both category tables by name or last-updated date. Ingredient names are kept unique (case-insensitive) so editing and deleting reliably target one record.
+
 ## General Notes
 
 ---
