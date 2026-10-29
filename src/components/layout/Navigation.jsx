@@ -32,7 +32,7 @@ export default function Navigation({ user, onLogout }) {
         ))}
         {user && (
           <li>
-            <button className="btn" type="button" onClick={onLogout}>
+            <button className="btn nav-logout" type="button" onClick={onLogout}>
               {strings.navigation.logout}
             </button>
           </li>
