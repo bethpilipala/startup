@@ -9,6 +9,7 @@ import RecipeOfTheDay from "./pages/RecipeOfTheDay.jsx";
 import Recipes from "./pages/Recipes.jsx";
 import UserHome from "./pages/UserHome.jsx";
 import RecipePage from "./pages/RecipePage.jsx";
+import RecipeResults from "./pages/RecipeResults.jsx";
 import { useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { APP_STORAGE_KEYS, getStorageItem, removeStorageItem, setStorageItem } from "./services/storage.js";
@@ -58,6 +59,7 @@ function SiteLayout() {
         <Route path="/random-recipe" element={<RandomRecipe user={user} />} />
         <Route path="/recipe-of-the-day" element={<RecipeOfTheDay user={user} />} />
         <Route path="/recipes" element={<Recipes />} />
+        <Route path="/recipes/results" element={<RecipeResults />} />
         <Route path="/recipes/:recipeId" element={<RecipePage user={user} />} />
         <Route
           path="/userhome"

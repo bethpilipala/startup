@@ -137,8 +137,10 @@ const strings = {
       ? `${title} marked as made. Removed ${removedCount} used-up ingredient${removedCount === 1 ? "" : "s"} from your pantry.`
       : `${title} marked as made. Your pantry was not changed.`,
     resultsHeading: "Recipe results",
+    categoryResultsHeading: (category) => `${category} Recipes`,
+    searchResultsFor: (query) => `Search results for "${query}"`,
+    backToCategoriesLabel: "Back to recipes",
     recentlyViewedHeading: "Recently viewed",
-    clearFiltersButton: "Clear filters",
     noResultsMessage: "No recipes matched your search or category.",
     enjoyRecipeHeading: "Enjoy this recipe?",
     saveRecipeText: "Save this recipe to your My Pantry page.",

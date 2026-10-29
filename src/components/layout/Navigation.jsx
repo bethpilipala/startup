@@ -17,7 +17,7 @@ export default function Navigation({ user, onLogout }) {
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     const query = new FormData(event.currentTarget).get("q");
-    navigate(`/recipes${query ? `?q=${encodeURIComponent(query)}` : ""}`);
+    navigate(`/recipes/results${query ? `?q=${encodeURIComponent(query)}` : ""}`);
   };
 
   return (

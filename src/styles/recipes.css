@@ -37,25 +37,20 @@
     font-weight: 700;
 }
 
-.recipe-results {
-    margin: 2rem 0;
-}
-
-.recipe-results-heading {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-}
-
-.recipe-results-grid {
+.recipe-result-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
 }
 
-.recipe-results-grid > a {
+@media (min-width: 701px) {
+    .recipe-result-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+.recipe-result-card {
+    display: block;
     overflow: hidden;
     border: 1px solid var(--line);
     border-radius: 8px;
@@ -64,28 +59,79 @@
     text-decoration: none;
 }
 
-.recipe-results-grid > a:hover {
+.recipe-result-card:hover,
+.recipe-result-card:focus-visible {
     border-color: var(--terracotta);
 }
 
-.recipe-results-grid figure {
+.recipe-result-card:focus-visible {
+    outline: 3px solid var(--sage-dark);
+    outline-offset: 3px;
+}
+
+.recipe-result-card figure {
     margin: 0;
 }
 
-.recipe-results-grid img {
+.recipe-result-card img {
     display: block;
     width: 100%;
     aspect-ratio: 4 / 3;
     object-fit: cover;
+    background: var(--terracotta-soft);
 }
 
-.recipe-results-grid figcaption {
+.recipe-result-card figcaption {
     padding: 0.75rem;
 }
 
-.recipe-results-grid h3 {
+.recipe-result-card h3 {
     margin: 0;
+    font-size: 1rem;
 }
+
+.recipe-results-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+    color: var(--olive);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.recipe-results-back:hover {
+    color: var(--terracotta);
+}
+
+.recently-viewed-banner {
+    margin: 2rem 0 1rem;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--sage-lightest);
+}
+
+.recently-viewed-banner h2 {
+    margin: 0 0 0.75rem;
+    font-size: 1.15rem;
+}
+
+.recently-viewed-list {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    padding: 0.25rem 0.2rem 0.75rem;
+}
+
+.recently-viewed-list .recipe-result-card {
+    flex: 0 0 12rem;
+}
+
+.recently-viewed-list .recipe-result-card img {
+    aspect-ratio: 16 / 9;
+}
+
 
 .used-ingredients-form {
     display: grid;
