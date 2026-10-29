@@ -89,6 +89,8 @@ Recipe detail pages now record recently viewed recipe IDs in localStorage. The l
 
 Pantry freshness reminders are calculated from each ingredient's last-updated date. Refrigerated items are flagged at seven days and shelf-stable items at thirty days; selecting Mark updated refreshes the date and removes the reminder. Missing, invalid, or future dates are not treated as overdue.
 
+Recipe details include a Mark as made flow. Since the sample app does not track exact recipe quantities against pantry quantities, users confirm which matched ingredients they have used up. Only checked ingredients are removed from localStorage; unchecked ingredients are preserved. The recipe detail updates its pantry match after confirmation.
+
 ## General Notes
 
 ---

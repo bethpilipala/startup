@@ -87,6 +87,42 @@
     margin: 0;
 }
 
+.used-ingredients-form {
+    display: grid;
+    gap: 1rem;
+    max-width: 38rem;
+    margin-top: 1rem;
+}
+
+.used-ingredients-form fieldset {
+    display: grid;
+    gap: 0.6rem;
+    margin: 0;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--white);
+}
+
+.used-ingredients-form legend {
+    float: none;
+    width: auto;
+    margin: 0;
+    padding: 0 0.25rem;
+    font-weight: 700;
+}
+
+.used-ingredient-option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.used-ingredient-option input {
+    min-width: 1rem;
+    min-height: 1rem;
+}
+
 .random-recipe-action {
     margin: 1rem auto 2rem;
     text-align: center;

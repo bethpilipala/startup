@@ -47,7 +47,10 @@ function pantryContainsIngredient(pantry, recipeIngredient) {
 }
 
 export default function RecipeDetails({ recipe, user }) {
-  const [pantry] = useState(() => getStorageItem(APP_STORAGE_KEYS.ingredients) ?? []);
+  const [pantry, setPantry] = useState(() => getStorageItem(APP_STORAGE_KEYS.ingredients) ?? []);
+  const [showMadeForm, setShowMadeForm] = useState(false);
+  const [usedUpNames, setUsedUpNames] = useState([]);
+  const [madeMessage, setMadeMessage] = useState("");
   const favoriteStorageKey = user ? getUserFavoritesStorageKey(user) : null;
   const [favoriteIds, setFavoriteIds] = useState(() => {
     if (!favoriteStorageKey) {
@@ -60,6 +63,9 @@ export default function RecipeDetails({ recipe, user }) {
   const isFavorite = favoriteIds.includes(recipe.id);
   const ingredientCheck = useMemo(() => {
     const recipeIngredients = getRecipeIngredients(recipe);
+    const matchedPantryItems = pantry.filter((item) => recipeIngredients.some(
+      (ingredient) => pantryContainsIngredient([item], ingredient),
+    ));
     const missing = recipeIngredients.filter(
       (ingredient) => !pantryContainsIngredient(pantry, ingredient),
     );
@@ -67,6 +73,7 @@ export default function RecipeDetails({ recipe, user }) {
       total: recipeIngredients.length,
       missing,
       available: recipeIngredients.length - missing.length,
+      matchedPantryItems,
     };
   }, [pantry, recipe]);
 
@@ -91,6 +98,30 @@ export default function RecipeDetails({ recipe, user }) {
       : [...favoriteIds, recipe.id];
     setStorageItem(favoriteStorageKey, nextFavoriteIds);
     setFavoriteIds(nextFavoriteIds);
+  };
+
+  const openMadeForm = () => {
+    setUsedUpNames([]);
+    setMadeMessage("");
+    setShowMadeForm(true);
+  };
+
+  const toggleUsedUpIngredient = (ingredientName) => {
+    setUsedUpNames((currentNames) => currentNames.includes(ingredientName)
+      ? currentNames.filter((name) => name !== ingredientName)
+      : [...currentNames, ingredientName]);
+  };
+
+  const handleMarkAsMade = (event) => {
+    event.preventDefault();
+    const nextPantry = pantry.filter((ingredient) => !usedUpNames.includes(ingredient.name));
+    setStorageItem(APP_STORAGE_KEYS.ingredients, nextPantry);
+    setPantry(nextPantry);
+    setShowMadeForm(false);
+    setMadeMessage(strings.recipes.markedAsMadeMessage(
+      recipe.title,
+      usedUpNames.length,
+    ));
   };
 
   return (
@@ -125,6 +156,40 @@ export default function RecipeDetails({ recipe, user }) {
             </>
           )}
           <Link className="btn" to="/ingredients">{strings.common.updateIngredientsButton}</Link>
+        </section>
+        <section aria-labelledby="mark-as-made-heading">
+          <h2 id="mark-as-made-heading">{strings.recipes.markAsMadeHeading}</h2>
+          <p>{strings.recipes.markAsMadeDescription}</p>
+          {!showMadeForm ? (
+            <button className="btn" type="button" onClick={openMadeForm}>
+              {strings.recipes.markAsMadeButton}
+            </button>
+          ) : (
+            <form className="used-ingredients-form" onSubmit={handleMarkAsMade}>
+              <fieldset>
+                <legend>{strings.recipes.usedUpIngredientsPrompt}</legend>
+                {ingredientCheck.matchedPantryItems.length > 0 ? (
+                  ingredientCheck.matchedPantryItems.map((ingredient) => (
+                    <label className="used-ingredient-option" key={ingredient.name}>
+                      <input
+                        type="checkbox"
+                        checked={usedUpNames.includes(ingredient.name)}
+                        onChange={() => toggleUsedUpIngredient(ingredient.name)}
+                      />
+                      <span>{ingredient.name} ({ingredient.quantity})</span>
+                    </label>
+                  ))
+                ) : <p>{strings.recipes.noMatchedPantryIngredients}</p>}
+              </fieldset>
+              <div className="recipe-save-actions">
+                <button className="btn" type="submit">{strings.recipes.confirmMadeButton}</button>
+                <button className="btn" type="button" onClick={() => setShowMadeForm(false)}>
+                  {strings.recipes.cancelMadeButton}
+                </button>
+              </div>
+            </form>
+          )}
+          {madeMessage && <p role="status">{madeMessage}</p>}
         </section>
         <section aria-labelledby="recipe-save-heading">
           <h2 id="recipe-save-heading">{strings.recipes.enjoyRecipeHeading}</h2>

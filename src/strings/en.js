@@ -116,6 +116,16 @@ const strings = {
     emptyPantryMessage: "Add ingredients to your pantry to see how this recipe matches.",
     matchCount: (available, total) => `You have ${available} of ${total} ingredients for this recipe.`,
     missingIngredientsHeading: "Ingredients to add",
+    markAsMadeHeading: "Made this recipe?",
+    markAsMadeDescription: "Choose only the pantry ingredients that you used up. Unchecked items will stay in your pantry.",
+    markAsMadeButton: "Mark as made",
+    usedUpIngredientsPrompt: "Which matched pantry ingredients are used up?",
+    noMatchedPantryIngredients: "No ingredients in your pantry match this recipe.",
+    confirmMadeButton: "Confirm recipe made",
+    cancelMadeButton: "Cancel",
+    markedAsMadeMessage: (title, removedCount) => removedCount > 0
+      ? `${title} marked as made. Removed ${removedCount} used-up ingredient${removedCount === 1 ? "" : "s"} from your pantry.`
+      : `${title} marked as made. Your pantry was not changed.`,
     resultsHeading: "Recipe results",
     recentlyViewedHeading: "Recently viewed",
     clearFiltersButton: "Clear filters",
