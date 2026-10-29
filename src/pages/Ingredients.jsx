@@ -215,7 +215,6 @@ export default function Ingredients() {
   return (
     <main>
       <h1>{strings.ingredients.pageTitle}</h1>
-      <p>{strings.ingredients.signInNotice}</p>
       <section className="ingredient-reminders" aria-labelledby="ingredient-reminders-heading" aria-live="polite">
         <h2 id="ingredient-reminders-heading">{strings.ingredients.remindersHeading}</h2>
         <p>{strings.ingredients.remindersDescription}</p>

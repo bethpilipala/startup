@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import RecipeCard from "../components/recipes/RecipeCard.jsx";
+import RecipeResultCard from "../components/recipes/RecipeResultCard.jsx";
 import { recipes } from "../data/recipes.js";
 import {
   APP_STORAGE_KEYS,
@@ -33,11 +33,7 @@ export default function UserHome({ user }) {
             {favoriteRecipes.length > 0 ? (
               <div className="userhome-favorites-grid">
                 {favoriteRecipes.map((recipe) => (
-                  <RecipeCard
-                    className="userhome-favorite-card"
-                    key={recipe.id}
-                    recipe={recipe}
-                  />
+                  <RecipeResultCard key={recipe.id} recipe={recipe} />
                 ))}
               </div>
             ) : (

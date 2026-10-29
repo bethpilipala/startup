@@ -49,7 +49,6 @@ const strings = {
 
   ingredients: {
     pageTitle: "Ingredients",
-    signInNotice: "This is only available if you have signed in.",
     remindersHeading: "Pantry freshness reminders",
     remindersDescription: "Review refrigerated ingredients after 7 days and shelf-stable ingredients after 30 days.",
     reminderMessage: (name, days, threshold) => `${name} was last updated ${days} days ago (reminder after ${threshold} days).`,
