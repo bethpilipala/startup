@@ -1,4 +1,5 @@
 import RecipeCard from "../components/recipes/RecipeCard.jsx";
+import ActivityFeed from "../components/activity/ActivityFeed.jsx";
 import strings from "../strings/en.js";
 import { getRecipeOfTheDay } from "../data/recipes.js";
 
@@ -17,6 +18,7 @@ export default function Home() {
           imageAlt=""
         />
       </section>
+      <ActivityFeed />
     </main>
   );
 }

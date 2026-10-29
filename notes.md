@@ -83,6 +83,8 @@ Recipe discovery now filters the sample recipe catalog by category or search tex
 
 Recipe favorites are stored in localStorage under a key scoped to the signed-in email, so separate demo accounts have independent saved recipe lists. Signed-in users can save or remove a recipe from any recipe detail route. My Pantry greets the signed-in user, shows the current pantry item count, and displays saved recipes as links back to their detail pages. These are local browser demo data, not synced between devices.
 
+The home page includes a simulated community activity feed. A `useEffect` interval adds a canned sample event every ten seconds and cleans up the timer when the component unmounts. The feed is explicitly labeled demo data; replace the interval source with a WebSocket or service endpoint when live activity is available.
+
 ## General Notes
 
 ---

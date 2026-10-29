@@ -162,8 +162,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - This deliverable is in progress. Added localStorage seed data, mock authentication with protected pantry routes, pantry ingredient add/edit/delete and sorting, recipe search/category filters, pantry ingredient matching, random recipe selection, a date-based featured recipe, and per-account saved recipes.
-- [ ] **Hooks** - This deliverable is in progress. Login and pantry forms use controlled state; `useEffect` persists pantry changes and updates the random recipe page title. Recipe search state is reflected in the URL, and app-level auth state initializes from localStorage. Favorite state is stored per demo account.
+- [ ] **All functionality implemented or mocked out** - This deliverable is in progress. Added localStorage seed data, mock authentication with protected pantry routes, pantry ingredient add/edit/delete and sorting, recipe search/category filters, pantry ingredient matching, random recipe selection, a date-based featured recipe, per-account saved recipes, and a simulated live activity feed.
+- [ ] **Hooks** - This deliverable is in progress. Login and pantry forms use controlled state; `useEffect` persists pantry changes, updates the random recipe page title, and starts/cleans up the simulated activity interval. Recipe search state is reflected in the URL, and app-level auth state initializes from localStorage. Favorite state is stored per demo account.
 
 ## 🚀 Service deliverable
 

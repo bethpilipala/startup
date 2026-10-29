@@ -24,6 +24,14 @@ const strings = {
   home: {
     intro: "Don't let a few missing ingredients stop you from cooking! Browse by meal, add ingredients to your pantry, or try today's featured recipe.",
     recipeOfTheDayHeading: "Recipe of the Day",
+    activityFeedHeading: "Community Activity",
+    activityFeedNotice: "Demo activity simulates updates that could come from a live service.",
+    mockActivities: {
+      savedPasta: "Alex saved Pasta Primavera.",
+      addedProduce: "Jordan added bell peppers to their pantry.",
+      foundMatch: "Sam found a recipe that matches their pantry.",
+      savedEggs: "Taylor saved Eggs Benedict.",
+    },
   },
 
   about: {
