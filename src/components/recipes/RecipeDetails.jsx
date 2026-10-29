@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import IngredientsList from "./IngredientsList.jsx";
 import InstructionsList from "./InstructionsList.jsx";
@@ -69,6 +69,17 @@ export default function RecipeDetails({ recipe, user }) {
       available: recipeIngredients.length - missing.length,
     };
   }, [pantry, recipe]);
+
+  useEffect(() => {
+    const storedRecipeIds = getStorageItem(APP_STORAGE_KEYS.recentlyViewedRecipes);
+    const previousRecipeIds = Array.isArray(storedRecipeIds) ? storedRecipeIds : [];
+    const nextRecipeIds = [
+      recipe.id,
+      ...previousRecipeIds.filter((recipeId) => recipeId !== recipe.id),
+    ].slice(0, 5);
+
+    setStorageItem(APP_STORAGE_KEYS.recentlyViewedRecipes, nextRecipeIds);
+  }, [recipe.id]);
 
   const toggleFavorite = () => {
     if (!favoriteStorageKey) {

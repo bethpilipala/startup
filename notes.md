@@ -85,6 +85,8 @@ Recipe favorites are stored in localStorage under a key scoped to the signed-in 
 
 The home page includes a simulated community activity feed. A `useEffect` interval adds a canned sample event every ten seconds and cleans up the timer when the component unmounts. The feed is explicitly labeled demo data; replace the interval source with a WebSocket or service endpoint when live activity is available.
 
+Recipe detail pages now record recently viewed recipe IDs in localStorage. The list is ordered from most recent to oldest, avoids duplicate IDs, and is capped at five entries. The Recipes page resolves those IDs against the current catalog and presents matching recipe cards.
+
 ## General Notes
 
 ---

@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import CategoryList from "../components/categories/CategoryList.jsx";
 import RecipeCard from "../components/recipes/RecipeCard.jsx";
 import { recipes } from "../data/recipes.js";
+import { APP_STORAGE_KEYS, getStorageItem } from "../services/storage.js";
 import strings from "../strings/en.js";
 
 const categories = [
@@ -19,6 +20,10 @@ const categories = [
 export default function Recipes() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState(searchParams.get("q") ?? "");
+  const [recentlyViewedIds] = useState(() => {
+    const storedIds = getStorageItem(APP_STORAGE_KEYS.recentlyViewedRecipes);
+    return Array.isArray(storedIds) ? storedIds : [];
+  });
   const activeCategory = searchParams.get("category") ?? "";
   const normalizedQuery = (searchParams.get("q") ?? "").trim().toLocaleLowerCase();
   const filteredRecipes = recipes.filter((recipe) => {
@@ -35,6 +40,9 @@ export default function Recipes() {
     ].join(" ").toLocaleLowerCase();
     return matchesCategory && (!normalizedQuery || searchableText.includes(normalizedQuery));
   });
+  const recentlyViewedRecipes = recentlyViewedIds
+    .map((recipeId) => recipes.find((recipe) => recipe.id === recipeId))
+    .filter(Boolean);
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -62,6 +70,16 @@ export default function Recipes() {
         </form>
       </search>
       <CategoryList categories={categories} />
+      {recentlyViewedRecipes.length > 0 && (
+        <section className="recipe-results" aria-labelledby="recently-viewed-heading">
+          <h2 id="recently-viewed-heading">{strings.recipes.recentlyViewedHeading}</h2>
+          <div className="recipe-results-grid">
+            {recentlyViewedRecipes.map((recipe) => (
+              <RecipeCard key={recipe.id} recipe={recipe} />
+            ))}
+          </div>
+        </section>
+      )}
       {(activeCategory || normalizedQuery) && (
         <section className="recipe-results" aria-live="polite">
           <div className="recipe-results-heading">

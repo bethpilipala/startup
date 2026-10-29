@@ -5,6 +5,7 @@ export const APP_STORAGE_KEYS = {
   recipes: "partialPantry.recipes",
   user: "partialPantry.user",
   favorites: "partialPantry.favorites",
+  recentlyViewedRecipes: "partialPantry.recentlyViewedRecipes",
 };
 
 export function getUserFavoritesStorageKey(user) {

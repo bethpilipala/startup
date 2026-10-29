@@ -112,6 +112,7 @@ const strings = {
     matchCount: (available, total) => `You have ${available} of ${total} ingredients for this recipe.`,
     missingIngredientsHeading: "Ingredients to add",
     resultsHeading: "Recipe results",
+    recentlyViewedHeading: "Recently viewed",
     clearFiltersButton: "Clear filters",
     noResultsMessage: "No recipes matched your search or category.",
     enjoyRecipeHeading: "Enjoy this recipe?",
