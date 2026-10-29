@@ -81,6 +81,8 @@ The Ingredients page now loads its pantry list from localStorage, saves changes 
 
 Recipe discovery now filters the sample recipe catalog by category or search text using URL query parameters. Recipe cards open a shared recipe detail route. Recipe detail pages compare the recipe's ingredient names with pantry items and show a count plus the unmatched recipe ingredients. Random Recipe picks from available sample recipes and has a Try another button. The featured recipe is selected by calendar day and is shown consistently on both Home and Recipe of the Day. The current catalog only has two recipes, so most categories correctly show no matches until more recipe data is added.
 
+Recipe favorites are stored in localStorage under a key scoped to the signed-in email, so separate demo accounts have independent saved recipe lists. Signed-in users can save or remove a recipe from any recipe detail route. My Pantry greets the signed-in user, shows the current pantry item count, and displays saved recipes as links back to their detail pages. These are local browser demo data, not synced between devices.
+
 ## General Notes
 
 ---

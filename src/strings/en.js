@@ -109,11 +109,14 @@ const strings = {
     enjoyRecipeHeading: "Enjoy this recipe?",
     saveRecipeText: "Save this recipe to your My Pantry page.",
     saveRecipeButton: "Save Recipe",
-    saveCountInitial: "0 saves",
+    removeFavoriteButton: "Remove from My Pantry",
+    signInToSaveLink: "Sign in to save this recipe",
   },
 
   userhome: {
     title: "My Pantry",
+    greeting: (name) => `Welcome, ${name}!`,
+    pantryCount: (count) => `You have ${count} ingredients in your pantry.`,
     myRecipesHeading: "My Recipes",
     noRecipesSavedText: "No recipes saved yet.",
     recipesWillAppearText: "Recipes you save will appear here.",

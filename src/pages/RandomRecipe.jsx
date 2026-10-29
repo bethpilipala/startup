@@ -8,7 +8,7 @@ function chooseRandomRecipe(currentId) {
   return options[Math.floor(Math.random() * options.length)];
 }
 
-export default function RandomRecipe() {
+export default function RandomRecipe({ user }) {
   const [recipe, setRecipe] = useState(() => chooseRandomRecipe(null));
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function RandomRecipe() {
 
   return (
     <>
-      <RecipeDetails recipe={recipe} />
+      <RecipeDetails recipe={recipe} user={user} />
       <div className="random-recipe-action">
         <button className="btn" type="button" onClick={() => setRecipe((current) => chooseRandomRecipe(current.id))}>
           Try another random recipe

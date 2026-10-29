@@ -1,29 +1,52 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { APP_STORAGE_KEYS, getStorageItem } from "../services/storage.js";
+import RecipeCard from "../components/recipes/RecipeCard.jsx";
+import { recipes } from "../data/recipes.js";
+import {
+  APP_STORAGE_KEYS,
+  getStorageItem,
+  getUserFavoritesStorageKey,
+} from "../services/storage.js";
 import strings from "../strings/en.js";
 
-export default function UserHome() {
+export default function UserHome({ user }) {
   const [pantryIngredients] = useState(
     () => getStorageItem(APP_STORAGE_KEYS.ingredients) ?? [],
   );
+  const [favoriteIds] = useState(() => {
+    const storedFavorites = getStorageItem(getUserFavoritesStorageKey(user));
+    return Array.isArray(storedFavorites) ? storedFavorites : [];
+  });
+  const favoriteRecipes = recipes.filter((recipe) => favoriteIds.includes(recipe.id));
 
   return (
     <main className="userhome">
       <h1>{strings.userhome.title}</h1>
+      <p className="userhome-greeting">{strings.userhome.greeting(user?.name ?? user?.email ?? "")}</p>
+      <p className="userhome-pantry-count">
+        {strings.userhome.pantryCount(pantryIngredients.length)}
+      </p>
       <div className="row g-4 userhome-overview">
         <div className="col-lg-7">
           <section className="userhome-recipes" aria-labelledby="your-recipes-heading">
             <h2 id="your-recipes-heading">{strings.userhome.myRecipesHeading}</h2>
-            <div className="row row-cols-1 row-cols-md-2 g-3 userhome-recipe-grid">
-              <div className="col">
-                <div className="userhome-empty-state" role="status">
-                  <p>{strings.userhome.noRecipesSavedText}</p>
-                  <p>{strings.userhome.recipesWillAppearText}</p>
-                  <Link to="/recipes">{strings.userhome.exploreRecipesLink}</Link>
-                </div>
+            {favoriteRecipes.length > 0 ? (
+              <div className="userhome-favorites-grid">
+                {favoriteRecipes.map((recipe) => (
+                  <RecipeCard
+                    className="userhome-favorite-card"
+                    key={recipe.id}
+                    recipe={recipe}
+                  />
+                ))}
               </div>
-            </div>
+            ) : (
+              <div className="userhome-empty-state" role="status">
+                <p>{strings.userhome.noRecipesSavedText}</p>
+                <p>{strings.userhome.recipesWillAppearText}</p>
+                <Link to="/recipes">{strings.userhome.exploreRecipesLink}</Link>
+              </div>
+            )}
           </section>
         </div>
         <div className="col-lg-5">

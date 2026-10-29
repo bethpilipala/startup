@@ -4,7 +4,16 @@ export const APP_STORAGE_KEYS = {
   ingredients: "partialPantry.ingredients",
   recipes: "partialPantry.recipes",
   user: "partialPantry.user",
+  favorites: "partialPantry.favorites",
 };
+
+export function getUserFavoritesStorageKey(user) {
+  if (!user?.email) {
+    throw new TypeError("A signed-in user email is required to access favorites.");
+  }
+
+  return `${APP_STORAGE_KEYS.favorites}.${encodeURIComponent(user.email.trim().toLocaleLowerCase())}`;
+}
 
 const initialIngredients = [
   { name: "Flour", quantity: "10 lbs", category: "shelf-stable" },

@@ -55,15 +55,15 @@ function SiteLayout() {
           }
         />
         <Route path="/login" element={<Login onAuthenticate={handleAuthenticate} />} />
-        <Route path="/random-recipe" element={<RandomRecipe />} />
-        <Route path="/recipe-of-the-day" element={<RecipeOfTheDay />} />
+        <Route path="/random-recipe" element={<RandomRecipe user={user} />} />
+        <Route path="/recipe-of-the-day" element={<RecipeOfTheDay user={user} />} />
         <Route path="/recipes" element={<Recipes />} />
-        <Route path="/recipes/:recipeId" element={<RecipePage />} />
+        <Route path="/recipes/:recipeId" element={<RecipePage user={user} />} />
         <Route
           path="/userhome"
           element={
             <ProtectedRoute user={user}>
-              <UserHome />
+              <UserHome user={user} />
             </ProtectedRoute>
           }
         />

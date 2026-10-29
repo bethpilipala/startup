@@ -4,7 +4,12 @@ import IngredientsList from "./IngredientsList.jsx";
 import InstructionsList from "./InstructionsList.jsx";
 import RecipeHeader from "./RecipeHeader.jsx";
 import RecipeTags from "./RecipeTags.jsx";
-import { APP_STORAGE_KEYS, getStorageItem } from "../../services/storage.js";
+import {
+  APP_STORAGE_KEYS,
+  getStorageItem,
+  getUserFavoritesStorageKey,
+  setStorageItem,
+} from "../../services/storage.js";
 import strings from "../../strings/en.js";
 
 const measurementWords = new Set([
@@ -41,8 +46,18 @@ function pantryContainsIngredient(pantry, recipeIngredient) {
   });
 }
 
-export default function RecipeDetails({ recipe }) {
+export default function RecipeDetails({ recipe, user }) {
   const [pantry] = useState(() => getStorageItem(APP_STORAGE_KEYS.ingredients) ?? []);
+  const favoriteStorageKey = user ? getUserFavoritesStorageKey(user) : null;
+  const [favoriteIds, setFavoriteIds] = useState(() => {
+    if (!favoriteStorageKey) {
+      return [];
+    }
+
+    const storedFavorites = getStorageItem(favoriteStorageKey);
+    return Array.isArray(storedFavorites) ? storedFavorites : [];
+  });
+  const isFavorite = favoriteIds.includes(recipe.id);
   const ingredientCheck = useMemo(() => {
     const recipeIngredients = getRecipeIngredients(recipe);
     const missing = recipeIngredients.filter(
@@ -54,6 +69,18 @@ export default function RecipeDetails({ recipe }) {
       available: recipeIngredients.length - missing.length,
     };
   }, [pantry, recipe]);
+
+  const toggleFavorite = () => {
+    if (!favoriteStorageKey) {
+      return;
+    }
+
+    const nextFavoriteIds = isFavorite
+      ? favoriteIds.filter((id) => id !== recipe.id)
+      : [...favoriteIds, recipe.id];
+    setStorageItem(favoriteStorageKey, nextFavoriteIds);
+    setFavoriteIds(nextFavoriteIds);
+  };
 
   return (
     <main>
@@ -92,10 +119,21 @@ export default function RecipeDetails({ recipe }) {
           <h2 id="recipe-save-heading">{strings.recipes.enjoyRecipeHeading}</h2>
           <p className="recipe-save-description">{strings.recipes.saveRecipeText}</p>
           <div className="recipe-save-actions">
-            <button className="btn recipe-save-button" type="button">
-              <span aria-hidden="true">♡</span>&ensp;{strings.recipes.saveRecipeButton}
-            </button>
-            <output id="recipe-save-count" aria-live="polite">{strings.recipes.saveCountInitial}</output>
+            {user ? (
+              <button
+                className="btn recipe-save-button"
+                type="button"
+                aria-pressed={isFavorite}
+                onClick={toggleFavorite}
+              >
+                <span aria-hidden="true">{isFavorite ? "♥" : "♡"}</span>&ensp;
+                {isFavorite ? strings.recipes.removeFavoriteButton : strings.recipes.saveRecipeButton}
+              </button>
+            ) : (
+              <Link className="btn recipe-save-button" to="/login">
+                {strings.recipes.signInToSaveLink}
+              </Link>
+            )}
           </div>
         </section>
       </article>
