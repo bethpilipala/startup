@@ -7,10 +7,32 @@ const categories = [
   { value: "refrigerated", label: strings.ingredients.refrigeratedHeading },
 ];
 
+const freshnessIntervals = {
+  "shelf-stable": 30,
+  refrigerated: 7,
+};
+
 function getToday() {
   const date = new Date();
   const offset = date.getTimezoneOffset();
   return new Date(date.getTime() - offset * 60 * 1000).toISOString().slice(0, 10);
+}
+
+function getDaysSinceUpdated(updatedAt) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(updatedAt ?? "")) {
+    return null;
+  }
+
+  const [year, month, day] = updatedAt.split("-").map(Number);
+  const updatedDate = Date.UTC(year, month - 1, day);
+  if (new Date(updatedDate).toISOString().slice(0, 10) !== updatedAt) {
+    return null;
+  }
+
+  const todayParts = getToday().split("-").map(Number);
+  const todayDate = Date.UTC(todayParts[0], todayParts[1] - 1, todayParts[2]);
+  const daysSinceUpdated = Math.floor((todayDate - updatedDate) / 86400000);
+  return daysSinceUpdated >= 0 ? daysSinceUpdated : null;
 }
 
 function IngredientTable({ headingId, title, records, onSortChange, onEdit, onDelete }) {
@@ -107,6 +129,22 @@ export default function Ingredients() {
     );
   }, [ingredients, sortOrder]);
 
+  const ingredientsNeedingRefresh = useMemo(
+    () => ingredients
+      .map((ingredient) => ({
+        ...ingredient,
+        daysSinceUpdated: getDaysSinceUpdated(ingredient.updatedAt),
+      }))
+      .filter((ingredient) => {
+        const freshnessInterval = freshnessIntervals[ingredient.category];
+        return freshnessInterval
+          && ingredient.daysSinceUpdated !== null
+          && ingredient.daysSinceUpdated >= freshnessInterval;
+      })
+      .sort((first, second) => second.daysSinceUpdated - first.daysSinceUpdated),
+    [ingredients],
+  );
+
   const resetForm = () => {
     setName("");
     setQuantity("");
@@ -167,10 +205,45 @@ export default function Ingredients() {
     }
   };
 
+  const handleMarkUpdated = (ingredientName) => {
+    const updatedAt = getToday();
+    setIngredients((currentIngredients) => currentIngredients.map((ingredient) => (
+      ingredient.name === ingredientName ? { ...ingredient, updatedAt } : ingredient
+    )));
+  };
+
   return (
     <main>
       <h1>{strings.ingredients.pageTitle}</h1>
       <p>{strings.ingredients.signInNotice}</p>
+      <section className="ingredient-reminders" aria-labelledby="ingredient-reminders-heading" aria-live="polite">
+        <h2 id="ingredient-reminders-heading">{strings.ingredients.remindersHeading}</h2>
+        <p>{strings.ingredients.remindersDescription}</p>
+        {ingredientsNeedingRefresh.length > 0 ? (
+          <ul>
+            {ingredientsNeedingRefresh.map((ingredient) => (
+              <li key={ingredient.name}>
+                <span>
+                  {strings.ingredients.reminderMessage(
+                    ingredient.name,
+                    ingredient.daysSinceUpdated,
+                    freshnessIntervals[ingredient.category],
+                  )}
+                </span>
+                <button
+                  className="btn"
+                  type="button"
+                  onClick={() => handleMarkUpdated(ingredient.name)}
+                >
+                  {strings.ingredients.markUpdatedButton}
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p role="status">{strings.ingredients.noRemindersMessage}</p>
+        )}
+      </section>
       <form className="ingredient-form" onSubmit={handleSubmit}>
         <h2>{editingName ? strings.ingredients.editHeading : strings.ingredients.addHeading}</h2>
         <div className="ingredient-form-fields">

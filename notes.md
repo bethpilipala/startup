@@ -87,6 +87,8 @@ The home page includes a simulated community activity feed. A `useEffect` interv
 
 Recipe detail pages now record recently viewed recipe IDs in localStorage. The list is ordered from most recent to oldest, avoids duplicate IDs, and is capped at five entries. The Recipes page resolves those IDs against the current catalog and presents matching recipe cards.
 
+Pantry freshness reminders are calculated from each ingredient's last-updated date. Refrigerated items are flagged at seven days and shelf-stable items at thirty days; selecting Mark updated refreshes the date and removes the reminder. Missing, invalid, or future dates are not treated as overdue.
+
 ## General Notes
 
 ---

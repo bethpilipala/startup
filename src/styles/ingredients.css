@@ -9,6 +9,37 @@
     background: var(--white);
 }
 
+.ingredient-reminders {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    border-left: 4px solid var(--terracotta);
+    border-radius: 0 8px 8px 0;
+    background: var(--terracotta-soft);
+}
+
+.ingredient-reminders h2 {
+    margin-top: 0;
+}
+
+.ingredient-reminders ul {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 0;
+    padding-left: 1.25rem;
+}
+
+.ingredient-reminders li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.ingredient-reminders > p:last-child {
+    margin-bottom: 0;
+}
+
 .ingredient-form h2 {
     margin: 0;
 }
