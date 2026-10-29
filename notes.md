@@ -79,6 +79,8 @@ The login page is now a mock client-side flow: users enter an email and password
 
 The Ingredients page now loads its pantry list from localStorage, saves changes with an effect, and supports adding, editing, and deleting ingredients. Each ingredient has a category and last-updated date. The existing sort menus now sort both category tables by name or last-updated date. Ingredient names are kept unique (case-insensitive) so editing and deleting reliably target one record.
 
+Recipe discovery now filters the sample recipe catalog by category or search text using URL query parameters. Recipe cards open a shared recipe detail route. Recipe detail pages compare the recipe's ingredient names with pantry items and show a count plus the unmatched recipe ingredients. Random Recipe picks from available sample recipes and has a Try another button. The featured recipe is selected by calendar day and is shown consistently on both Home and Recipe of the Day. The current catalog only has two recipes, so most categories correctly show no matches until more recipe data is added.
+
 ## General Notes
 
 ---

@@ -1,5 +1,8 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import CategoryList from "../components/categories/CategoryList.jsx";
+import RecipeCard from "../components/recipes/RecipeCard.jsx";
+import { recipes } from "../data/recipes.js";
 import strings from "../strings/en.js";
 
 const categories = [
@@ -14,16 +17,64 @@ const categories = [
 ];
 
 export default function Recipes() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [query, setQuery] = useState(searchParams.get("q") ?? "");
+  const activeCategory = searchParams.get("category") ?? "";
+  const normalizedQuery = (searchParams.get("q") ?? "").trim().toLocaleLowerCase();
+  const filteredRecipes = recipes.filter((recipe) => {
+    const matchesCategory = !activeCategory || recipe.categories?.some(
+      (category) => category.toLocaleLowerCase() === activeCategory.toLocaleLowerCase(),
+    );
+    const searchableText = [
+      recipe.title,
+      recipe.description,
+      ...(recipe.categories ?? []),
+      ...(recipe.tags ?? []),
+      ...(recipe.ingredients ?? []),
+      ...(recipe.ingredientGroups ?? []).flatMap((group) => group.ingredients),
+    ].join(" ").toLocaleLowerCase();
+    return matchesCategory && (!normalizedQuery || searchableText.includes(normalizedQuery));
+  });
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    const nextParams = new URLSearchParams(searchParams);
+    if (query.trim()) {
+      nextParams.set("q", query.trim());
+    } else {
+      nextParams.delete("q");
+    }
+    setSearchParams(nextParams);
+  };
+
+  const clearFilters = () => {
+    setQuery("");
+    setSearchParams({});
+  };
+
   return (
     <main>
       <h1>{strings.recipes.pageTitle}</h1>
       <search>
-        <form className="recipe-search-form" action="/search" method="get">
-          <input className="form-control" type="search" name="q" placeholder={strings.recipes.searchPlaceholder} aria-label={strings.common.searchRecipesLabel} />
+        <form className="recipe-search-form" onSubmit={handleSearch}>
+          <input className="form-control" type="search" name="q" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={strings.recipes.searchPlaceholder} aria-label={strings.common.searchRecipesLabel} />
           <button className="btn" type="submit">{strings.common.searchButton}</button>
         </form>
       </search>
       <CategoryList categories={categories} />
+      {(activeCategory || normalizedQuery) && (
+        <section className="recipe-results" aria-live="polite">
+          <div className="recipe-results-heading">
+            <h2>{strings.recipes.resultsHeading}</h2>
+            <button className="btn" type="button" onClick={clearFilters}>{strings.recipes.clearFiltersButton}</button>
+          </div>
+          {filteredRecipes.length > 0 ? (
+            <div className="recipe-results-grid">
+              {filteredRecipes.map((recipe) => <RecipeCard key={recipe.id} recipe={recipe} />)}
+            </div>
+          ) : <p>{strings.recipes.noResultsMessage}</p>}
+        </section>
+      )}
       <Link to="/random-recipe">{strings.recipes.randomRecipeLink}</Link>
     </main>
   );

@@ -1,6 +1,6 @@
 import RecipeCard from "../components/recipes/RecipeCard.jsx";
 import strings from "../strings/en.js";
-import { eggsBenedictRecipe } from "../data/recipes.js";
+import { getRecipeOfTheDay } from "../data/recipes.js";
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
         <h2 id="recipe-of-the-day-heading">{strings.home.recipeOfTheDayHeading}</h2>
         <RecipeCard
           className="recipe-of-the-day-link"
-          recipe={eggsBenedictRecipe}
+          recipe={getRecipeOfTheDay()}
           imageAlt=""
         />
       </section>

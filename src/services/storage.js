@@ -1,4 +1,4 @@
-import { eggsBenedictRecipe, pastaPrimaveraRecipe } from "../data/recipes.js";
+import { recipes } from "../data/recipes.js";
 
 export const APP_STORAGE_KEYS = {
   ingredients: "partialPantry.ingredients",
@@ -42,7 +42,7 @@ export function initializeAppData() {
   }));
   const initialData = [
     [APP_STORAGE_KEYS.ingredients, ingredients],
-    [APP_STORAGE_KEYS.recipes, [eggsBenedictRecipe, pastaPrimaveraRecipe]],
+    [APP_STORAGE_KEYS.recipes, recipes],
   ];
 
   for (const [key, value] of initialData) {

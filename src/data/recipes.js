@@ -1,6 +1,7 @@
 export const eggsBenedictRecipe = {
   id: "eggs-benedict",
-  path: "/recipe-of-the-day",
+  path: "/recipes/eggs-benedict",
+  categories: ["Breakfast"],
   title: "Eggs Benedict",
   description: "A classic breakfast made with toasted English muffins, Canadian bacon, poached eggs, and creamy hollandaise sauce. It's a delicious way to turn a few simple ingredients into a satisfying meal.",
   image: "/images/eggs_benedict.jpg",
@@ -51,7 +52,8 @@ export const eggsBenedictRecipe = {
 
 export const pastaPrimaveraRecipe = {
   id: "pasta-primavera",
-  path: "/random-recipe",
+  path: "/recipes/pasta-primavera",
+  categories: ["Dinner"],
   title: "Pasta Primavera",
   description: "A simple pasta dish packed with fresh vegetables. This recipe is a great way to use up ingredients you already have in your kitchen.",
   image: "/images/pasta-primavera.jpg",
@@ -84,3 +86,14 @@ export const pastaPrimaveraRecipe = {
   ],
   tags: ["Vegetarian", "Pasta", "Quick Meals", "Italian-Inspired"],
 };
+
+export const recipes = [eggsBenedictRecipe, pastaPrimaveraRecipe];
+
+export function getRecipeOfTheDay(date = new Date()) {
+  const dayNumber = Math.floor(Date.UTC(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+  ) / 86400000);
+  return recipes[dayNumber % recipes.length];
+}
