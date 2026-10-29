@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import IngredientsList from "./IngredientsList.jsx";
 import InstructionsList from "./InstructionsList.jsx";
@@ -48,6 +48,10 @@ function pantryContainsIngredient(pantry, recipeIngredient) {
 
 export default function RecipeDetails({ recipe, user }) {
   const [pantry, setPantry] = useState(() => getStorageItem(APP_STORAGE_KEYS.ingredients) ?? []);
+  const [servingMultiplier, setServingMultiplier] = useState(1);
+  const [wakeLockActive, setWakeLockActive] = useState(false);
+  const [wakeLockPending, setWakeLockPending] = useState(false);
+  const [wakeLockMessage, setWakeLockMessage] = useState("");
   const [showMadeForm, setShowMadeForm] = useState(false);
   const [usedUpNames, setUsedUpNames] = useState([]);
   const [madeMessage, setMadeMessage] = useState("");
@@ -60,6 +64,8 @@ export default function RecipeDetails({ recipe, user }) {
     const storedFavorites = getStorageItem(favoriteStorageKey);
     return Array.isArray(storedFavorites) ? storedFavorites : [];
   });
+  const wakeLockRef = useRef(null);
+  const wakeLockReleaseHandlerRef = useRef(null);
   const isFavorite = favoriteIds.includes(recipe.id);
   const ingredientCheck = useMemo(() => {
     const recipeIngredients = getRecipeIngredients(recipe);
@@ -87,6 +93,18 @@ export default function RecipeDetails({ recipe, user }) {
 
     setStorageItem(APP_STORAGE_KEYS.recentlyViewedRecipes, nextRecipeIds);
   }, [recipe.id]);
+
+  useEffect(() => () => {
+    const wakeLock = wakeLockRef.current;
+    if (wakeLock) {
+      if (wakeLockReleaseHandlerRef.current) {
+        wakeLock.removeEventListener("release", wakeLockReleaseHandlerRef.current);
+      }
+      wakeLock.release().catch((error) => {
+        console.error(strings.recipes.wakeLockReleaseError, error);
+      });
+    }
+  }, []);
 
   const toggleFavorite = () => {
     if (!favoriteStorageKey) {
@@ -124,16 +142,100 @@ export default function RecipeDetails({ recipe, user }) {
     ));
   };
 
+  const handleWakeLockToggle = async () => {
+    setWakeLockMessage("");
+
+    if (wakeLockRef.current) {
+      const currentWakeLock = wakeLockRef.current;
+      wakeLockRef.current = null;
+      if (wakeLockReleaseHandlerRef.current) {
+        currentWakeLock.removeEventListener("release", wakeLockReleaseHandlerRef.current);
+        wakeLockReleaseHandlerRef.current = null;
+      }
+      try {
+        await currentWakeLock.release();
+        setWakeLockActive(false);
+      } catch {
+        wakeLockRef.current = currentWakeLock;
+        setWakeLockActive(true);
+        setWakeLockMessage(strings.recipes.wakeLockReleaseError);
+      }
+      return;
+    }
+
+    if (!("wakeLock" in navigator)) {
+      setWakeLockMessage(strings.recipes.wakeLockUnsupported);
+      return;
+    }
+
+    setWakeLockPending(true);
+    try {
+      const wakeLock = await navigator.wakeLock.request("screen");
+      wakeLockRef.current = wakeLock;
+      const handleRelease = () => {
+        wakeLockRef.current = null;
+        wakeLockReleaseHandlerRef.current = null;
+        setWakeLockActive(false);
+      };
+      wakeLockReleaseHandlerRef.current = handleRelease;
+      wakeLock.addEventListener("release", handleRelease, { once: true });
+      setWakeLockActive(true);
+    } catch {
+      setWakeLockMessage(strings.recipes.wakeLockRequestError);
+    } finally {
+      setWakeLockPending(false);
+    }
+  };
+
+  const recipeServings = Number.parseFloat(recipe.servings);
+  const scaledServings = Number.isFinite(recipeServings)
+    ? String(Number((recipeServings * servingMultiplier).toFixed(2)))
+    : recipe.servings;
+
   return (
     <main>
       <article>
-        <RecipeHeader {...recipe} />
+        <RecipeHeader {...recipe} servings={scaledServings} />
         <figure className="recipe-detail-photo">
           <img src={recipe.image} alt={recipe.imageAlt} />
         </figure>
-        <IngredientsList ingredients={recipe.ingredients} groups={recipe.ingredientGroups} />
+        <section className="recipe-scaling" aria-labelledby="recipe-scaling-heading">
+          <h2 id="recipe-scaling-heading">{strings.recipes.scaleRecipeHeading}</h2>
+          <div className="recipe-save-actions" role="group" aria-label={strings.recipes.scaleRecipeLabel}>
+            {[0.5, 1, 2].map((multiplier) => (
+              <button
+                className="btn"
+                key={multiplier}
+                type="button"
+                aria-pressed={servingMultiplier === multiplier}
+                onClick={() => setServingMultiplier(multiplier)}
+              >
+                {strings.recipes.scaleRecipeOption(multiplier)}
+              </button>
+            ))}
+          </div>
+        </section>
+        <IngredientsList
+          ingredients={recipe.ingredients}
+          groups={recipe.ingredientGroups}
+          multiplier={servingMultiplier}
+        />
         <InstructionsList instructions={recipe.instructions} />
         <RecipeTags tags={recipe.tags} />
+        <section aria-labelledby="wake-lock-heading">
+          <h2 id="wake-lock-heading">{strings.recipes.wakeLockHeading}</h2>
+          <p>{strings.recipes.wakeLockDescription}</p>
+          <button
+            className="btn"
+            type="button"
+            onClick={handleWakeLockToggle}
+            disabled={wakeLockPending}
+            aria-pressed={wakeLockActive}
+          >
+            {wakeLockActive ? strings.recipes.disableWakeLockButton : strings.recipes.enableWakeLockButton}
+          </button>
+          {wakeLockMessage && <p role="status">{wakeLockMessage}</p>}
+        </section>
         <section>
           <h2>{strings.recipes.haveIngredientsHeading}</h2>
           {pantry.length === 0 ? (

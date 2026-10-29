@@ -91,6 +91,8 @@ Pantry freshness reminders are calculated from each ingredient's last-updated da
 
 Recipe details include a Mark as made flow. Since the sample app does not track exact recipe quantities against pantry quantities, users confirm which matched ingredients they have used up. Only checked ingredients are removed from localStorage; unchecked ingredients are preserved. The recipe detail updates its pantry match after confirmation.
 
+Recipe detail pages can scale ingredient quantities and serving counts to half, original, or double. Amounts without a leading numeric quantity remain unchanged. The page also offers the Screen Wake Lock API when available; the toggle reports unsupported or failed requests, and an active lock is released when leaving the recipe page.
+
 ## General Notes
 
 ---

@@ -351,6 +351,23 @@ main > article > header p:last-child {
     object-position: center;
 }
 
+.recipe-scaling {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.recipe-scaling h2 {
+    margin: 0;
+}
+
+.recipe-scaling [aria-pressed="true"] {
+    border-color: var(--olive);
+    background: var(--olive);
+}
+
 main > article section {
     padding: 1.35rem 0;
     border-top: 1px solid var(--line);
