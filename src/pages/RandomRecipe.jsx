@@ -12,6 +12,7 @@ export default function RandomRecipe({ user }) {
   const [recipe, setRecipe] = useState(() => chooseRandomRecipe(null));
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     document.title = `${recipe.title} | The Partial Pantry`;
     return () => {
       document.title = "The Partial Pantry";

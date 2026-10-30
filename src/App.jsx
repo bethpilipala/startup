@@ -10,7 +10,7 @@ import Recipes from "./pages/Recipes.jsx";
 import UserHome from "./pages/UserHome.jsx";
 import RecipePage from "./pages/RecipePage.jsx";
 import RecipeResults from "./pages/RecipeResults.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { APP_STORAGE_KEYS, getStorageItem, removeStorageItem, setStorageItem } from "./services/storage.js";
 
@@ -22,6 +22,16 @@ function ProtectedRoute({ user, children }) {
   }
 
   return children;
+}
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
 }
 
 function SiteLayout() {
@@ -43,6 +53,7 @@ function SiteLayout() {
 
   return (
     <>
+      <ScrollToTop />
       <Header user={user} onLogout={handleLogout} />
       <Routes>
         <Route path="/" element={<Home />} />
