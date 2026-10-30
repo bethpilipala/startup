@@ -100,6 +100,15 @@
     text-decoration: none;
 }
 
+button.recipe-results-back {
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
 .recipe-results-back:hover {
     color: var(--terracotta);
 }

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import IngredientsList from "./IngredientsList.jsx";
 import InstructionsList from "./InstructionsList.jsx";
 import RecipeHeader from "./RecipeHeader.jsx";
@@ -47,6 +47,7 @@ function pantryContainsIngredient(pantry, recipeIngredient) {
 }
 
 export default function RecipeDetails({ recipe, user }) {
+  const navigate = useNavigate();
   const [pantry, setPantry] = useState(() => getStorageItem(APP_STORAGE_KEYS.ingredients) ?? []);
   const [servingMultiplier, setServingMultiplier] = useState(1);
   const [wakeLockActive, setWakeLockActive] = useState(false);
@@ -194,6 +195,9 @@ export default function RecipeDetails({ recipe, user }) {
 
   return (
     <main>
+      <button className="recipe-results-back" type="button" onClick={() => navigate(-1)}>
+        <span aria-hidden="true">←</span> Back
+      </button>
       <article>
         <RecipeHeader {...recipe} servings={scaledServings} />
         <figure className="recipe-detail-photo">
