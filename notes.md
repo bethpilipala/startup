@@ -111,6 +111,8 @@ More interactivity with the user. The ability to add comments, and add a profile
 
 Include a feature to add your own recipes.
 
+Have to make sure that water and or ice is always included.
+
 
 ---
 
