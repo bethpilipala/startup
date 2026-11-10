@@ -60,11 +60,55 @@ apiRouter.get('/user/me', verifyAuth, (req, res) => {
   res.send({ email: req.user.email });
 });
 
+apiRouter.get('/ingredients', verifyAuth, (req, res) => {
+  res.send(req.user.ingredients);
+});
+
+apiRouter.put('/ingredients', verifyAuth, (req, res) => {
+  if (!Array.isArray(req.body)) {
+    return res.status(400).send({ msg: 'Ingredients must be a list' });
+  }
+  req.user.ingredients = req.body;
+  res.send(req.user.ingredients);
+});
+
+// Favorites and recently viewed are lists of recipe IDs.
+apiRouter.get('/favorites', verifyAuth, (req, res) => {
+  res.send(req.user.favorites);
+});
+
+apiRouter.put('/favorites', verifyAuth, (req, res) => {
+  if (!isIdList(req.body)) {
+    return res.status(400).send({ msg: 'Favorites must be a list of recipe IDs' });
+  }
+  req.user.favorites = req.body;
+  res.send(req.user.favorites);
+});
+
+apiRouter.get('/recent', verifyAuth, (req, res) => {
+  res.send(req.user.recentlyViewed);
+});
+
+apiRouter.put('/recent', verifyAuth, (req, res) => {
+  if (!isIdList(req.body)) {
+    return res.status(400).send({ msg: 'Recently viewed must be a list of recipe IDs' });
+  }
+  req.user.recentlyViewed = req.body;
+  res.send(req.user.recentlyViewed);
+});
+
+function isIdList(value) {
+  return Array.isArray(value) && value.every((id) => typeof id === 'string' || typeof id === 'number');
+}
+
 async function createUser(email, password) {
   const user = {
     email: normalizeEmail(email),
     password: await bcrypt.hash(password, 10),
     token: uuid.v4(),
+    ingredients: [],
+    favorites: [],
+    recentlyViewed: [],
   };
   users.push(user);
   return user;
