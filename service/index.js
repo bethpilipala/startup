@@ -1,8 +1,14 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const bcrypt = require('bcryptjs');
+const uuid = require('uuid');
 
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
+const authCookieName = 'token';
+
+// In-memory store until the database deliverable.
+const users = [];
 
 app.use(express.json());
 app.use(cookieParser());
@@ -14,6 +20,82 @@ app.use('/api', apiRouter);
 apiRouter.get('/health', (_req, res) => {
   res.send({ status: 'ok' });
 });
+
+apiRouter.post('/auth/create', async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).send({ msg: 'Email and password are required' });
+  }
+  if (findUser('email', email)) {
+    return res.status(409).send({ msg: 'Existing user' });
+  }
+
+  const user = await createUser(email, password);
+  setAuthCookie(res, user.token);
+  res.send({ email: user.email });
+});
+
+apiRouter.post('/auth/login', async (req, res) => {
+  const { email, password } = req.body;
+  const user = email ? findUser('email', email) : null;
+  if (user && (await bcrypt.compare(password ?? '', user.password))) {
+    user.token = uuid.v4();
+    setAuthCookie(res, user.token);
+    return res.send({ email: user.email });
+  }
+  res.status(401).send({ msg: 'Unauthorized' });
+});
+
+apiRouter.delete('/auth/logout', (req, res) => {
+  const user = findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    delete user.token;
+  }
+  res.clearCookie(authCookieName);
+  res.status(204).end();
+});
+
+// Returns the current user; also serves as the simplest auth-protected endpoint.
+apiRouter.get('/user/me', verifyAuth, (req, res) => {
+  res.send({ email: req.user.email });
+});
+
+async function createUser(email, password) {
+  const user = {
+    email: normalizeEmail(email),
+    password: await bcrypt.hash(password, 10),
+    token: uuid.v4(),
+  };
+  users.push(user);
+  return user;
+}
+
+function findUser(field, value) {
+  if (!value) return null;
+  const target = field === 'email' ? normalizeEmail(value) : value;
+  return users.find((u) => u[field] === target) ?? null;
+}
+
+function normalizeEmail(email) {
+  return String(email).trim().toLowerCase();
+}
+
+function verifyAuth(req, res, next) {
+  const user = findUser('token', req.cookies[authCookieName]);
+  if (!user) {
+    return res.status(401).send({ msg: 'Unauthorized' });
+  }
+  req.user = user;
+  next();
+}
+
+function setAuthCookie(res, token) {
+  res.cookie(authCookieName, token, {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+}
 
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
