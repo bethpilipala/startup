@@ -96,6 +96,7 @@ const strings = {
     requiredFieldsError: "Enter a valid email address and a password to continue.",
     checkingSession: "Checking your session...",
     connectionError: "Unable to reach the service. Check your connection and try again.",
+    serviceUnavailable: "The service is unavailable. If you're developing locally, start the backend and try again.",
     requestError: "The service could not complete your request. Please try again.",
   },
 

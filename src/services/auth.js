@@ -13,7 +13,10 @@ export async function request(path, options = {}) {
 
   if (!response.ok) {
     const body = await response.json().catch(() => null);
-    const error = new Error(body?.msg || strings.login.requestError);
+    const message = [502, 503, 504].includes(response.status)
+      ? strings.login.serviceUnavailable
+      : body?.msg || strings.login.requestError;
+    const error = new Error(message);
     error.status = response.status;
     throw error;
   }
