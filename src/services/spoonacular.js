@@ -1,6 +1,17 @@
 const BASE_URL = "https://api.spoonacular.com";
 const CACHE_PREFIX = "partialPantry.spoonacular.";
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
+const pendingRequests = new Map();
+const categoryTypes = {
+  Breakfast: "breakfast",
+  Lunch: "main course",
+  Dinner: "main course",
+  Appetizers: "appetizer",
+  Sides: "side dish",
+  "Soups & Salads": "soup,salad",
+  Desserts: "dessert",
+  "Snacks & Drinks": "snack,beverage",
+};
 
 export class SpoonacularError extends Error {
   constructor(message, status) {
@@ -52,7 +63,19 @@ async function request(path, params = {}, { cache = true } = {}) {
     if (cached) return cached;
   }
 
+  if (cache && pendingRequests.has(cacheKey)) return pendingRequests.get(cacheKey);
+
   query.set("apiKey", apiKey);
+  const pending = fetchResponse(path, query, cache ? cacheKey : null);
+  if (cache) pendingRequests.set(cacheKey, pending);
+  try {
+    return await pending;
+  } finally {
+    if (cache) pendingRequests.delete(cacheKey);
+  }
+}
+
+async function fetchResponse(path, query, cacheKey) {
   let response;
   try {
     response = await fetch(`${BASE_URL}${path}?${query}`);
@@ -60,8 +83,11 @@ async function request(path, params = {}, { cache = true } = {}) {
     throw new SpoonacularError("Could not reach Spoonacular. Check your connection.");
   }
 
-  if (response.status === 402 || response.status === 429) {
-    throw new SpoonacularError("The daily Spoonacular quota has been used up. Try again tomorrow.", response.status);
+  if (response.status === 402) {
+    throw new SpoonacularError("The Spoonacular quota has been used up. Try again later.", response.status);
+  }
+  if (response.status === 429) {
+    throw new SpoonacularError("Too many Spoonacular requests. Please try again later.", response.status);
   }
   if (response.status === 401) {
     throw new SpoonacularError("Spoonacular rejected the API key.", response.status);
@@ -71,7 +97,7 @@ async function request(path, params = {}, { cache = true } = {}) {
   }
 
   const data = await response.json();
-  if (cache) writeCache(cacheKey, data);
+  if (cacheKey) writeCache(cacheKey, data);
   return data;
 }
 
@@ -123,12 +149,13 @@ export function mapRecipe(recipe) {
 }
 
 export async function searchRecipes({ query, category, number = 12 } = {}) {
+  if (category && !Object.hasOwn(categoryTypes, category)) {
+    throw new SpoonacularError("This recipe category is not supported.");
+  }
   const data = await request("/recipes/complexSearch", {
     query,
-    type: category,
+    type: category ? categoryTypes[category] : undefined,
     number,
-    addRecipeInformation: true,
-    fillIngredients: true,
   });
   return data.results.map(mapRecipe);
 }

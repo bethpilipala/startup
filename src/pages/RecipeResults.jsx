@@ -1,35 +1,30 @@
+import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import RecipeResultCard from "../components/recipes/RecipeResultCard.jsx";
-import { recipes } from "../data/recipes.js";
+import { searchRecipes } from "../services/spoonacular.js";
 import strings from "../strings/en.js";
-
-function matchesSearch(recipe, query) {
-  if (!query) {
-    return true;
-  }
-
-  const searchableText = [
-    recipe.title,
-    recipe.description,
-    ...(recipe.categories ?? []),
-    ...(recipe.tags ?? []),
-    ...(recipe.ingredients ?? []),
-    ...(recipe.ingredientGroups ?? []).flatMap((group) => group.ingredients),
-  ].join(" ").toLocaleLowerCase();
-
-  return searchableText.includes(query);
-}
 
 export default function RecipeResults() {
   const [searchParams] = useSearchParams();
   const activeCategory = searchParams.get("category") ?? "";
-  const normalizedQuery = (searchParams.get("q") ?? "").trim().toLocaleLowerCase();
-  const filteredRecipes = recipes.filter((recipe) => {
-    const matchesCategory = !activeCategory || recipe.categories?.some(
-      (category) => category.toLocaleLowerCase() === activeCategory.toLocaleLowerCase(),
+  const query = (searchParams.get("q") ?? "").trim();
+  const requestKey = JSON.stringify([query, activeCategory]);
+  const [result, setResult] = useState(null);
+  const currentResult = result?.key === requestKey ? result : null;
+
+  useEffect(() => {
+    let active = true;
+    searchRecipes({ query, category: activeCategory }).then(
+      (recipes) => {
+        if (active) setResult({ key: requestKey, recipes });
+      },
+      (error) => {
+        if (active) setResult({ key: requestKey, error: error.message });
+      },
     );
-    return matchesCategory && matchesSearch(recipe, normalizedQuery);
-  });
+    return () => { active = false; };
+  }, [query, activeCategory, requestKey]);
+
   const resultsHeading = activeCategory
     ? strings.recipes.categoryResultsHeading(activeCategory)
     : strings.recipes.resultsHeading;
@@ -40,16 +35,18 @@ export default function RecipeResults() {
         <span aria-hidden="true">←</span> {strings.recipes.backToCategoriesLabel}
       </Link>
       <h1>{resultsHeading}</h1>
-      {normalizedQuery && <p>{strings.recipes.searchResultsFor(normalizedQuery)}</p>}
-      {filteredRecipes.length > 0 ? (
+      {query && <p>{strings.recipes.searchResultsFor(query)}</p>}
+      {!currentResult && <p role="status">{strings.recipes.loadingRecipes}</p>}
+      {currentResult?.error && <p role="alert">{currentResult.error}</p>}
+      {currentResult?.recipes?.length > 0 ? (
         <section aria-label={strings.recipes.recipesListLabel}>
           <div className="recipe-result-grid">
-            {filteredRecipes.map((recipe) => (
+            {currentResult.recipes.map((recipe) => (
               <RecipeResultCard key={recipe.id} recipe={recipe} />
             ))}
           </div>
         </section>
-      ) : (
+      ) : currentResult?.recipes && (
         <p role="status">{strings.recipes.noResultsMessage}</p>
       )}
     </main>

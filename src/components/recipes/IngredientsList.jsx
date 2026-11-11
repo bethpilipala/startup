@@ -25,6 +25,7 @@ export default function IngredientsList({ ingredients = [], groups = [], multipl
   return (
     <section>
       <h2>{strings.recipes.ingredientsHeading}</h2>
+      {groups.length === 0 && ingredients.length === 0 && <p>{strings.recipes.notProvided}</p>}
       {groups.length > 0
         ? groups.map((group) => (
             <div key={group.name}>

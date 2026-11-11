@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CategoryList from "../components/categories/CategoryList.jsx";
 import RecipeResultCard from "../components/recipes/RecipeResultCard.jsx";
-import { recipes } from "../data/recipes.js";
 import { APP_STORAGE_KEYS, getStorageItem } from "../services/storage.js";
+import useSavedRecipes from "../services/useSavedRecipes.js";
 import strings from "../strings/en.js";
 
 const categories = [
@@ -24,9 +24,7 @@ export default function Recipes() {
     const storedIds = getStorageItem(APP_STORAGE_KEYS.recentlyViewedRecipes);
     return Array.isArray(storedIds) ? storedIds : [];
   });
-  const recentlyViewedRecipes = recentlyViewedIds
-    .map((recipeId) => recipes.find((recipe) => recipe.id === recipeId))
-    .filter(Boolean);
+  const { recipes: recentlyViewedRecipes, errors, loading } = useSavedRecipes(recentlyViewedIds);
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -45,9 +43,11 @@ export default function Recipes() {
       </search>
       <CategoryList categories={categories} />
       <Link to="/random-recipe">{strings.recipes.randomRecipeLink}</Link>
-      {recentlyViewedRecipes.length > 0 && (
+      {recentlyViewedIds.length > 0 && (
         <section className="recently-viewed-banner" aria-labelledby="recently-viewed-heading">
           <h2 id="recently-viewed-heading">{strings.recipes.recentlyViewedHeading}</h2>
+          {loading && <p role="status">{strings.recipes.loadingRecipes}</p>}
+          {errors.length > 0 && <p role="alert">{strings.recipes.savedRecipesError} {errors[0]}</p>}
           <div className="recently-viewed-list">
             {recentlyViewedRecipes.map((recipe) => (
               <RecipeResultCard key={recipe.id} recipe={recipe} />

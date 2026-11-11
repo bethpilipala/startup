@@ -200,9 +200,11 @@ export default function RecipeDetails({ recipe, user }) {
       </button>
       <article>
         <RecipeHeader {...recipe} servings={scaledServings} />
-        <figure className="recipe-detail-photo">
-          <img src={recipe.image} alt={recipe.imageAlt} />
-        </figure>
+        {recipe.image && (
+          <figure className="recipe-detail-photo">
+            <img src={recipe.image} alt={recipe.imageAlt} />
+          </figure>
+        )}
         <section className="recipe-scaling" aria-labelledby="recipe-scaling-heading">
           <h2 id="recipe-scaling-heading">{strings.recipes.scaleRecipeHeading}</h2>
           <div className="recipe-save-actions" role="group" aria-label={strings.recipes.scaleRecipeLabel}>
@@ -242,7 +244,9 @@ export default function RecipeDetails({ recipe, user }) {
         </section>
         <section>
           <h2>{strings.recipes.haveIngredientsHeading}</h2>
-          {pantry.length === 0 ? (
+          {ingredientCheck.total === 0 ? (
+            <p>{strings.recipes.notProvided}</p>
+          ) : pantry.length === 0 ? (
             <p>{strings.recipes.emptyPantryMessage}</p>
           ) : (
             <>

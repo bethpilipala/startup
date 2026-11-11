@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import RecipeResultCard from "../components/recipes/RecipeResultCard.jsx";
-import { recipes } from "../data/recipes.js";
+import useSavedRecipes from "../services/useSavedRecipes.js";
 import {
   APP_STORAGE_KEYS,
   getStorageItem,
@@ -17,7 +17,7 @@ export default function UserHome({ user }) {
     const storedFavorites = getStorageItem(getUserFavoritesStorageKey(user));
     return Array.isArray(storedFavorites) ? storedFavorites : [];
   });
-  const favoriteRecipes = recipes.filter((recipe) => favoriteIds.includes(recipe.id));
+  const { recipes: favoriteRecipes, errors, loading } = useSavedRecipes(favoriteIds);
 
   return (
     <main className="userhome">
@@ -30,13 +30,15 @@ export default function UserHome({ user }) {
         <div className="col-lg-7">
           <section className="userhome-recipes" aria-labelledby="your-recipes-heading">
             <h2 id="your-recipes-heading">{strings.userhome.myRecipesHeading}</h2>
+            {loading && <p role="status">{strings.recipes.loadingRecipes}</p>}
+            {errors.length > 0 && <p role="alert">{strings.recipes.savedRecipesError} {errors[0]}</p>}
             {favoriteRecipes.length > 0 ? (
               <div className="userhome-favorites-grid">
                 {favoriteRecipes.map((recipe) => (
                   <RecipeResultCard key={recipe.id} recipe={recipe} />
                 ))}
               </div>
-            ) : (
+            ) : !loading && errors.length === 0 && (
               <div className="userhome-empty-state" role="status">
                 <p>{strings.userhome.noRecipesSavedText}</p>
                 <p>{strings.userhome.recipesWillAppearText}</p>
