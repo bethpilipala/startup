@@ -95,6 +95,25 @@ Recipe details include a Mark as made flow. Since the sample app does not track 
 
 Recipe detail pages can scale ingredient quantities and serving counts to half, original, or double. Amounts without a leading numeric quantity remain unchanged. The page also offers the Screen Wake Lock API when available; the toggle reports unsupported or failed requests, and an active lock is released when leaving the recipe page.
 
+## Startup Service
+
+The backend lives in `service/` (Express on port 4000, its own `package.json`). Vite proxies `/api` to it during development. Accounts use bcrypt-hashed passwords and an httpOnly auth cookie, and ingredients, favorites, and recently viewed recipe IDs are exposed as endpoints that require that cookie. All of this is held in server memory for now, so it resets whenever the service restarts, until a database is added.
+
+### Spoonacular API (third-party recipes)
+
+Recipes now come from Spoonacular through `src/services/spoonacular.js`, which calls the API from the frontend and maps each response into the recipe shape the components already use. The API has limits that shape how the app behaves:
+
+- **Daily quota.** The free tier allows roughly 150 points per day, and each request costs points (more for requests that include full recipe details). When the quota runs out the API returns 402/429. The service turns this into a readable error, and pages need to show it instead of a blank screen. To avoid wasting points, responses are cached in localStorage for 24 hours, keyed by request URL. Random recipe is deliberately not cached, so it costs a point every time, and recipe of the day is stored once per date so it stays the same all day.
+- **The API key is visible in the browser.** The assignment requires the frontend to call the third-party service, so the key ships in the JavaScript bundle (`VITE_SPOONACULAR_KEY` in the git-ignored `.env.local`). Anyone can copy it and use up my quota. The key must never be committed, and the key has to be present when the frontend is built for deployment.
+- **Missing or inconsistent fields.** Many recipes have no prep or cook time, only a total time, and some have no step-by-step instructions. Those fields come through as empty strings or an empty list, so the detail page has to hide or label what is missing instead of assuming it exists.
+- **No ingredient groups.** The old sample recipes grouped ingredients (for example, "Hollandaise Sauce"). Spoonacular gives one flat list, so every recipe now has a single "Ingredients" group.
+- **Categories are dish types, not my fixed list.** Spoonacular's dish types (such as "side dish" and "main course") don't line up exactly with my category tiles (Breakfast, Dinner, Soups & Salads, and so on). The category search passes a `type` and some categories may need to be mapped or renamed. A recipe can also belong to several dish types.
+- **Recipe IDs are numbers, not slugs.** Favorites and recently viewed now store Spoonacular IDs. Old locally stored IDs like `eggs-benedict` won't resolve, and the backend accepts both strings and numbers.
+- **Descriptions are HTML summaries.** The summary text is stripped of tags and can be long or contain links to other sites.
+- **Search is limited.** Results are capped per request (12 for now), and no results, a failed request, and an exhausted quota need different messages.
+- **Terms of use.** The free plan requires attributing Spoonacular, so a credit link should appear in the app.
+- **No ingredient matching offline.** Pantry matching on the detail page compares text strings, so it only works after the recipe has loaded from the API.
+
 ## General Notes
 
 ---
