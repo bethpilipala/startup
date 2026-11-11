@@ -8,7 +8,7 @@
 
 - Recipe search and category results include both Spoonacular and hardcoded recipes. Recipe cards open their details, and favorites and recently viewed support both sources.
 - Set `VITE_SPOONACULAR_KEY` in a git-ignored `.env.local` before starting or building the frontend. Because the browser calls Spoonacular directly, the key is visible to visitors.
-- The random and featured recipe pages still use sample data. The Express service currently stores accounts and application data in memory, and the frontend has not yet been connected to its authentication and application endpoints.
+- Random Recipe can select either a hardcoded recipe or a Spoonacular recipe; the featured recipe still uses sample data. The Express service currently stores accounts and application data in memory, and the frontend has not yet been connected to its authentication and application endpoints.
 
 Recipe Finder is an application that lets users browse recipes as well as add their own. But beyond being a simple recipe database, the user can enter what ingredients they currently have in their house and the Recipe Finder will spit out recipes that contain only those ingredients. Users can create an account, save recipes, create recipes, and record what ingredients they have. Some ingredients, like spices, cans or other dry goods, will be in a section that is more permanant so that the user doesn't have to input them every time, but will frequently ask for updates regarding ingredients such as fresh fruits and vegetables. After making the recipe the user can mark the recipe as made and the website will prompt the user to remove used ingredients.
 

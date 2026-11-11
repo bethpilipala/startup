@@ -103,6 +103,8 @@ const strings = {
     categoriesLabel: "Recipe categories",
     recipesListLabel: "Recipes",
     randomRecipeLink: "Get a Random Recipe",
+    randomRecipeHeading: "Random Recipe",
+    tryAnotherRecipe: "Try another random recipe",
     ingredientsHeading: "Ingredients",
     instructionsHeading: "Instructions",
     tagsHeading: "Recipe Tags",

@@ -167,6 +167,9 @@ export async function getRecipe(id) {
 
 export async function getRandomRecipe() {
   const data = await request("/recipes/random", { number: 1 }, { cache: false });
+  if (!Array.isArray(data.recipes) || data.recipes.length === 0) {
+    throw new SpoonacularError("Spoonacular did not return a random recipe. Please try again.");
+  }
   return mapRecipe(data.recipes[0]);
 }
 
