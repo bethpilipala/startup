@@ -172,15 +172,3 @@ export async function getRandomRecipe() {
   }
   return mapRecipe(data.recipes[0]);
 }
-
-// Recipe of the day is the same all day, so it is cached under a per-date key.
-export async function getRecipeOfTheDay(date = new Date()) {
-  const day = date.toISOString().slice(0, 10);
-  const cacheKey = `${CACHE_PREFIX}recipeOfTheDay.${day}`;
-  const cached = readCache(cacheKey);
-  if (cached) return cached;
-
-  const recipe = await getRandomRecipe();
-  writeCache(cacheKey, recipe);
-  return recipe;
-}

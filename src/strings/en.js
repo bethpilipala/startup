@@ -144,6 +144,7 @@ const strings = {
     recentlyViewedHeading: "Recently viewed",
     noResultsMessage: "No recipes matched your search or category.",
     loadingRecipes: "Loading recipes...",
+    retryButton: "Try again",
     savedRecipesError: "Some saved recipes could not be loaded.",
     notProvided: "Not provided",
     enjoyRecipeHeading: "Enjoy this recipe?",
