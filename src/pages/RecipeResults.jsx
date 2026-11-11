@@ -1,8 +1,22 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import RecipeResultCard from "../components/recipes/RecipeResultCard.jsx";
+import { recipes as localRecipes } from "../data/recipes.js";
 import { searchRecipes } from "../services/spoonacular.js";
 import strings from "../strings/en.js";
+
+function matchesSearch(recipe, query) {
+  const searchableText = [
+    recipe.title,
+    recipe.description,
+    ...(recipe.categories ?? []),
+    ...(recipe.tags ?? []),
+    ...(recipe.ingredients ?? []),
+    ...(recipe.ingredientGroups ?? []).flatMap((group) => group.ingredients),
+  ].join(" ").toLocaleLowerCase();
+
+  return searchableText.includes(query);
+}
 
 export default function RecipeResults() {
   const [searchParams] = useSearchParams();
@@ -11,6 +25,14 @@ export default function RecipeResults() {
   const requestKey = JSON.stringify([query, activeCategory]);
   const [result, setResult] = useState(null);
   const currentResult = result?.key === requestKey ? result : null;
+  const normalizedQuery = query.toLocaleLowerCase();
+  const matchingLocalRecipes = localRecipes.filter((recipe) => {
+    const matchesCategory = !activeCategory || recipe.categories?.some(
+      (category) => category.toLocaleLowerCase() === activeCategory.toLocaleLowerCase(),
+    );
+    return matchesCategory && matchesSearch(recipe, normalizedQuery);
+  });
+  const combinedRecipes = [...matchingLocalRecipes, ...(currentResult?.recipes ?? [])];
 
   useEffect(() => {
     let active = true;
@@ -38,11 +60,11 @@ export default function RecipeResults() {
       {query && <p>{strings.recipes.searchResultsFor(query)}</p>}
       {!currentResult && <p role="status">{strings.recipes.loadingRecipes}</p>}
       {currentResult?.error && <p role="alert">{currentResult.error}</p>}
-      {currentResult?.recipes?.length > 0 ? (
+      {combinedRecipes.length > 0 ? (
         <section aria-label={strings.recipes.recipesListLabel}>
           <div className="recipe-result-grid">
-            {currentResult.recipes.map((recipe) => (
-              <RecipeResultCard key={recipe.id} recipe={recipe} />
+            {combinedRecipes.map((recipe) => (
+              <RecipeResultCard key={recipe.path} recipe={recipe} />
             ))}
           </div>
         </section>

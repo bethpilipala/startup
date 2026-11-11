@@ -6,7 +6,7 @@
 
 ## Startup Service progress
 
-- Recipe search and category results use the Spoonacular API. Recipe cards open API-backed details, and favorites and recently viewed support both Spoonacular and existing sample recipes.
+- Recipe search and category results include both Spoonacular and hardcoded recipes. Recipe cards open their details, and favorites and recently viewed support both sources.
 - Set `VITE_SPOONACULAR_KEY` in a git-ignored `.env.local` before starting or building the frontend. Because the browser calls Spoonacular directly, the key is visible to visitors.
 - The random and featured recipe pages still use sample data. The Express service currently stores accounts and application data in memory, and the frontend has not yet been connected to its authentication and application endpoints.
 

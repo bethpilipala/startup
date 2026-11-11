@@ -101,7 +101,7 @@ The backend lives in `service/` (Express on port 4000, its own `package.json`). 
 
 ### Spoonacular API (third-party recipes)
 
-The Recipes page now searches Spoonacular for recipe cards and maps the existing category tiles to Spoonacular dish types. Search cards open API-backed recipe details; missing times, ingredients, or instructions are marked "Not provided". Recently viewed and favorite lists can resolve both Spoonacular IDs and existing sample recipe IDs. The random and featured recipe pages still use sample recipes for now.
+The Recipes page searches both the hardcoded recipes and Spoonacular, and maps the existing category tiles to Spoonacular dish types. Hardcoded matches remain available if the Spoonacular request fails, with the error shown separately. Search cards open their recipe details; missing times, ingredients, or instructions are marked "Not provided". Recently viewed and favorite lists can resolve both Spoonacular IDs and existing sample recipe IDs. The random and featured recipe pages still use sample recipes for now.
 
 Recipe search and API-backed details use `src/services/spoonacular.js`, which calls the API from the frontend and maps each response into the recipe shape the components already use. The API has limits that shape how the app behaves:
 
