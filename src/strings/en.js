@@ -94,7 +94,9 @@ const strings = {
     submitButton: "Log in",
     createAccountButton: "Create account",
     requiredFieldsError: "Enter a valid email address and a password to continue.",
-    mockAuthNotice: "Demo account access is stored in this browser only. Do not use a real password.",
+    checkingSession: "Checking your session...",
+    connectionError: "Unable to reach the service. Check your connection and try again.",
+    requestError: "The service could not complete your request. Please try again.",
   },
 
   recipes: {

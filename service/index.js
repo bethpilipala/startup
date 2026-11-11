@@ -22,21 +22,28 @@ apiRouter.get('/health', (_req, res) => {
 });
 
 apiRouter.post('/auth/create', async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
-    return res.status(400).send({ msg: 'Email and password are required' });
+  const { email, password } = req.body ?? {};
+  if (!validCredentials(email, password)) {
+    return res.status(400).send({ msg: 'Enter an email and a password of at most 72 UTF-8 bytes.' });
   }
   if (findUser('email', email)) {
     return res.status(409).send({ msg: 'Existing user' });
   }
 
-  const user = await createUser(email, password);
+  const passwordHash = await bcrypt.hash(password, 10);
+  if (findUser('email', email)) {
+    return res.status(409).send({ msg: 'Existing user' });
+  }
+  const user = createUser(email, passwordHash);
   setAuthCookie(res, user.token);
   res.send({ email: user.email });
 });
 
 apiRouter.post('/auth/login', async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password } = req.body ?? {};
+  if (!validCredentials(email, password)) {
+    return res.status(400).send({ msg: 'Enter an email and a password of at most 72 UTF-8 bytes.' });
+  }
   const user = email ? findUser('email', email) : null;
   if (user && (await bcrypt.compare(password ?? '', user.password))) {
     user.token = uuid.v4();
@@ -101,10 +108,16 @@ function isIdList(value) {
   return Array.isArray(value) && value.every((id) => typeof id === 'string' || typeof id === 'number');
 }
 
-async function createUser(email, password) {
+function validCredentials(email, password) {
+  return typeof email === 'string' && email.trim().length > 0
+    && typeof password === 'string' && password.length > 0
+    && Buffer.byteLength(password, 'utf8') <= 72;
+}
+
+function createUser(email, passwordHash) {
   const user = {
     email: normalizeEmail(email),
-    password: await bcrypt.hash(password, 10),
+    password: passwordHash,
     token: uuid.v4(),
     ingredients: [],
     favorites: [],
@@ -145,6 +158,10 @@ app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`Listening on port ${port}`);
+  });
+}
+
+module.exports = app;

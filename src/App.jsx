@@ -12,11 +12,23 @@ import RecipePage from "./pages/RecipePage.jsx";
 import RecipeResults from "./pages/RecipeResults.jsx";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { APP_STORAGE_KEYS, getStorageItem, removeStorageItem, setStorageItem } from "./services/storage.js";
+import { getCurrentUser, logout } from "./services/auth.js";
+import strings from "./strings/en.js";
 
-function ProtectedRoute({ user, children }) {
+function ProtectedRoute({ user, authStatus, authError, onRetry, children }) {
   const location = useLocation();
 
+  if (authStatus === "loading") {
+    return <main><p role="status">{strings.login.checkingSession}</p></main>;
+  }
+  if (authStatus === "error") {
+    return (
+      <main>
+        <p role="alert">{authError}</p>
+        <button className="btn" type="button" onClick={onRetry}>{strings.recipes.retryButton}</button>
+      </main>
+    );
+  }
   if (!user) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
@@ -35,38 +47,84 @@ function ScrollToTop() {
 }
 
 function SiteLayout() {
-  const [user, setUser] = useState(() => getStorageItem(APP_STORAGE_KEYS.user));
+  const [user, setUser] = useState(null);
+  const [authStatus, setAuthStatus] = useState("loading");
+  const [authError, setAuthError] = useState("");
+  const [sessionAttempt, setSessionAttempt] = useState(0);
 
-  const handleAuthenticate = (email) => {
-    const authenticatedUser = {
-      email,
-      name: email.split("@")[0],
-    };
-    setStorageItem(APP_STORAGE_KEYS.user, authenticatedUser);
+  useEffect(() => {
+    let active = true;
+    getCurrentUser().then(
+      (currentUser) => {
+        if (active) {
+          setUser(currentUser);
+          setAuthStatus("ready");
+        }
+      },
+      (error) => {
+        if (active) {
+          if (error.status === 401) {
+            setUser(null);
+            setAuthStatus("ready");
+          } else {
+            setAuthError(error.message);
+            setAuthStatus("error");
+          }
+        }
+      },
+    );
+    return () => { active = false; };
+  }, [sessionAttempt]);
+
+  const handleAuthenticate = (authenticatedUser) => {
     setUser(authenticatedUser);
+    setAuthStatus("ready");
+    setAuthError("");
   };
 
-  const handleLogout = () => {
-    removeStorageItem(APP_STORAGE_KEYS.user);
-    setUser(null);
+  const handleLogout = async () => {
+    setAuthError("");
+    try {
+      await logout();
+      setUser(null);
+      setAuthStatus("ready");
+    } catch (error) {
+      setAuthError(error.message);
+    }
+  };
+
+  const retrySession = () => {
+    setAuthError("");
+    setAuthStatus("loading");
+    setSessionAttempt((attempt) => attempt + 1);
   };
 
   return (
     <>
       <ScrollToTop />
       <Header user={user} onLogout={handleLogout} />
+      {authError && authStatus !== "error" && <p role="alert">{authError}</p>}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route
           path="/ingredients"
           element={
-            <ProtectedRoute user={user}>
+            <ProtectedRoute user={user} authStatus={authStatus} authError={authError} onRetry={retrySession}>
               <Ingredients />
             </ProtectedRoute>
           }
         />
-        <Route path="/login" element={<Login onAuthenticate={handleAuthenticate} />} />
+        <Route path="/login" element={
+          authStatus === "loading" ? (
+            <main><p role="status">{strings.login.checkingSession}</p></main>
+          ) : authStatus === "error" ? (
+            <main>
+              <p role="alert">{authError}</p>
+              <button className="btn" type="button" onClick={retrySession}>{strings.recipes.retryButton}</button>
+            </main>
+          ) : <Login onAuthenticate={handleAuthenticate} />
+        } />
         <Route path="/random-recipe" element={<RandomRecipe user={user} />} />
         <Route path="/recipe-of-the-day" element={<RecipeOfTheDay user={user} />} />
         <Route path="/recipes" element={<Recipes />} />
@@ -75,7 +133,7 @@ function SiteLayout() {
         <Route
           path="/userhome"
           element={
-            <ProtectedRoute user={user}>
+            <ProtectedRoute user={user} authStatus={authStatus} authError={authError} onRetry={retrySession}>
               <UserHome user={user} />
             </ProtectedRoute>
           }

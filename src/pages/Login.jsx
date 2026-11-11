@@ -1,25 +1,38 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { login, register } from "../services/auth.js";
 import strings from "../strings/en.js";
 
 export default function Login({ onAuthenticate }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [pending, setPending] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    if (pending) return;
     const trimmedEmail = email.trim();
     if (!trimmedEmail || !password) {
       setMessage(strings.login.requiredFieldsError);
       return;
     }
 
-    onAuthenticate(trimmedEmail);
-    const destination = location.state?.from?.pathname ?? "/userhome";
-    navigate(destination, { replace: true });
+    setMessage("");
+    setPending(true);
+    try {
+      const authenticate = event.nativeEvent.submitter?.value === "register" ? register : login;
+      const user = await authenticate(trimmedEmail, password);
+      onAuthenticate(user);
+      const destination = location.state?.from;
+      navigate(destination ? `${destination.pathname}${destination.search || ""}${destination.hash || ""}` : "/userhome", { replace: true });
+    } catch (error) {
+      setMessage(error.message);
+    } finally {
+      setPending(false);
+    }
   };
 
   return (
@@ -55,11 +68,10 @@ export default function Login({ onAuthenticate }) {
           <p className="login-forgot-password">{strings.login.forgotPasswordNotice}</p>
         </div>
         <div className="login-actions">
-          <button className="btn" type="submit">{strings.login.submitButton}</button>
-          <button className="btn" type="submit">{strings.login.createAccountButton}</button>
+          <button className="btn" type="submit" value="login" disabled={pending}>{strings.login.submitButton}</button>
+          <button className="btn" type="submit" value="register" disabled={pending}>{strings.login.createAccountButton}</button>
         </div>
         {message && <p role="alert">{message}</p>}
-        <p>{strings.login.mockAuthNotice}</p>
       </form>
     </main>
   );
