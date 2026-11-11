@@ -175,12 +175,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - Created a separate Express service in `service/` that defaults to port 4000, with its own dependencies.
+- [ ] **Static middleware for frontend** - Configured Express to serve files from `public`; serving the built frontend through the production deployment still needs to be verified.
+- [x] **Calls to third party endpoints** - The frontend calls Spoonacular for recipe search, details, random recipes, and Recipe of the Day. Hardcoded recipes remain available alongside API recipes.
+- [x] **Backend service endpoints** - Added `/api/health`, authentication endpoints, and protected ingredients, favorites, and recently viewed endpoints. Data is held in memory and resets when the service restarts.
+- [ ] **Frontend calls service endpoints** - The frontend still uses localStorage for account and pantry data; connecting it to the backend endpoints is not complete.
+- [ ] **Supports registration, login, logout, and restricted endpoint** - The backend implements these endpoints and hashes passwords with bcrypt, but the frontend still uses mock authentication. The complete flow remains to be connected and tested.
 
 
 ## 🚀 DB deliverable
