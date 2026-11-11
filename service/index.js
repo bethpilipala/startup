@@ -2,6 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
+const path = require('node:path');
 
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -12,10 +13,10 @@ const users = [];
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.static('public'));
 
 const apiRouter = express.Router();
 app.use('/api', apiRouter);
+app.use(express.static('public'));
 
 apiRouter.get('/health', (_req, res) => {
   res.send({ status: 'ok' });
@@ -121,6 +122,10 @@ apiRouter.put('/recent', verifyAuth, (req, res) => {
   res.send(req.user.recentlyViewed);
 });
 
+apiRouter.use((_req, res) => {
+  res.status(404).send({ msg: 'API endpoint not found' });
+});
+
 function isIdList(value) {
   return Array.isArray(value) && value.every((id) => typeof id === 'string' || typeof id === 'number');
 }
@@ -179,7 +184,10 @@ function setAuthCookie(res, token) {
   });
 }
 
-app.use((_req, res) => {
+app.use((req, res, next) => {
+  if (!['GET', 'HEAD'].includes(req.method) || path.extname(req.path) || !req.accepts('html')) {
+    return next();
+  }
   res.sendFile('index.html', { root: 'public' });
 });
 

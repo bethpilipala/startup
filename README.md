@@ -10,7 +10,7 @@
 - Set `VITE_SPOONACULAR_KEY` in a git-ignored `.env.local` before starting or building the frontend. Because the browser calls Spoonacular directly, the key is visible to visitors.
 - Random Recipe can select either a hardcoded recipe or a Spoonacular recipe. Recipe of the Day alternates between the two sources by local calendar day and is saved in each browser so the home and detail pages agree. The frontend uses the Express service for authentication and signed-in pantry ingredients, favorites, and recently viewed recipes. The service stores these in memory, so they are lost when it restarts.
 
-For local development, run `node service/index.js` and `npm run dev` in separate terminals, then open the Vite URL on `localhost`. Run the backend authentication tests with `npm --prefix service test`.
+For local development, run `node service/index.js` and `npm run dev` in separate terminals, then open the Vite URL on `localhost`.
 
 Recipe Finder is an application that lets users browse recipes as well as add their own. But beyond being a simple recipe database, the user can enter what ingredients they currently have in their house and the Recipe Finder will spit out recipes that contain only those ingredients. Users can create an account, save recipes, create recipes, and record what ingredients they have. Some ingredients, like spices, cans or other dry goods, will be in a section that is more permanant so that the user doesn't have to input them every time, but will frequently ask for updates regarding ingredients such as fresh fruits and vegetables. After making the recipe the user can mark the recipe as made and the website will prompt the user to remove used ingredients.
 
@@ -178,7 +178,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] **Node.js/Express HTTP service** - Created a separate Express service in `service/` that defaults to port 4000, with its own dependencies.
-- [ ] **Static middleware for frontend** - Configured Express to serve files from `public`; serving the built frontend through the production deployment still needs to be verified.
+- [x] **Static middleware for frontend** - Express serves files from `public` and falls back to the frontend for client-side routes. Tested the actual Vite build locally in the deployment layout; production deployment still needs to be verified.
 - [x] **Calls to third party endpoints** - The frontend calls Spoonacular for recipe search, details, random recipes, and Recipe of the Day. Hardcoded recipes remain available alongside API recipes.
 - [x] **Backend service endpoints** - Added `/api/health`, authentication endpoints, and protected ingredients, favorites, and recently viewed endpoints. Data is held in memory and resets when the service restarts.
 - [x] **Frontend calls service endpoints** - The frontend calls the Express authentication endpoints, restores sessions through `/api/user/me`, and loads and saves signed-in users' ingredients, favorites, and recently viewed recipes through protected endpoints. Signed-out visitors retain a separate browser-only recently viewed list.
