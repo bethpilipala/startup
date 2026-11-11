@@ -107,7 +107,7 @@ The first account to sign in on an existing browser imports its shared ingredien
 
 ### Spoonacular API (third-party recipes)
 
-The Recipes page searches both the hardcoded recipes and Spoonacular, and maps the existing category tiles to Spoonacular dish types. Hardcoded matches remain available if the Spoonacular request fails, with the error shown separately. Search cards open their recipe details; missing times, ingredients, or instructions are marked "Not provided". Recently viewed and favorite lists can resolve both Spoonacular IDs and existing sample recipe IDs. Random Recipe chooses between the two sources. Recipe of the Day alternates sources by local calendar day and saves the selection in the browser so the Home and detail pages agree; different browsers can show different Spoonacular selections.
+The Recipes page searches both the hardcoded recipes and Spoonacular, and maps the existing category tiles to Spoonacular dish types. Hardcoded matches remain available if the Spoonacular request fails, with the error shown separately. Search cards open their recipe details; missing times, ingredients, instructions, and tags are hidden. Recently viewed and favorite lists can resolve both Spoonacular IDs and existing sample recipe IDs. Random Recipe chooses between the two sources. Recipe of the Day alternates sources by local calendar day and saves the selection in the browser so the Home and detail pages agree; different browsers can show different Spoonacular selections.
 
 Recipe search and API-backed details use `src/services/spoonacular.js`, which calls the API from the frontend and maps each response into the recipe shape the components already use. The API has limits that shape how the app behaves:
 
@@ -117,7 +117,7 @@ Recipe search and API-backed details use `src/services/spoonacular.js`, which ca
 - **Ingredient groups.** The mapper currently places Spoonacular ingredients in one "Ingredients" group, so the detail page does not preserve groups such as "Hollandaise Sauce".
 - **Categories are dish types, not my fixed list.** Spoonacular's dish types (such as "side dish" and "main course") don't line up exactly with my category tiles (Breakfast, Dinner, Soups & Salads, and so on). The category search passes a `type` and some categories may need to be mapped or renamed. A recipe can also belong to several dish types.
 - **Recipe IDs are numbers, not slugs.** The app stores Spoonacular IDs as strings. Existing sample recipe IDs like `eggs-benedict` are still resolved locally, and the backend accepts both strings and numbers.
-- **Descriptions are HTML summaries.** The summary text is stripped of tags and can be long or contain links to other sites.
+- **Descriptions are HTML summaries.** Spoonacular summaries are not displayed; hardcoded recipe descriptions remain visible.
 - **Search is limited.** Results are capped per request (12 for now), and no results, a failed request, and an exhausted quota need different messages.
 - **Terms of use.** The free plan requires attributing Spoonacular, so a credit link should appear in the app.
 - **No ingredient matching offline.** Pantry matching on the detail page compares text strings, so it only works after the recipe has loaded from the API.

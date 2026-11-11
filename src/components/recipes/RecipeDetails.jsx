@@ -180,13 +180,17 @@ export default function RecipeDetails({ recipe, user }) {
         {error && <p role="alert">{error}</p>}
         {status === "error" && <button className="btn" type="button" onClick={retry}>{strings.recipes.retryButton}</button>}
         {saving && <p role="status">{strings.pantry.saving}</p>}
-        <RecipeHeader {...recipe} servings={scaledServings} />
+        <RecipeHeader
+          {...recipe}
+          description={/^\d+$/.test(String(recipe.id)) ? "" : recipe.description}
+          servings={scaledServings}
+        />
         {recipe.image && (
           <figure className="recipe-detail-photo">
             <img src={recipe.image} alt={recipe.imageAlt} />
           </figure>
         )}
-        <section className="recipe-scaling" aria-labelledby="recipe-scaling-heading">
+        {(ingredientCheck.total > 0 || recipe.servings) && <section className="recipe-scaling" aria-labelledby="recipe-scaling-heading">
           <h2 id="recipe-scaling-heading">{strings.recipes.scaleRecipeHeading}</h2>
           <div className="recipe-save-actions" role="group" aria-label={strings.recipes.scaleRecipeLabel}>
             {[0.5, 1, 2].map((multiplier) => (
@@ -201,7 +205,7 @@ export default function RecipeDetails({ recipe, user }) {
               </button>
             ))}
           </div>
-        </section>
+        </section>}
         <IngredientsList
           ingredients={recipe.ingredients}
           groups={recipe.ingredientGroups}
@@ -223,14 +227,12 @@ export default function RecipeDetails({ recipe, user }) {
           </button>
           {wakeLockMessage && <p role="status">{wakeLockMessage}</p>}
         </section>
-        <section>
+        {ingredientCheck.total > 0 && <section>
           <h2>{strings.recipes.haveIngredientsHeading}</h2>
           {!user ? (
             <p>{strings.pantry.guestPantry}</p>
           ) : status !== "ready" ? (
             <p>{strings.pantry.loading}</p>
-          ) : ingredientCheck.total === 0 ? (
-            <p>{strings.recipes.notProvided}</p>
           ) : pantry.length === 0 ? (
             <p>{strings.recipes.emptyPantryMessage}</p>
           ) : (
@@ -251,8 +253,8 @@ export default function RecipeDetails({ recipe, user }) {
             </>
           )}
           <Link className="btn" to="/ingredients">{strings.common.updateIngredientsButton}</Link>
-        </section>
-        {user && status === "ready" && <section aria-labelledby="mark-as-made-heading">
+        </section>}
+        {ingredientCheck.total > 0 && user && status === "ready" && <section aria-labelledby="mark-as-made-heading">
           <h2 id="mark-as-made-heading">{strings.recipes.markAsMadeHeading}</h2>
           <p>{strings.recipes.markAsMadeDescription}</p>
           {!showMadeForm ? (

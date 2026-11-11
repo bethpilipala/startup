@@ -155,7 +155,6 @@ const strings = {
     loadingRecipes: "Loading recipes...",
     retryButton: "Try again",
     savedRecipesError: "Some saved recipes could not be loaded.",
-    notProvided: "Not provided",
     enjoyRecipeHeading: "Enjoy this recipe?",
     saveRecipeText: "Save this recipe to your My Pantry page.",
     saveRecipeButton: "Save Recipe",

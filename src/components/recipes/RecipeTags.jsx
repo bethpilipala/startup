@@ -1,6 +1,8 @@
 import strings from "../../strings/en.js";
 
 export default function RecipeTags({ tags = [] }) {
+  if (tags.length === 0) return null;
+
   return (
     <section>
       <h2>{strings.recipes.tagsHeading}</h2>

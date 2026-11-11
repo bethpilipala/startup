@@ -135,7 +135,6 @@ export function mapRecipe(recipe) {
     path: `/recipes/${id}`,
     categories: (recipe.dishTypes ?? []).map(capitalize),
     title: recipe.title,
-    description: stripHtml(recipe.summary),
     image: recipe.image,
     imageAlt: recipe.title,
     prepTime: formatMinutes(recipe.preparationMinutes),

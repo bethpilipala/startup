@@ -22,12 +22,14 @@ function scaleIngredient(ingredient, multiplier) {
 }
 
 export default function IngredientsList({ ingredients = [], groups = [], multiplier = 1 }) {
+  const availableGroups = groups.filter((group) => group.ingredients.length > 0);
+  if (availableGroups.length === 0 && ingredients.length === 0) return null;
+
   return (
     <section>
       <h2>{strings.recipes.ingredientsHeading}</h2>
-      {groups.length === 0 && ingredients.length === 0 && <p>{strings.recipes.notProvided}</p>}
-      {groups.length > 0
-        ? groups.map((group) => (
+      {availableGroups.length > 0
+        ? availableGroups.map((group) => (
             <div key={group.name}>
               <h3>{group.name}</h3>
               <ul>
