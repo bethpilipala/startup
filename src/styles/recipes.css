@@ -386,9 +386,19 @@ main > article > header p:last-child {
     margin: 0;
 }
 
-.recipe-scaling [aria-pressed="true"] {
-    border-color: var(--olive);
-    background: var(--olive);
+.recipe-scaling .recipe-save-actions button.btn {
+    border-color: var(--terracotta);
+    background: var(--terracotta);
+}
+
+.recipe-scaling .recipe-save-actions button.btn:hover {
+    border-color: #873B25;
+    background: #873B25;
+}
+
+.recipe-scaling .recipe-save-actions button.btn[aria-pressed="true"] {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
 }
 
 main > article section {
