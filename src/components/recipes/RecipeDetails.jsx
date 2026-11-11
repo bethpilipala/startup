@@ -4,12 +4,7 @@ import IngredientsList from "./IngredientsList.jsx";
 import InstructionsList from "./InstructionsList.jsx";
 import RecipeHeader from "./RecipeHeader.jsx";
 import RecipeTags from "./RecipeTags.jsx";
-import {
-  APP_STORAGE_KEYS,
-  getStorageItem,
-  getUserFavoritesStorageKey,
-  setStorageItem,
-} from "../../services/storage.js";
+import { usePantry } from "../../services/pantryContext.js";
 import strings from "../../strings/en.js";
 
 const measurementWords = new Set([
@@ -48,7 +43,7 @@ function pantryContainsIngredient(pantry, recipeIngredient) {
 
 export default function RecipeDetails({ recipe, user }) {
   const navigate = useNavigate();
-  const [pantry, setPantry] = useState(() => getStorageItem(APP_STORAGE_KEYS.ingredients) ?? []);
+  const { ingredients: pantry, favorites: favoriteIds, recent, status, error, saving, update, retry } = usePantry();
   const [servingMultiplier, setServingMultiplier] = useState(1);
   const [wakeLockActive, setWakeLockActive] = useState(false);
   const [wakeLockPending, setWakeLockPending] = useState(false);
@@ -56,18 +51,10 @@ export default function RecipeDetails({ recipe, user }) {
   const [showMadeForm, setShowMadeForm] = useState(false);
   const [usedUpNames, setUsedUpNames] = useState([]);
   const [madeMessage, setMadeMessage] = useState("");
-  const favoriteStorageKey = user ? getUserFavoritesStorageKey(user) : null;
-  const [favoriteIds, setFavoriteIds] = useState(() => {
-    if (!favoriteStorageKey) {
-      return [];
-    }
-
-    const storedFavorites = getStorageItem(favoriteStorageKey);
-    return Array.isArray(storedFavorites) ? storedFavorites : [];
-  });
+  const recordedRecipeRef = useRef(null);
   const wakeLockRef = useRef(null);
   const wakeLockReleaseHandlerRef = useRef(null);
-  const isFavorite = favoriteIds.includes(recipe.id);
+  const isFavorite = favoriteIds.some((id) => String(id) === String(recipe.id));
   const ingredientCheck = useMemo(() => {
     const recipeIngredients = getRecipeIngredients(recipe);
     const matchedPantryItems = pantry.filter((item) => recipeIngredients.some(
@@ -85,15 +72,12 @@ export default function RecipeDetails({ recipe, user }) {
   }, [pantry, recipe]);
 
   useEffect(() => {
-    const storedRecipeIds = getStorageItem(APP_STORAGE_KEYS.recentlyViewedRecipes);
-    const previousRecipeIds = Array.isArray(storedRecipeIds) ? storedRecipeIds : [];
-    const nextRecipeIds = [
-      recipe.id,
-      ...previousRecipeIds.filter((recipeId) => recipeId !== recipe.id),
-    ].slice(0, 5);
-
-    setStorageItem(APP_STORAGE_KEYS.recentlyViewedRecipes, nextRecipeIds);
-  }, [recipe.id]);
+    if (status !== "ready" || saving || recordedRecipeRef.current === recipe.id) return;
+    recordedRecipeRef.current = recipe.id;
+    if (String(recent[0]) !== String(recipe.id)) {
+      update("recent", (ids) => [recipe.id, ...ids.filter((id) => String(id) !== String(recipe.id))].slice(0, 5));
+    }
+  }, [recipe.id, status, saving, recent, update]);
 
   useEffect(() => () => {
     const wakeLock = wakeLockRef.current;
@@ -108,15 +92,9 @@ export default function RecipeDetails({ recipe, user }) {
   }, []);
 
   const toggleFavorite = () => {
-    if (!favoriteStorageKey) {
-      return;
-    }
-
-    const nextFavoriteIds = isFavorite
-      ? favoriteIds.filter((id) => id !== recipe.id)
-      : [...favoriteIds, recipe.id];
-    setStorageItem(favoriteStorageKey, nextFavoriteIds);
-    setFavoriteIds(nextFavoriteIds);
+    update("favorites", (ids) => isFavorite
+      ? ids.filter((id) => String(id) !== String(recipe.id))
+      : [...ids, recipe.id]);
   };
 
   const openMadeForm = () => {
@@ -131,11 +109,10 @@ export default function RecipeDetails({ recipe, user }) {
       : [...currentNames, ingredientName]);
   };
 
-  const handleMarkAsMade = (event) => {
+  const handleMarkAsMade = async (event) => {
     event.preventDefault();
-    const nextPantry = pantry.filter((ingredient) => !usedUpNames.includes(ingredient.name));
-    setStorageItem(APP_STORAGE_KEYS.ingredients, nextPantry);
-    setPantry(nextPantry);
+    const saved = await update("ingredients", (items) => items.filter((ingredient) => !usedUpNames.includes(ingredient.name)));
+    if (!saved) return;
     setShowMadeForm(false);
     setMadeMessage(strings.recipes.markedAsMadeMessage(
       recipe.title,
@@ -199,6 +176,10 @@ export default function RecipeDetails({ recipe, user }) {
         <span aria-hidden="true">←</span> Back
       </button>
       <article>
+        {status === "loading" && <p role="status">{strings.pantry.loading}</p>}
+        {error && <p role="alert">{error}</p>}
+        {status === "error" && <button className="btn" type="button" onClick={retry}>{strings.recipes.retryButton}</button>}
+        {saving && <p role="status">{strings.pantry.saving}</p>}
         <RecipeHeader {...recipe} servings={scaledServings} />
         {recipe.image && (
           <figure className="recipe-detail-photo">
@@ -244,7 +225,11 @@ export default function RecipeDetails({ recipe, user }) {
         </section>
         <section>
           <h2>{strings.recipes.haveIngredientsHeading}</h2>
-          {ingredientCheck.total === 0 ? (
+          {!user ? (
+            <p>{strings.pantry.guestPantry}</p>
+          ) : status !== "ready" ? (
+            <p>{strings.pantry.loading}</p>
+          ) : ingredientCheck.total === 0 ? (
             <p>{strings.recipes.notProvided}</p>
           ) : pantry.length === 0 ? (
             <p>{strings.recipes.emptyPantryMessage}</p>
@@ -267,11 +252,11 @@ export default function RecipeDetails({ recipe, user }) {
           )}
           <Link className="btn" to="/ingredients">{strings.common.updateIngredientsButton}</Link>
         </section>
-        <section aria-labelledby="mark-as-made-heading">
+        {user && status === "ready" && <section aria-labelledby="mark-as-made-heading">
           <h2 id="mark-as-made-heading">{strings.recipes.markAsMadeHeading}</h2>
           <p>{strings.recipes.markAsMadeDescription}</p>
           {!showMadeForm ? (
-            <button className="btn" type="button" onClick={openMadeForm}>
+            <button className="btn" type="button" onClick={openMadeForm} disabled={saving}>
               {strings.recipes.markAsMadeButton}
             </button>
           ) : (
@@ -292,7 +277,7 @@ export default function RecipeDetails({ recipe, user }) {
                 ) : <p>{strings.recipes.noMatchedPantryIngredients}</p>}
               </fieldset>
               <div className="recipe-save-actions">
-                <button className="btn" type="submit">{strings.recipes.confirmMadeButton}</button>
+                <button className="btn" type="submit" disabled={saving}>{strings.recipes.confirmMadeButton}</button>
                 <button className="btn" type="button" onClick={() => setShowMadeForm(false)}>
                   {strings.recipes.cancelMadeButton}
                 </button>
@@ -300,7 +285,7 @@ export default function RecipeDetails({ recipe, user }) {
             </form>
           )}
           {madeMessage && <p role="status">{madeMessage}</p>}
-        </section>
+        </section>}
         <section aria-labelledby="recipe-save-heading">
           <h2 id="recipe-save-heading">{strings.recipes.enjoyRecipeHeading}</h2>
           <p className="recipe-save-description">{strings.recipes.saveRecipeText}</p>
@@ -309,6 +294,7 @@ export default function RecipeDetails({ recipe, user }) {
               <button
                 className="btn recipe-save-button"
                 type="button"
+                disabled={status !== "ready" || saving}
                 aria-pressed={isFavorite}
                 onClick={toggleFavorite}
               >

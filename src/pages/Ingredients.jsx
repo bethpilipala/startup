@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import strings from "../strings/en.js";
-import { APP_STORAGE_KEYS, getStorageItem, setStorageItem } from "../services/storage.js";
+import { usePantry } from "../services/pantryContext.js";
 
 const categories = [
   { value: "shelf-stable", label: strings.ingredients.shelfStableHeading },
@@ -96,17 +96,13 @@ function IngredientTable({ headingId, title, records, onSortChange, onEdit, onDe
 }
 
 export default function Ingredients() {
-  const [ingredients, setIngredients] = useState(() => getStorageItem(APP_STORAGE_KEYS.ingredients) ?? []);
+  const { ingredients, status, error, saving, update, retry } = usePantry();
   const [sortOrder, setSortOrder] = useState("name-asc");
   const [editingName, setEditingName] = useState(null);
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState("");
   const [category, setCategory] = useState(categories[0].value);
   const [formError, setFormError] = useState("");
-
-  useEffect(() => {
-    setStorageItem(APP_STORAGE_KEYS.ingredients, ingredients);
-  }, [ingredients]);
 
   const sortedByCategory = useMemo(() => {
     const sorted = [...ingredients].sort((first, second) => {
@@ -153,7 +149,7 @@ export default function Ingredients() {
     setFormError("");
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const trimmedName = name.trim();
     const trimmedQuantity = quantity.trim();
@@ -179,12 +175,12 @@ export default function Ingredients() {
       updatedAt: getToday(),
     };
 
-    setIngredients((currentIngredients) => editingName
+    const saved = await update("ingredients", (currentIngredients) => editingName
       ? currentIngredients.map((ingredient) => (
         ingredient.name === editingName ? updatedIngredient : ingredient
       ))
       : [...currentIngredients, updatedIngredient]);
-    resetForm();
+    if (saved) resetForm();
   };
 
   const handleEdit = (ingredient) => {
@@ -196,18 +192,18 @@ export default function Ingredients() {
     document.getElementById("ingredient-name")?.focus();
   };
 
-  const handleDelete = (ingredientName) => {
-    setIngredients((currentIngredients) => currentIngredients.filter(
+  const handleDelete = async (ingredientName) => {
+    const saved = await update("ingredients", (currentIngredients) => currentIngredients.filter(
       (ingredient) => ingredient.name !== ingredientName,
     ));
-    if (editingName === ingredientName) {
+    if (saved && editingName === ingredientName) {
       resetForm();
     }
   };
 
   const handleMarkUpdated = (ingredientName) => {
     const updatedAt = getToday();
-    setIngredients((currentIngredients) => currentIngredients.map((ingredient) => (
+    update("ingredients", (currentIngredients) => currentIngredients.map((ingredient) => (
       ingredient.name === ingredientName ? { ...ingredient, updatedAt } : ingredient
     )));
   };
@@ -215,6 +211,12 @@ export default function Ingredients() {
   return (
     <main>
       <h1>{strings.ingredients.pageTitle}</h1>
+      {status === "loading" && <p role="status">{strings.pantry.loading}</p>}
+      {error && <p role="alert">{error}</p>}
+      {status === "error" && <button className="btn" type="button" onClick={retry}>{strings.recipes.retryButton}</button>}
+      {status === "ready" && (
+      <fieldset disabled={saving} style={{ border: 0, padding: 0, margin: 0 }}>
+      {saving && <p role="status">{strings.pantry.saving}</p>}
       <section className="ingredient-reminders" aria-labelledby="ingredient-reminders-heading" aria-live="polite">
         <h2 id="ingredient-reminders-heading">{strings.ingredients.remindersHeading}</h2>
         <p>{strings.ingredients.remindersDescription}</p>
@@ -306,6 +308,8 @@ export default function Ingredients() {
           onDelete={handleDelete}
         />
       ))}
+      </fieldset>
+      )}
     </main>
   );
 }

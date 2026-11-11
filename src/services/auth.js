@@ -1,6 +1,6 @@
 import strings from "../strings/en.js";
 
-async function request(path, options = {}) {
+export async function request(path, options = {}) {
   let response;
   try {
     response = await fetch(`/api${path}`, {

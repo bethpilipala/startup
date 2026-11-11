@@ -13,6 +13,7 @@ import RecipeResults from "./pages/RecipeResults.jsx";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { getCurrentUser, logout } from "./services/auth.js";
+import PantryProvider from "./services/PantryProvider.jsx";
 import strings from "./strings/en.js";
 
 function ProtectedRoute({ user, authStatus, authError, onRetry, children }) {
@@ -104,6 +105,7 @@ function SiteLayout() {
       <ScrollToTop />
       <Header user={user} onLogout={handleLogout} />
       {authError && authStatus !== "error" && <p role="alert">{authError}</p>}
+      <PantryProvider key={`${authStatus}:${user?.email ?? "guest"}`} user={user} authStatus={authStatus}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -140,6 +142,7 @@ function SiteLayout() {
         />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      </PantryProvider>
       <Footer />
     </>
   );

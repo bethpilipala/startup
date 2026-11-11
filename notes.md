@@ -99,7 +99,9 @@ Recipe detail pages can scale ingredient quantities and serving counts to half, 
 
 The backend lives in `service/` (Express on port 4000, its own `package.json`). Vite proxies `/api` to it during development. Accounts use bcrypt-hashed passwords and an httpOnly auth cookie, and ingredients, favorites, and recently viewed recipe IDs are exposed as endpoints that require that cookie. All of this is held in server memory for now, so it resets whenever the service restarts, until a database is added.
 
-Registration, login, and logout now call the Express service. On page load the frontend checks `/api/user/me` before opening protected pages; a 401 means the user is signed out, while connection errors are displayed with a retry option. Passwords are limited to 72 UTF-8 bytes because bcrypt only processes the first 72 bytes. Ingredients, favorites, and recently viewed still use browser storage until their frontend integration is complete; pantry ingredients and recent recipes are currently shared within the browser rather than scoped to the signed-in account.
+Registration, login, and logout call the Express service. On page load the frontend checks `/api/user/me` before opening protected pages; a 401 means the user is signed out, while connection errors are displayed with a retry option. Passwords are limited to 72 UTF-8 bytes because bcrypt only processes the first 72 bytes. Signed-in ingredients, favorites, and recently viewed recipes now use the protected service endpoints and are separate per account. Signed-out visitors keep a browser-only recent list.
+
+The first account to sign in on an existing browser imports its shared ingredient and recent lists into the service; each account can also import its own old browser favorites. The original browser data is not deleted. Imports merge rather than overwrite existing account data, and a browser marker prevents repeated imports. New accounts start with empty lists. Because the service is still in memory, its data and accounts are lost on restart; these browser import markers do not automatically restore data after a restart.
 
 ### Spoonacular API (third-party recipes)
 

@@ -99,6 +99,13 @@ const strings = {
     requestError: "The service could not complete your request. Please try again.",
   },
 
+  pantry: {
+    loading: "Loading pantry data...",
+    saving: "Saving changes...",
+    signInRequired: "Sign in to update your pantry.",
+    guestPantry: "Sign in to match this recipe with your pantry.",
+  },
+
   recipes: {
     pageTitle: "Recipes",
     searchPlaceholder: "Search...",

@@ -67,13 +67,30 @@ apiRouter.get('/user/me', verifyAuth, (req, res) => {
   res.send({ email: req.user.email });
 });
 
+apiRouter.post('/data/import', verifyAuth, (req, res) => {
+  const { ingredients, favorites, recent } = req.body ?? {};
+  if (!isIngredientList(ingredients) || !isIdList(favorites) || !isIdList(recent)) {
+    return res.status(400).send({ msg: 'Invalid imported data' });
+  }
+  const existingNames = new Set(req.user.ingredients.map((item) => item.name.trim().toLowerCase()));
+  req.user.ingredients.push(...ingredients.filter((item) => {
+    const name = item.name.trim().toLowerCase();
+    if (existingNames.has(name)) return false;
+    existingNames.add(name);
+    return true;
+  }));
+  req.user.favorites = [...new Set([...req.user.favorites.map(String), ...favorites.map(String)])];
+  req.user.recentlyViewed = [...new Set([...req.user.recentlyViewed.map(String), ...recent.map(String)])].slice(0, 5);
+  res.send({ ingredients: req.user.ingredients, favorites: req.user.favorites, recent: req.user.recentlyViewed });
+});
+
 apiRouter.get('/ingredients', verifyAuth, (req, res) => {
   res.send(req.user.ingredients);
 });
 
 apiRouter.put('/ingredients', verifyAuth, (req, res) => {
-  if (!Array.isArray(req.body)) {
-    return res.status(400).send({ msg: 'Ingredients must be a list' });
+  if (!isIngredientList(req.body)) {
+    return res.status(400).send({ msg: 'Ingredients must be a valid list' });
   }
   req.user.ingredients = req.body;
   res.send(req.user.ingredients);
@@ -106,6 +123,14 @@ apiRouter.put('/recent', verifyAuth, (req, res) => {
 
 function isIdList(value) {
   return Array.isArray(value) && value.every((id) => typeof id === 'string' || typeof id === 'number');
+}
+
+function isIngredientList(value) {
+  return Array.isArray(value) && value.every((item) =>
+    item && typeof item.name === 'string' && item.name.trim()
+    && typeof item.quantity === 'string' && item.quantity.trim()
+    && ['shelf-stable', 'refrigerated'].includes(item.category)
+    && (item.updatedAt === undefined || typeof item.updatedAt === 'string'));
 }
 
 function validCredentials(email, password) {

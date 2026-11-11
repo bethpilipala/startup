@@ -1,27 +1,20 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import RecipeResultCard from "../components/recipes/RecipeResultCard.jsx";
 import useSavedRecipes from "../services/useSavedRecipes.js";
-import {
-  APP_STORAGE_KEYS,
-  getStorageItem,
-  getUserFavoritesStorageKey,
-} from "../services/storage.js";
+import { usePantry } from "../services/pantryContext.js";
 import strings from "../strings/en.js";
 
 export default function UserHome({ user }) {
-  const [pantryIngredients] = useState(
-    () => getStorageItem(APP_STORAGE_KEYS.ingredients) ?? [],
-  );
-  const [favoriteIds] = useState(() => {
-    const storedFavorites = getStorageItem(getUserFavoritesStorageKey(user));
-    return Array.isArray(storedFavorites) ? storedFavorites : [];
-  });
+  const { ingredients: pantryIngredients, favorites: favoriteIds, status, error, retry } = usePantry();
   const { recipes: favoriteRecipes, errors, loading } = useSavedRecipes(favoriteIds);
 
   return (
     <main className="userhome">
       <h1>{strings.userhome.title}</h1>
+      {status === "loading" && <p role="status">{strings.pantry.loading}</p>}
+      {error && <p role="alert">{error}</p>}
+      {status === "error" && <button className="btn" type="button" onClick={retry}>{strings.recipes.retryButton}</button>}
+      {status === "ready" && <>
       <p className="userhome-greeting">{strings.userhome.greeting(user?.name ?? user?.email ?? "")}</p>
       <p className="userhome-pantry-count">
         {strings.userhome.pantryCount(pantryIngredients.length)}
@@ -64,6 +57,7 @@ export default function UserHome({ user }) {
           </section>
         </div>
       </div>
+      </>}
     </main>
   );
 }

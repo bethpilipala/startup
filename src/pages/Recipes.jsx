@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CategoryList from "../components/categories/CategoryList.jsx";
 import RecipeResultCard from "../components/recipes/RecipeResultCard.jsx";
-import { APP_STORAGE_KEYS, getStorageItem } from "../services/storage.js";
+import { usePantry } from "../services/pantryContext.js";
 import useSavedRecipes from "../services/useSavedRecipes.js";
 import strings from "../strings/en.js";
 
@@ -20,10 +20,7 @@ const categories = [
 export default function Recipes() {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
-  const [recentlyViewedIds] = useState(() => {
-    const storedIds = getStorageItem(APP_STORAGE_KEYS.recentlyViewedRecipes);
-    return Array.isArray(storedIds) ? storedIds : [];
-  });
+  const { recent: recentlyViewedIds, status, error, retry } = usePantry();
   const { recipes: recentlyViewedRecipes, errors, loading } = useSavedRecipes(recentlyViewedIds);
 
   const handleSearch = (event) => {
@@ -43,6 +40,9 @@ export default function Recipes() {
       </search>
       <CategoryList categories={categories} />
       <Link to="/random-recipe">{strings.recipes.randomRecipeLink}</Link>
+      {status === "loading" && <p role="status">{strings.pantry.loading}</p>}
+      {error && <p role="alert">{error}</p>}
+      {status === "error" && <button className="btn" type="button" onClick={retry}>{strings.recipes.retryButton}</button>}
       {recentlyViewedIds.length > 0 && (
         <section className="recently-viewed-banner" aria-labelledby="recently-viewed-heading">
           <h2 id="recently-viewed-heading">{strings.recipes.recentlyViewedHeading}</h2>

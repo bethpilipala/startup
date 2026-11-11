@@ -8,7 +8,7 @@
 
 - Recipe search and category results include both Spoonacular and hardcoded recipes. Recipe cards open their details, and favorites and recently viewed support both sources.
 - Set `VITE_SPOONACULAR_KEY` in a git-ignored `.env.local` before starting or building the frontend. Because the browser calls Spoonacular directly, the key is visible to visitors.
-- Random Recipe can select either a hardcoded recipe or a Spoonacular recipe. Recipe of the Day alternates between the two sources by local calendar day and is saved in each browser so the home and detail pages agree. The frontend uses the Express service for registration, login, logout, and session restoration. The service stores accounts and application data in memory, so they are lost when it restarts; pantry data still uses localStorage.
+- Random Recipe can select either a hardcoded recipe or a Spoonacular recipe. Recipe of the Day alternates between the two sources by local calendar day and is saved in each browser so the home and detail pages agree. The frontend uses the Express service for authentication and signed-in pantry ingredients, favorites, and recently viewed recipes. The service stores these in memory, so they are lost when it restarts.
 
 For local development, run `node service/index.js` and `npm run dev` in separate terminals, then open the Vite URL on `localhost`. Run the backend authentication tests with `npm --prefix service test`.
 
@@ -181,7 +181,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [ ] **Static middleware for frontend** - Configured Express to serve files from `public`; serving the built frontend through the production deployment still needs to be verified.
 - [x] **Calls to third party endpoints** - The frontend calls Spoonacular for recipe search, details, random recipes, and Recipe of the Day. Hardcoded recipes remain available alongside API recipes.
 - [x] **Backend service endpoints** - Added `/api/health`, authentication endpoints, and protected ingredients, favorites, and recently viewed endpoints. Data is held in memory and resets when the service restarts.
-- [x] **Frontend calls service endpoints** - The frontend calls the Express authentication endpoints and the protected `/api/user/me` endpoint to restore sessions. Pantry ingredients, favorites, and recently viewed recipes still use localStorage and are not yet connected to their backend endpoints.
+- [x] **Frontend calls service endpoints** - The frontend calls the Express authentication endpoints, restores sessions through `/api/user/me`, and loads and saves signed-in users' ingredients, favorites, and recently viewed recipes through protected endpoints. Signed-out visitors retain a separate browser-only recently viewed list.
 - [x] **Supports registration, login, logout, and restricted endpoint** - Connected the account form and logout button to the service, which hashes passwords using bcrypt and protects `/api/user/me` with an authentication cookie. Tested registration, login, logout, protected access, and session restoration locally. Accounts are in memory until a database is added.
 
 
